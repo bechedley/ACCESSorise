@@ -7,16 +7,19 @@ const orderSchema = new Schema({
     type: Date,
     default: Date.now
   },
+  bookIn: {
+    type: Date,
+    require: true
+  },
+  bookOut: {
+    type: Date,
+    require: true
+  },
   orderStatus: {
     type: String,
-    trim: true
-  },
-  products: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: 'Product'
-    }
-  ]
+    require: true,
+    enum: ['cancel', 'previous', 'active', 'completed']
+  }
 });
 
 const Order = mongoose.model('Order', orderSchema);

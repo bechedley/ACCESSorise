@@ -9,17 +9,27 @@ const productSchema = new Schema({
         trim: true
     },
     description: {
-        type: String
+        type: String,
+        require: true
     },
     location: {
-        type: String
+        type: String,
+        require: true
     },
     productStatus: {
-        type: String
+        type: String,
+        require: true,
+        enum: ['public', 'friendsOnly', 'hidden']
     },
     image: {
-        type: String
+        type: String,
+        require: true
     },
+    gallery: [
+        {
+          type: String,
+        }
+    ],
     deposit: {
         type: Number,
     },
@@ -35,10 +45,17 @@ const productSchema = new Schema({
             ref: 'Tag',
         },
     ],
-    category: {
-        type: Schema.Types.ObjectId,
-        ref: 'Category',
-        required: true
+    categories: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Category',
+            required: true
+        },
+    ],
+    bookings: [Order.schema],
+    onLoan: {
+        type: Boolean,
+        default: true
     }
 });
 
