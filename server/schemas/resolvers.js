@@ -36,7 +36,8 @@ const resolvers = {
         users: async () => {
             return User.find()
             .populate('products')
-            .populate('bookings');
+            .populate('bookings')
+            .populate('users');
         },
 
         user: async (parent, { _id }) => {
@@ -156,6 +157,207 @@ const resolvers = {
         }
     },
     Mutation: {
-        
+        addUser: async (parent, args) => {
+            const user = await User.create(args);
+            const token = signToken(user);
+      
+            return { token, user };
+        },
+
+        addBooking: async (parent, { bookingDate, bookingStatus, product }, context) => {
+            if (context.user) {
+              const booking = await Booking.create({
+                bookingDate,
+                bookingStatus,
+                product,
+                creator: context.user._id,
+              });
+      
+              await User.findOneAndUpdate(
+                { _id: context.user._id },
+                { $addToSet: { bookings: booking._id } }
+              );
+      
+              return booking;
+            }
+            throw new AuthenticationError('You need to be logged in!');
+        },
+        addProduct: async (parent, { 
+            name, 
+            description,
+            location,
+            productStatus,
+            image,
+            gallery,
+            deposit,
+            size,
+            colour,
+            tags,
+            categories }, context) => {
+            if (context.user) {
+              const product = await Product.create({
+                name, 
+                description,
+                location,
+                productStatus,
+                image,
+                gallery,
+                deposit,
+                size,
+                colour,
+                tags,
+                categories,
+                owner: context.user._id,
+              });
+      
+              await User.findOneAndUpdate(
+                { _id: context.user._id },
+                { $addToSet: { products: product._id } }
+              );
+      
+              return product;
+            }
+            throw new AuthenticationError('You need to be logged in!');
+        },
+
+        addFavourite: async (parent, { favouriteId }, context) => {
+            const user = await User.findOneAndUpdate(
+                { _id: context.user._id },
+                { $addToSet: { favourites: favouriteId } }
+              );
+      
+            return user;
+        },
+
+        addFriend: async (parent, { friendId }, context) => {
+            const user = await User.findOneAndUpdate(
+                { _id: context.user._id },
+                { $addToSet: { friends: friendId } }
+              );
+      
+            return user;
+        },
+
+        updateUser: async (parent, args, context) => {
+            if (context.user) {
+              return await User.findByIdAndUpdate(context.user._id, args, { new: true });
+            }
+      
+            throw new AuthenticationError('Not logged in');
+        },
+
+        updateBooking: async (parent, { 
+            _id,
+            bookingDate,
+            bookingStatus,
+         }, context) => {
+            if (context.user) {
+            return await Booking.findByIdAndUpdate(_id, { 
+            bookingDate: bookingDate, bookingStatus: bookingStatus }, { new: true });
+            }
+
+            throw new AuthenticationError('Not logged in');
+        },
+
+        updateProduct: async (parent, { 
+            _id,
+            name,
+            description,
+            location,
+            productStatus,
+            image,
+            gallery,
+            deposit,
+            size,
+            colour,
+            tags,
+            categories,
+            onLoan
+         }, context) => {
+            if (context.user) {
+            return await Product.findByIdAndUpdate(_id, { 
+            name: name, 
+            description: description,
+            location: location,
+            productStatus: productStatus,
+            image: image,
+            gallery: gallery,
+            deposit: deposit,
+            size: size,
+            colour: colour,
+            tags: tags,
+            categories: categories,
+            onLoan: onLoan, }, { new: true });
+            }
+
+            throw new AuthenticationError('Not logged in');
+        },
+
+        addTag: async (parent, { name }) => {
+            const tag = await Tag.create(name);
+      
+            return { tag };
+        },
+
+        removeProduct: async (parent, { productId }, context) => {
+            if (context.user) {
+              const product = await Product.findOneAndDelete({
+                _id: productId,
+                owner: context.user._id,
+              });
+      
+              await User.findOneAndUpdate(
+                { _id: context.user._id },
+                { $pull: { products: product._id } }
+              );
+      
+              return product;
+            }
+            throw new AuthenticationError('You need to be logged in!');
+        },
+
+        removeFavourite: async (parent, { favouriteId }, context) => {
+            if (context.user) {      
+              const currentUser = await User.findOneAndUpdate(
+                { _id: context.user._id },
+                { $pull: { favourites: favouriteId } }
+              );
+      
+              return currentUser;
+            }
+            throw new AuthenticationError('You need to be logged in!');
+        },
+
+        removeFriend: async (parent, { friendId }, context) => {
+            if (context.user) {      
+              const currentUser = await User.findOneAndUpdate(
+                { _id: context.user._id },
+                { $pull: { friends: friendId } }
+              );
+      
+              return currentUser;
+            }
+            throw new AuthenticationError('You need to be logged in!');
+        },
+
+        login: async (parent, { email, password }) => {
+            const user = await User.findOne({ email });
+      
+            if (!user) {
+              throw new AuthenticationError('Incorrect credentials');
+            }
+      
+            const correctPw = await user.isCorrectPassword(password);
+      
+            if (!correctPw) {
+              throw new AuthenticationError('Incorrect credentials');
+            }
+      
+            const token = signToken(user);
+      
+            return { token, user };
+        }
     }
-}
+};
+
+module.exports = resolvers;
