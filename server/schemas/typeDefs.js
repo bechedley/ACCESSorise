@@ -21,6 +21,7 @@ const typeDefs = gql`
     categories: [Category]
     bookings: [Booking]
     onLoan: Boolean
+    owner: User!
   }
 
   type Booking {
@@ -29,6 +30,7 @@ const typeDefs = gql`
     bookingDate: String!
     bookingStatus: String!
     product: Product
+    creator: User!
   }
 
   type User {
@@ -67,15 +69,16 @@ const typeDefs = gql`
   type Query {
     categories: [Category]
     category(_id: ID!): Category
+    tags: [Tag]
     products: [Product]
     product(_id: ID!): Product
     users: [User]
     user(_id: ID!): User
-    userBookings(user: ID): [Booking]
+    me: User
+    Bookings: [Booking]
     booking(_id: ID!): Booking
     favourites(user: ID, name: String): [Product]
     friends(user: ID, username: String): [User]
-    tags: [Tag]
     checkout(products: [ID]!): Checkout
   }
 
@@ -102,7 +105,7 @@ const typeDefs = gql`
         size: String
         colour: String
         tags: [ID]
-        categories: [ID]
+        categories: [ID]!
     ): Product
     addFavourite(_id: [ID]): Favourite
     addFriend(_id: [ID]): Friend

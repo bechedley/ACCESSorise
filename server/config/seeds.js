@@ -49,7 +49,8 @@ db.once('open', async () => {
       size: '9',
       colour: 'brown',
       tags: [tags[1]._id, tags[2]._id, tags[4]._id],
-      onLoan: False
+      onLoan: false,
+      owner: users[0]._id
     },
     {
       name: 'Black woven handbag',
@@ -63,7 +64,8 @@ db.once('open', async () => {
       size: 'universal',
       colour: 'black',
       tags: [tags[1]._id, tags[6]._id, tags[7]._id],
-      onLoan: True
+      onLoan: true,
+      owner: users[2]._id
     },
     {
       name: 'Black Heels',
@@ -76,7 +78,8 @@ db.once('open', async () => {
       size: '7',
       colour: 'black',
       tags: [tags[1]._id, tags[3]._id, tags[4]._id, tags[6]._id, tags[11]._id, tags[12]._id],
-      onLoan: False
+      onLoan: false,
+      owner: users[0]._id
     },
     {
       name: 'Silver Clutch',
@@ -90,7 +93,8 @@ db.once('open', async () => {
       size: 'universal',
       colour: 'silver',
       tags: [tags[6]._id, tags[7]._id, tags[9]._id],
-      onLoan: False
+      onLoan: false,
+      owner: users[1]._id
     },
     {
       name: 'Gold Necklace',
@@ -103,7 +107,8 @@ db.once('open', async () => {
       size: 'universal',
       colour: 'gold',
       tags: [tags[6]._id, tags[8]._id],
-      onLoan: False
+      onLoan: false,
+      owner: users[0]._id
     },
     {
       name: 'Silk Scarf',
@@ -114,7 +119,8 @@ db.once('open', async () => {
       image: 'young-ballerina-closeup-legs-shoes-standing-pointe-position.jpg',
       size: 'universal',
       colour: 'multi',
-      tags: [tags[1]._id, tags[5]._id]
+      tags: [tags[1]._id, tags[5]._id],
+      owner: users[2]._id
     },
     {
       name: 'Laptop Bag',
@@ -125,7 +131,8 @@ db.once('open', async () => {
       image: 'young-ballerina-closeup-legs-shoes-standing-pointe-position.jpg',
       size: 'universal',
       colour: 'multi',
-      tags: [tags[7]._id]
+      tags: [tags[7]._id],
+      owner: users[0]._id
     },
     {
       name: 'Cream Feather Fascinator',
@@ -139,7 +146,8 @@ db.once('open', async () => {
       size: 'universal',
       colour: 'cream',
       tags: [tags[0]._id, tags[6]._id, tags[8]._id],
-      onLoan: False
+      onLoan: false,
+      owner: users[3]._id
     },
     {
       name: 'Red Flower Fascinator',
@@ -152,7 +160,8 @@ db.once('open', async () => {
       size: 'universal',
       colour: 'red',
       tags: [tags[0]._id, tags[6]._id, tags[8]._id],
-      onLoan: False
+      onLoan: false,
+      owner: users[4]._id
     },
     {
       name: 'Brown knee-high boots',
@@ -165,7 +174,8 @@ db.once('open', async () => {
       size: '7',
       colour: 'brown',
       tags: [tags[1]._id, tags[3]._id, tags[4]._id, tags[11]._id, tags[12]._id],
-      onLoan: False
+      onLoan: false,
+      owner: users[3]._id
     },
     {
       name: 'Pale pink watch',
@@ -178,7 +188,8 @@ db.once('open', async () => {
       size: 'universal',
       colour: 'pink',
       tags: [tags[6]._id, tags[8]._id, tags[10]._id],
-      onLoan: False
+      onLoan: false,
+      owner: users[3]._id
     },
     {
       name: 'Silver Mimco Purse',
@@ -191,7 +202,8 @@ db.once('open', async () => {
       size: 'universal',
       colour: 'silver',
       tags: [tags[6]._id, tags[7]._id, tags[9]._id],
-      onLoan: False
+      onLoan: false,
+      owner: users[4]._id
     },
         {
       name: 'Gold Bracelet Watch',
@@ -204,7 +216,8 @@ db.once('open', async () => {
       size: 'universal',
       colour: 'gold',
       tags: [tags[8]._id, tags[10]._id],
-      onLoan: True
+      onLoan: true,
+      owner: users[2]._id
     },
     {
       name: 'Red Peep-toe Heels',
@@ -216,7 +229,8 @@ db.once('open', async () => {
       size: '8',
       colour: 'red',
       tags: [tags[2]._id, tags[3]._id, tags[4]._id, tags[6]._id, tags[11]._id],
-      onLoan: False
+      onLoan: false,
+      owner: users[2]._id
     },
     {
       name: 'White High Heels',
@@ -228,7 +242,8 @@ db.once('open', async () => {
       gallery: ['young-ballerina-closeup-legs-shoes-standing-pointe-position.jpg','women-s-beige-low-heel-shoes-fashion.jpg'],
       size: '9',
       colour: 'white',
-      tags: [tags[2]._id, tags[4]._id, tags[6]._id, tags[11]._id]
+      tags: [tags[2]._id, tags[4]._id, tags[6]._id, tags[11]._id],
+      owner: users[4]._id
     },
     {
       name: 'Black Ankle Boots',
@@ -240,7 +255,8 @@ db.once('open', async () => {
       gallery: ['young-ballerina-closeup-legs-shoes-standing-pointe-position.jpg','women-s-beige-low-heel-shoes-fashion.jpg'],
       size: '10',
       colour: 'black',
-      tags: [tags[1]._id, tags[3]._id, tags[4]._id, tags[11]._id, tags[12]._id]
+      tags: [tags[1]._id, tags[3]._id, tags[4]._id, tags[11]._id, tags[12]._id],
+      owner: users[0]._id
     },
     {
       name: 'Black Fascinator',
@@ -252,7 +268,8 @@ db.once('open', async () => {
       gallery: ['young-ballerina-closeup-legs-shoes-standing-pointe-position.jpg','women-s-beige-low-heel-shoes-fashion.jpg'],
       size: 'universal',
       colour: 'black',
-      tags: [tags[0]._id, tags[6]._id]
+      tags: [tags[0]._id, tags[6]._id],
+      owner: users[1]._id
     }
   ]);
 
@@ -272,19 +289,22 @@ db.once('open', async () => {
             createdDate: '2022-12-30',
             bookingDate: '2023-9-2',
             bookingStatus: 'active',
-            product: products[5]._id
+            product: products[5]._id,
+            creator: users[0]._id
         },
         {
             createdDate: '2022-12-30',
             bookingDate: '2023-4-17',
             bookingStatus: 'cancelled',
-            product: products[12]._id
+            product: products[12]._id,
+            creator: users[0]._id
         },
         {
             createdDate: '2023-1-30',
             bookingDate: '2023-5-1',
             bookingStatus: 'active',
-            product: products[14]._id
+            product: products[14]._id,
+            creator: users[0]._id
         }
     ]
   });
@@ -301,19 +321,22 @@ db.once('open', async () => {
             createdDate: '2022-12-30',
             bookingDate: '2023-2-1',
             bookingStatus: 'previous',
-            product: products[0]._id
+            product: products[0]._id,
+            creator: users[1]._id
         },
         {
             createdDate: '2022-12-10',
             bookingDate: '2023-4-7',
             bookingStatus: 'active',
-            product: products[7]._id
+            product: products[7]._id,
+            creator: users[1]._id
         },
         {
             createdDate: '2023-2-1',
             bookingDate: '2023-4-11',
             bookingStatus: 'active',
-            product: products[11]._id
+            product: products[11]._id,
+            creator: users[1]._id
         }
     ]
   });
@@ -330,31 +353,36 @@ db.once('open', async () => {
             createdDate: '2022-12-10',
             bookingDate: '2023-2-25',
             bookingStatus: 'active',
-            product: products[2]._id
+            product: products[2]._id,
+            creator: users[2]._id
         },
         {
             createdDate: '2022-12-10',
             bookingDate: '2023-4-8',
             bookingStatus: 'active',
-            product: products[4]._id
+            product: products[4]._id,
+            creator: users[2]._id
         },
         {
             createdDate: '2022-12-30',
             bookingDate: '2023-1-15',
             bookingStatus: 'completed',
-            product: products[10]._id
+            product: products[10]._id,
+            creator: users[2]._id
         },
         {
             createdDate: '2022-12-30',
             bookingDate: '2023-2-16',
             bookingStatus: 'active',
-            product: products[10]._id
+            product: products[10]._id,
+            creator: users[2]._id
         },
         {
             createdDate: '2022-12-30',
             bookingDate: '2023-2-17',
             bookingStatus: 'active',
-            product: products[10]._id
+            product: products[10]._id,
+            creator: users[2]._id
         }
     ]
   });
@@ -371,31 +399,36 @@ db.once('open', async () => {
             createdDate: '2022-12-30',
             bookingDate: '2023-2-25',
             bookingStatus: 'active',
-            product: products[0]._id
+            product: products[0]._id,
+            creator: users[3]._id
         },
         {
             createdDate: '2023-1-10',
             bookingDate: '2023-3-2',
             bookingStatus: 'active',
-            product: products[1]._id
+            product: products[1]._id,
+            creator: users[3]._id
         },
         {
             createdDate: '2023-1-10',
             bookingDate: '2023-9-1',
             bookingStatus: 'active',
-            product: products[1]._id
+            product: products[1]._id,
+            creator: users[3]._id
         },
         {
             createdDate: '2023-1-10',
             bookingDate: '2023-6-1',
             bookingStatus: 'active',
-            product: products[6]._id
+            product: products[6]._id,
+            creator: users[3]._id
         },
         {
             createdDate: '2023-1-12',
             bookingDate: '2023-5-30',
             bookingStatus: 'active',
-            product: products[14]._id
+            product: products[14]._id,
+            creator: users[3]._id
         }
     ]
   });
@@ -412,13 +445,15 @@ db.once('open', async () => {
             createdDate: '2023-1-8',
             bookingDate: '2023-2-20',
             bookingStatus: 'active',
-            product: products[9]._id
+            product: products[9]._id,
+            creator: users[4]._id
         },
         {
             createdDate: '2022-11-10',
             bookingDate: '2022-12-2',
             bookingStatus: 'completed',
-            product: products[16]._id
+            product: products[16]._id,
+            creator: users[4]._id
         }
     ]
   });
