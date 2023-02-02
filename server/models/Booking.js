@@ -20,6 +20,11 @@ const bookingSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'Product',
     required: true
+  },
+  creator: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+    required: true
   }
 });
 

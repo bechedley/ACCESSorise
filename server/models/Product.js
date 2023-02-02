@@ -56,6 +56,11 @@ const productSchema = new Schema({
     onLoan: {
         type: Boolean,
         default: false
+    },
+    owner: {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
     }
 });
 
