@@ -2,15 +2,18 @@ const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 const User = require('./User');
+const dateFormat = require('../utils/dateFormat');
 
 const bookingSchema = new Schema({
   createdDate: {
     type: Date,
-    default: Date.now
+    default: Date.now,
+    get: (timestamp) => dateFormat(timestamp),
   },
   bookingDate: {
     type: Date,
-    require: true
+    require: true,
+    get: (timestamp) => dateFormat(timestamp),
   },
   bookingStatus: {
     type: String,
