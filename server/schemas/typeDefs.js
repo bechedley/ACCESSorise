@@ -20,15 +20,15 @@ const typeDefs = gql`
     tags: [Tag]
     categories: [Category]
     bookings: [Booking]
-    onLoad: Boolean
+    onLoan: Boolean
   }
 
   type Booking {
     _id: ID!
-    purchaseDate: String!
+    createdDate: String!
     bookingDate: String!
     bookingStatus: String!
-    deposit: Float
+    product: Product
   }
 
   type User {
@@ -89,7 +89,7 @@ const typeDefs = gql`
     addBooking(
         bookingDate: String!
         bookingStatus: String!
-        deposit: Float
+        product: ID!
     ): Booking
     addProduct(
         name: String!

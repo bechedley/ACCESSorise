@@ -14,10 +14,12 @@ const bookingSchema = new Schema({
   bookingStatus: {
     type: String,
     require: true,
-    enum: ['cancel', 'previous', 'active', 'completed']
+    enum: ['cancelled', 'previous', 'active', 'completed']
   },
-  deposit: {
-    type: Number,
+  product: {
+    type: Schema.Types.ObjectId,
+    ref: 'Product',
+    required: true
   }
 });
 

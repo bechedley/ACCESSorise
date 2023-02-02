@@ -55,7 +55,7 @@ const productSchema = new Schema({
     bookings: [Booking.schema],
     onLoan: {
         type: Boolean,
-        default: true
+        default: false
     }
 });
 
