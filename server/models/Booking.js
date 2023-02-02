@@ -2,26 +2,25 @@ const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 
-const orderSchema = new Schema({
-  purchaseDate: {
+const bookingSchema = new Schema({
+  createdDate: {
     type: Date,
     default: Date.now
   },
-  bookIn: {
+  bookingDate: {
     type: Date,
     require: true
   },
-  bookOut: {
-    type: Date,
-    require: true
-  },
-  orderStatus: {
+  bookingStatus: {
     type: String,
     require: true,
     enum: ['cancel', 'previous', 'active', 'completed']
+  },
+  deposit: {
+    type: Number,
   }
 });
 
-const Order = mongoose.model('Order', orderSchema);
+const Booking = mongoose.model('Booking', bookingSchema);
 
-module.exports = Order;
+module.exports = Booking;

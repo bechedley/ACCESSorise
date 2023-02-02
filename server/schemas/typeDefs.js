@@ -19,23 +19,23 @@ const typeDefs = gql`
     colour: String
     tags: [Tag]
     categories: [Category]
-    bookings: [Order]
+    bookings: [Booking]
     onLoad: Boolean
   }
 
-  type Order {
+  type Booking {
     _id: ID!
     purchaseDate: String!
-    bookIn: String!
-    bookOut: String!
-    orderStatus: String!
+    bookingDate: String!
+    bookingStatus: String!
+    deposit: Float
   }
 
   type User {
     _id: ID
     username: String
     email: String
-    orders: [Order]
+    bookings: [Booking]
     products: [Product]
     favourites: [Product]
     friends: [User]
@@ -50,6 +50,15 @@ const typeDefs = gql`
     session: ID
   }
 
+  type Friend {
+    _id: ID!
+    username: String
+  }
+
+  type Favourite {
+    _id: ID!
+  }
+
   type Auth {
     token: ID
     user: User
@@ -58,32 +67,51 @@ const typeDefs = gql`
   type Query {
     categories: [Category]
     category(_id: ID!): Category
-    products(category: ID, name: String): [Product]
+    products: [Product]
     product(_id: ID!): Product
     users: [User]
     user(_id: ID!): User
-    userProducts(user: ID, name: String): [Product]
-    userProduct(user: ID, _id: ID!): Product
-    userFavourites(user: ID, name: String): [Product]
-    userFriends(user: ID, username: String): [User]
+    userBookings(user: ID): [Booking]
+    booking(_id: ID!): Booking
+    favourites(user: ID, name: String): [Product]
+    friends(user: ID, username: String): [User]
     tags: [Tag]
-    order(_id: ID!): Order
     checkout(products: [ID]!): Checkout
   }
 
   type Mutation {
-    addUser(username: String!, email: String!, password: String!): Auth
-    addOrder(products: [ID]!): Order
-    updateUser(username: String, email: String, password: String): User
-    updateProduct(_id: ID!, #): Product
     login(email: String!, password: String!): Auth
-    addFriend
-    addProduct
-    addFavourite
-    updateOrder
-    removeFriend
-    removeProduct
-    removeFavourite
+    addUser(
+        username: String!
+        email: String!
+        password: String!
+    ): Auth
+    addBooking(
+        bookingDate: String!
+        bookingStatus: String!
+        deposit: Float
+    ): Booking
+    addProduct(
+        name: String!
+        description: String!
+        location: String!
+        productStatus: String!
+        image: String!
+        gallery: String
+        deposit: Float
+        size: String
+        colour: String
+        tags: [ID]
+        categories: [ID]
+    ): Product
+    addFavourite(_id: [ID]): Favourite
+    addFriend(_id: [ID]): Friend
+    updateUser(username: String, email: String, password: String): User
+    updateBooking(_id: ID!): Booking
+    updateProduct(_id: ID!): Product
+    removeProduct(productId: ID!): Product
+    removeFavourite(userId: ID!, favouriteId: ID!): Favourite
+    removeFriend(userId: ID!, friendId: ID!): Friend
   }
 `;
 

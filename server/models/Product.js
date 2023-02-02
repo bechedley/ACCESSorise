@@ -52,7 +52,7 @@ const productSchema = new Schema({
             required: true
         },
     ],
-    bookings: [Order.schema],
+    bookings: [Booking.schema],
     onLoan: {
         type: Boolean,
         default: true
