@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 const Booking = require('./Booking');
-const User = require('./User');
 
 const productSchema = new Schema({
     name: {
@@ -59,10 +58,12 @@ const productSchema = new Schema({
         type: Boolean,
         default: false
     },
-    owner: {
-        type: String,
-        required: true
-    }
+    owner: [
+        {
+          type: Schema.Types.ObjectId,
+          ref: 'User',
+        },
+    ]
 });
 
 const Product = mongoose.model('Product', productSchema);

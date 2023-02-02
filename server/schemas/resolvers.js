@@ -21,26 +21,32 @@ const resolvers = {
             return await Product.find()
             .populate('categories')
             .populate('tags')
-            .populate('bookings');
+            .populate('bookings')
+            .populate('owner');
         },
 
         product: async (parent, { _id }) => {
             return await Product.findById(_id)
             .populate('categories')
             .populate('tags')
-            .populate('bookings');
+            .populate('bookings')
+            .populate('owner');
         },
 
         users: async () => {
             return User.find()
             .populate('products')
-            .populate('bookings');
+            .populate('bookings')
+            .populate('favourites')
+            .populate('friends');
         },
 
         user: async (parent, { _id }) => {
             return await User.findById(_id)
             .populate('products')
             .populate('bookings')
+            .populate('favourites')
+            .populate('friends')
             .populate({
                 path: 'bookings.products',
                 populate: 'categories'
@@ -53,6 +59,8 @@ const resolvers = {
               return User.findOne({ _id: context.user._id })
               .populate('products')
               .populate('bookings')
+              .populate('friends')
+              .populate('favourites')
               .populate({
                 path: 'bookings.products',
                 populate: 'categories'
@@ -63,7 +71,8 @@ const resolvers = {
 
         bookings: async () => {
             return await Booking.find()
-            .populate('product');
+            .populate('product')
+            .populate('creator');
         },
 
         booking: async (parent, { _id }, context) => {
@@ -95,7 +104,8 @@ const resolvers = {
             return await Product.find(params)
             .populate('categories')
             .populate('tags')
-            .populate('bookings');
+            .populate('bookings')
+            .populate('owner');
         },
 
         friends: async (parent, { user, username }) => {
@@ -113,7 +123,8 @@ const resolvers = {
       
             return await User.find(params)
             .populate('products')
-            .populate('bookings');
+            .populate('bookings')
+            .populate('friends');
         },
 
         checkout: async (parent, args, context) => {

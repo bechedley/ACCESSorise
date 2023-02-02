@@ -18,8 +18,8 @@ const typeDefs = gql`
     size: String
     colour: String
     tags: [Tag]
-    categories: [Category]
-    bookings: [Booking]
+    categories: [Category!]!
+    bookings: [Booking!]
     onLoan: Boolean
     owner: User
   }
@@ -29,7 +29,7 @@ const typeDefs = gql`
     createdDate: String!
     bookingDate: String!
     bookingStatus: String!
-    product: Product
+    product: Product!
     creator: User
   }
 
@@ -37,9 +37,9 @@ const typeDefs = gql`
     _id: ID
     username: String
     email: String
-    bookings: [Booking]
-    products: [Product]
-    favourites: [Product]
+    bookings: [Booking!]
+    products: [Product!]
+    favourites: [Product!]
     friends: [User]
   }
 

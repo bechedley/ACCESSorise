@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
-const User = require('./User');
+
 const dateFormat = require('../utils/dateFormat');
 
 const bookingSchema = new Schema({
@@ -25,10 +25,12 @@ const bookingSchema = new Schema({
     ref: 'Product',
     required: true
   },
-  creator: {
-    type: String,
-    required: true
-  }
+  creator: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+    },
+  ]
 });
 
 const Booking = mongoose.model('Booking', bookingSchema);

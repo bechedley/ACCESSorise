@@ -35,8 +35,6 @@ db.once('open', async () => {
 
   console.log('tags seeded');
 
-  const allUsers = await User.find();
-
   await Product.deleteMany();
 
   const products = await Product.insertMany([
@@ -51,8 +49,7 @@ db.once('open', async () => {
       size: '9',
       colour: 'brown',
       tags: [tags[1]._id, tags[2]._id, tags[4]._id],
-      onLoan: false,
-      owner: 'userOne'
+      onLoan: false
     },
     {
       name: 'Black woven handbag',
@@ -66,8 +63,7 @@ db.once('open', async () => {
       size: 'universal',
       colour: 'black',
       tags: [tags[1]._id, tags[6]._id, tags[7]._id],
-      onLoan: true,
-      owner: 'userThree'
+      onLoan: true
     },
     {
       name: 'Black Heels',
@@ -80,8 +76,7 @@ db.once('open', async () => {
       size: '7',
       colour: 'black',
       tags: [tags[1]._id, tags[3]._id, tags[4]._id, tags[6]._id, tags[11]._id, tags[12]._id],
-      onLoan: false,
-      owner: 'userOne'
+      onLoan: false
     },
     {
       name: 'Silver Clutch',
@@ -95,8 +90,7 @@ db.once('open', async () => {
       size: 'universal',
       colour: 'silver',
       tags: [tags[6]._id, tags[7]._id, tags[9]._id],
-      onLoan: false,
-      owner: 'userTwo'
+      onLoan: false
     },
     {
       name: 'Gold Necklace',
@@ -109,8 +103,7 @@ db.once('open', async () => {
       size: 'universal',
       colour: 'gold',
       tags: [tags[6]._id, tags[8]._id],
-      onLoan: false,
-      owner: 'userOne'
+      onLoan: false
     },
     {
       name: 'Silk Scarf',
@@ -121,8 +114,7 @@ db.once('open', async () => {
       image: 'young-ballerina-closeup-legs-shoes-standing-pointe-position.jpg',
       size: 'universal',
       colour: 'multi',
-      tags: [tags[1]._id, tags[5]._id],
-      owner: 'userThree'
+      tags: [tags[1]._id, tags[5]._id]
     },
     {
       name: 'Laptop Bag',
@@ -133,8 +125,7 @@ db.once('open', async () => {
       image: 'young-ballerina-closeup-legs-shoes-standing-pointe-position.jpg',
       size: 'universal',
       colour: 'multi',
-      tags: [tags[7]._id],
-      owner: 'userOne'
+      tags: [tags[7]._id]
     },
     {
       name: 'Cream Feather Fascinator',
@@ -148,8 +139,7 @@ db.once('open', async () => {
       size: 'universal',
       colour: 'cream',
       tags: [tags[0]._id, tags[6]._id, tags[8]._id],
-      onLoan: false,
-      owner: 'userFour'
+      onLoan: false
     },
     {
       name: 'Red Flower Fascinator',
@@ -162,8 +152,7 @@ db.once('open', async () => {
       size: 'universal',
       colour: 'red',
       tags: [tags[0]._id, tags[6]._id, tags[8]._id],
-      onLoan: false,
-      owner: 'userFive'
+      onLoan: false
     },
     {
       name: 'Brown knee-high boots',
@@ -176,8 +165,7 @@ db.once('open', async () => {
       size: '7',
       colour: 'brown',
       tags: [tags[1]._id, tags[3]._id, tags[4]._id, tags[11]._id, tags[12]._id],
-      onLoan: false,
-      owner: 'userFour'
+      onLoan: false
     },
     {
       name: 'Pale pink watch',
@@ -190,8 +178,7 @@ db.once('open', async () => {
       size: 'universal',
       colour: 'pink',
       tags: [tags[6]._id, tags[8]._id, tags[10]._id],
-      onLoan: false,
-      owner: 'userFour'
+      onLoan: false
     },
     {
       name: 'Silver Mimco Purse',
@@ -204,8 +191,7 @@ db.once('open', async () => {
       size: 'universal',
       colour: 'silver',
       tags: [tags[6]._id, tags[7]._id, tags[9]._id],
-      onLoan: false,
-      owner: 'userFive'
+      onLoan: false
     },
     {
       name: 'Gold Bracelet Watch',
@@ -218,8 +204,7 @@ db.once('open', async () => {
       size: 'universal',
       colour: 'gold',
       tags: [tags[8]._id, tags[10]._id],
-      onLoan: true,
-      owner: 'userThree'
+      onLoan: true
     },
     {
       name: 'Red Peep-toe Heels',
@@ -231,8 +216,7 @@ db.once('open', async () => {
       size: '8',
       colour: 'red',
       tags: [tags[2]._id, tags[3]._id, tags[4]._id, tags[6]._id, tags[11]._id],
-      onLoan: false,
-      owner: 'userThree'
+      onLoan: false
     },
     {
       name: 'White High Heels',
@@ -244,8 +228,7 @@ db.once('open', async () => {
       gallery: ['young-ballerina-closeup-legs-shoes-standing-pointe-position.jpg', 'women-s-beige-low-heel-shoes-fashion.jpg'],
       size: '9',
       colour: 'white',
-      tags: [tags[2]._id, tags[4]._id, tags[6]._id, tags[11]._id],
-      owner: 'userFive'
+      tags: [tags[2]._id, tags[4]._id, tags[6]._id, tags[11]._id]
     },
     {
       name: 'Black Ankle Boots',
@@ -257,8 +240,7 @@ db.once('open', async () => {
       gallery: ['young-ballerina-closeup-legs-shoes-standing-pointe-position.jpg', 'women-s-beige-low-heel-shoes-fashion.jpg'],
       size: '10',
       colour: 'black',
-      tags: [tags[1]._id, tags[3]._id, tags[4]._id, tags[11]._id, tags[12]._id],
-      owner: 'userOne'
+      tags: [tags[1]._id, tags[3]._id, tags[4]._id, tags[11]._id, tags[12]._id]
     },
     {
       name: 'Black Fascinator',
@@ -270,8 +252,7 @@ db.once('open', async () => {
       gallery: ['young-ballerina-closeup-legs-shoes-standing-pointe-position.jpg', 'women-s-beige-low-heel-shoes-fashion.jpg'],
       size: 'universal',
       colour: 'black',
-      tags: [tags[0]._id, tags[6]._id],
-      owner: 'userTwo'
+      tags: [tags[0]._id, tags[6]._id]
     }
   ]);
 
@@ -285,29 +266,25 @@ db.once('open', async () => {
       email: 'userone@email.com',
       password: 'password12345',
       products: [products[0]._id, products[2]._id, products[4]._id, products[6]._id, products[15]._id],
-      friends: ['userThree', 'userFive'],
       favourites: [products[1]._id, products[5]._id, products[11]._id, products[14]._id, products[16]._id],
       bookings: [
         {
           createdDate: '2022-12-30',
           bookingDate: '2023-9-2',
           bookingStatus: 'active',
-          product: products[5]._id,
-          creator: 'userOne'
+          product: products[5]._id
         },
         {
           createdDate: '2022-12-30',
           bookingDate: '2023-4-17',
           bookingStatus: 'cancelled',
-          product: products[12]._id,
-          creator: 'userOne'
+          product: products[12]._id
         },
         {
           createdDate: '2023-1-30',
           bookingDate: '2023-5-1',
           bookingStatus: 'active',
-          product: products[14]._id,
-          creator: 'userOne'
+          product: products[14]._id
         }
       ]
     },
@@ -316,29 +293,25 @@ db.once('open', async () => {
       email: 'userTwo@email.com',
       password: 'password12345',
       products: [products[3]._id, products[16]._id],
-      friends: ['userFour'],
       favourites: [products[0]._id, products[5]._id, products[7]._id, products[11]._id, products[15]._id],
       bookings: [
         {
           createdDate: '2022-12-30',
           bookingDate: '2023-2-1',
           bookingStatus: 'previous',
-          product: products[0]._id,
-          creator: 'userTwo'
+          product: products[0]._id
         },
         {
           createdDate: '2022-12-10',
           bookingDate: '2023-4-7',
           bookingStatus: 'active',
-          product: products[7]._id,
-          creator: 'userTwo'
+          product: products[7]._id
         },
         {
           createdDate: '2023-2-1',
           bookingDate: '2023-4-11',
           bookingStatus: 'active',
-          product: products[11]._id,
-          creator: 'userTwo'
+          product: products[11]._id
         }
       ]
     },
@@ -347,43 +320,37 @@ db.once('open', async () => {
       email: 'userThree@email.com',
       password: 'password12345',
       products: [products[1]._id, products[5]._id, products[12]._id, products[13]._id],
-      friends: ['userOne', 'userTwo', 'userFour', 'userFive'],
       favourites: [products[0]._id, products[2]._id, products[6]._id, products[10]._id, products[15]._id],
       bookings: [
         {
           createdDate: '2022-12-10',
           bookingDate: '2023-2-25',
           bookingStatus: 'active',
-          product: products[2]._id,
-          creator: 'userThree'
+          product: products[2]._id
         },
         {
           createdDate: '2022-12-10',
           bookingDate: '2023-4-8',
           bookingStatus: 'active',
-          product: products[4]._id,
-          creator: 'userThree'
+          product: products[4]._id
         },
         {
           createdDate: '2022-12-30',
           bookingDate: '2023-1-15',
           bookingStatus: 'completed',
-          product: products[10]._id,
-          creator: 'userThree'
+          product: products[10]._id
         },
         {
           createdDate: '2022-12-30',
           bookingDate: '2023-2-16',
           bookingStatus: 'active',
-          product: products[10]._id,
-          creator: 'userThree'
+          product: products[10]._id
         },
         {
           createdDate: '2022-12-30',
           bookingDate: '2023-2-17',
           bookingStatus: 'active',
-          product: products[10]._id,
-          creator: 'userThree'
+          product: products[10]._id
         }
       ]
     },
@@ -392,43 +359,37 @@ db.once('open', async () => {
       email: 'userFour@email.com',
       password: 'password12345',
       products: [products[7]._id, products[9]._id, products[10]._id],
-      friends: ['userTwo', 'userThree', 'userFive'],
       favourites: [products[1]._id, products[2]._id, products[4]._id, products[6]._id, products[11]._id, products[13]._id, products[14]._id],
       bookings: [
         {
           createdDate: '2022-12-30',
           bookingDate: '2023-2-25',
           bookingStatus: 'active',
-          product: products[0]._id,
-          creator: 'userFour'
+          product: products[0]._id
         },
         {
           createdDate: '2023-1-10',
           bookingDate: '2023-3-2',
           bookingStatus: 'active',
-          product: products[1]._id,
-          creator: 'userFour'
+          product: products[1]._id
         },
         {
           createdDate: '2023-1-10',
           bookingDate: '2023-9-1',
           bookingStatus: 'active',
-          product: products[1]._id,
-          creator: 'userFour'
+          product: products[1]._id
         },
         {
           createdDate: '2023-1-10',
           bookingDate: '2023-6-1',
           bookingStatus: 'active',
-          product: products[6]._id,
-          creator: 'userFour'
+          product: products[6]._id
         },
         {
           createdDate: '2023-1-12',
           bookingDate: '2023-5-30',
           bookingStatus: 'active',
-          product: products[14]._id,
-          creator: 'userFour'
+          product: products[14]._id
         }
       ]
     },
@@ -437,28 +398,52 @@ db.once('open', async () => {
       email: 'userFive@email.com',
       password: 'password12345',
       products: [products[8]._id, products[11]._id, products[14]._id],
-      friends: ['userOne', 'userThree', 'userFour'],
       favourites: [products[0]._id, products[4]._id, products[5]._id, products[9]._id, products[10]._id, products[12]._id, products[16]._id],
       bookings: [
         {
           createdDate: '2023-1-8',
           bookingDate: '2023-2-20',
           bookingStatus: 'active',
-          product: products[9]._id,
-          creator: 'userFive'
+          product: products[9]._id
         },
         {
           createdDate: '2022-11-10',
           bookingDate: '2022-12-2',
           bookingStatus: 'completed',
-          product: products[16]._id,
-          creator: 'userFive'
+          product: products[16]._id
         }
       ]
     }
   ]);
 
   console.log('users seeded');
+
+  const userOne = await User.findOneAndUpdate(
+    { username: 'userOne' },
+    { $addToSet: { friends: [users[2]._id, users[4]._id] } }
+  );
+
+  const userTwo = await User.findOneAndUpdate(
+    { username: 'userTwo' },
+    { $addToSet: { friends: users[3]._id } }
+  );
+
+  const userThree = await User.findOneAndUpdate(
+    { username: 'userThree' },
+    { $addToSet: { friends: [users[0]._id, users[1]._id, users[3]._id, users[4]._id] } }
+  );
+
+  const userFour = await User.findOneAndUpdate(
+    { username: 'userFour' },
+    { $addToSet: { friends: [users[1]._id, users[2]._id, users[4]._id] } }
+  );
+
+  const userFive = await User.findOneAndUpdate(
+    { username: 'userFive' },
+    { $addToSet: { friends: [users[0]._id, users[2]._id, users[3]._id] } }
+  );
+
+  console.log('friends seeded');
 
   process.exit();
 });
