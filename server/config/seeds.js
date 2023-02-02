@@ -18,22 +18,24 @@ db.once('open', async () => {
   await Tag.deleteMany();
 
   const tags = await Tag.insertMany([
-    { name: 'fascinator' },
-    { name: 'casual' },
-    { name: 'sandals' },
-    { name: 'comfortable' },
-    { name: 'shoes' },
-    { name: 'scarf' },
-    { name: 'spring racing' },
-    { name: 'handbag' },
-    { name: 'jewellery' },
-    { name: 'purse' },
-    { name: 'watch' },
-    { name: 'heels' },
-    { name: 'boots' },
+    { tagName: 'fascinator' },
+    { tagName: 'casual' },
+    { tagName: 'sandals' },
+    { tagName: 'comfortable' },
+    { tagName: 'shoes' },
+    { tagName: 'scarf' },
+    { tagName: 'spring racing' },
+    { tagName: 'handbag' },
+    { tagName: 'jewellery' },
+    { tagName: 'purse' },
+    { tagName: 'watch' },
+    { tagName: 'heels' },
+    { tagName: 'boots' },
   ]);
 
   console.log('tags seeded');
+
+  const allUsers = await User.find();
 
   await Product.deleteMany();
 
@@ -45,12 +47,12 @@ db.once('open', async () => {
       location: 'Melbourne',
       productStatus: 'public',
       image: 'women-s-beige-low-heel-shoes-fashion.jpg',
-      gallery: ['woman-white-background-model-shoe.jpg','young-ballerina-closeup-legs-shoes-standing-pointe-position.jpg'],
+      gallery: ['woman-white-background-model-shoe.jpg', 'young-ballerina-closeup-legs-shoes-standing-pointe-position.jpg'],
       size: '9',
       colour: 'brown',
       tags: [tags[1]._id, tags[2]._id, tags[4]._id],
       onLoan: false,
-      owner: users[0]._id
+      owner: 'userOne'
     },
     {
       name: 'Black woven handbag',
@@ -59,13 +61,13 @@ db.once('open', async () => {
       location: 'Sydney',
       productStatus: 'friendsOnly',
       image: 'young-ballerina-closeup-legs-shoes-standing-pointe-position.jpg',
-      gallery: ['woman-white-background-model-shoe.jpg','women-s-beige-low-heel-shoes-fashion.jpg'],
+      gallery: ['woman-white-background-model-shoe.jpg', 'women-s-beige-low-heel-shoes-fashion.jpg'],
       deposit: 50.00,
       size: 'universal',
       colour: 'black',
       tags: [tags[1]._id, tags[6]._id, tags[7]._id],
       onLoan: true,
-      owner: users[2]._id
+      owner: 'userThree'
     },
     {
       name: 'Black Heels',
@@ -74,12 +76,12 @@ db.once('open', async () => {
       location: 'Melbourne',
       productStatus: 'public',
       image: 'women-s-beige-low-heel-shoes-fashion.jpg',
-      gallery: ['woman-white-background-model-shoe.jpg','young-ballerina-closeup-legs-shoes-standing-pointe-position.jpg'],
+      gallery: ['woman-white-background-model-shoe.jpg', 'young-ballerina-closeup-legs-shoes-standing-pointe-position.jpg'],
       size: '7',
       colour: 'black',
       tags: [tags[1]._id, tags[3]._id, tags[4]._id, tags[6]._id, tags[11]._id, tags[12]._id],
       onLoan: false,
-      owner: users[0]._id
+      owner: 'userOne'
     },
     {
       name: 'Silver Clutch',
@@ -88,39 +90,39 @@ db.once('open', async () => {
       location: 'Brisbane',
       productStatus: 'hidden',
       image: 'young-ballerina-closeup-legs-shoes-standing-pointe-position.jpg',
-      gallery: ['woman-white-background-model-shoe.jpg','women-s-beige-low-heel-shoes-fashion.jpg'],
+      gallery: ['woman-white-background-model-shoe.jpg', 'women-s-beige-low-heel-shoes-fashion.jpg'],
       deposit: 80.00,
       size: 'universal',
       colour: 'silver',
       tags: [tags[6]._id, tags[7]._id, tags[9]._id],
       onLoan: false,
-      owner: users[1]._id
+      owner: 'userTwo'
     },
     {
       name: 'Gold Necklace',
       description: 'Long gold chain.',
-      category: [categories[0]._id, categories[1].id,categories[2].id, categories[3].id, categories[4].id, categories[5]._id],
+      category: [categories[0]._id, categories[1].id, categories[2].id, categories[3].id, categories[4].id, categories[5]._id],
       location: 'Melbourne',
       productStatus: 'public',
       image: 'young-ballerina-closeup-legs-shoes-standing-pointe-position.jpg',
-      gallery: ['woman-white-background-model-shoe.jpg','women-s-beige-low-heel-shoes-fashion.jpg'],
+      gallery: ['woman-white-background-model-shoe.jpg', 'women-s-beige-low-heel-shoes-fashion.jpg'],
       size: 'universal',
       colour: 'gold',
       tags: [tags[6]._id, tags[8]._id],
       onLoan: false,
-      owner: users[0]._id
+      owner: 'userOne'
     },
     {
       name: 'Silk Scarf',
       description: 'Multicoloured silk scarf in greens and blues.',
-      category: [categories[1]._id, categories[2].id,categories[4].id],
+      category: [categories[1]._id, categories[2].id, categories[4].id],
       location: 'Melbourne',
       productStatus: 'public',
       image: 'young-ballerina-closeup-legs-shoes-standing-pointe-position.jpg',
       size: 'universal',
       colour: 'multi',
       tags: [tags[1]._id, tags[5]._id],
-      owner: users[2]._id
+      owner: 'userThree'
     },
     {
       name: 'Laptop Bag',
@@ -132,7 +134,7 @@ db.once('open', async () => {
       size: 'universal',
       colour: 'multi',
       tags: [tags[7]._id],
-      owner: users[0]._id
+      owner: 'userOne'
     },
     {
       name: 'Cream Feather Fascinator',
@@ -141,13 +143,13 @@ db.once('open', async () => {
       location: 'Melbourne',
       productStatus: 'friendsOnly',
       image: 'mohammad-metri-E-0ON3VGrBc-unsplash.jpg',
-      gallery: ['woman-white-background-model-shoe.jpg','women-s-beige-low-heel-shoes-fashion.jpg'],
+      gallery: ['woman-white-background-model-shoe.jpg', 'women-s-beige-low-heel-shoes-fashion.jpg'],
       deposit: 60.00,
       size: 'universal',
       colour: 'cream',
       tags: [tags[0]._id, tags[6]._id, tags[8]._id],
       onLoan: false,
-      owner: users[3]._id
+      owner: 'userFour'
     },
     {
       name: 'Red Flower Fascinator',
@@ -156,12 +158,12 @@ db.once('open', async () => {
       location: 'Melbourne',
       productStatus: 'hidden',
       image: 'mohammad-metri-E-0ON3VGrBc-unsplash.jpg',
-      gallery: ['woman-white-background-model-shoe.jpg','women-s-beige-low-heel-shoes-fashion.jpg'],
+      gallery: ['woman-white-background-model-shoe.jpg', 'women-s-beige-low-heel-shoes-fashion.jpg'],
       size: 'universal',
       colour: 'red',
       tags: [tags[0]._id, tags[6]._id, tags[8]._id],
       onLoan: false,
-      owner: users[4]._id
+      owner: 'userFive'
     },
     {
       name: 'Brown knee-high boots',
@@ -170,12 +172,12 @@ db.once('open', async () => {
       location: 'Melbourne',
       productStatus: 'friendsOnly',
       image: 'woman-white-background-model-shoe.jpg',
-      gallery: ['mohammad-metri-E-0ON3VGrBc-unsplash.jpg','women-s-beige-low-heel-shoes-fashion.jpg'],
+      gallery: ['mohammad-metri-E-0ON3VGrBc-unsplash.jpg', 'women-s-beige-low-heel-shoes-fashion.jpg'],
       size: '7',
       colour: 'brown',
       tags: [tags[1]._id, tags[3]._id, tags[4]._id, tags[11]._id, tags[12]._id],
       onLoan: false,
-      owner: users[3]._id
+      owner: 'userFour'
     },
     {
       name: 'Pale pink watch',
@@ -184,12 +186,12 @@ db.once('open', async () => {
       location: 'Melbourne',
       productStatus: 'friendsOnly',
       image: 'woman-white-background-model-shoe.jpg',
-      gallery: ['mohammad-metri-E-0ON3VGrBc-unsplash.jpg','women-s-beige-low-heel-shoes-fashion.jpg'],
+      gallery: ['mohammad-metri-E-0ON3VGrBc-unsplash.jpg', 'women-s-beige-low-heel-shoes-fashion.jpg'],
       size: 'universal',
       colour: 'pink',
       tags: [tags[6]._id, tags[8]._id, tags[10]._id],
       onLoan: false,
-      owner: users[3]._id
+      owner: 'userFour'
     },
     {
       name: 'Silver Mimco Purse',
@@ -198,26 +200,26 @@ db.once('open', async () => {
       location: 'Melbourne',
       productStatus: 'public',
       image: 'woman-white-background-model-shoe.jpg',
-      gallery: ['mohammad-metri-E-0ON3VGrBc-unsplash.jpg','women-s-beige-low-heel-shoes-fashion.jpg'],
+      gallery: ['mohammad-metri-E-0ON3VGrBc-unsplash.jpg', 'women-s-beige-low-heel-shoes-fashion.jpg'],
       size: 'universal',
       colour: 'silver',
       tags: [tags[6]._id, tags[7]._id, tags[9]._id],
       onLoan: false,
-      owner: users[4]._id
+      owner: 'userFive'
     },
-        {
+    {
       name: 'Gold Bracelet Watch',
       description: 'Delicate gold bracelet watch with filigree links. Analogue.',
       category: [categories[0]._id, categories[1].id, categories[2].id, categories[3].id, categories[4].id, categories[5].id],
       location: 'Sydney',
       productStatus: 'public',
       image: 'woman-white-background-model-shoe.jpg',
-      gallery: ['mohammad-metri-E-0ON3VGrBc-unsplash.jpg','women-s-beige-low-heel-shoes-fashion.jpg'],
+      gallery: ['mohammad-metri-E-0ON3VGrBc-unsplash.jpg', 'women-s-beige-low-heel-shoes-fashion.jpg'],
       size: 'universal',
       colour: 'gold',
       tags: [tags[8]._id, tags[10]._id],
       onLoan: true,
-      owner: users[2]._id
+      owner: 'userThree'
     },
     {
       name: 'Red Peep-toe Heels',
@@ -230,7 +232,7 @@ db.once('open', async () => {
       colour: 'red',
       tags: [tags[2]._id, tags[3]._id, tags[4]._id, tags[6]._id, tags[11]._id],
       onLoan: false,
-      owner: users[2]._id
+      owner: 'userThree'
     },
     {
       name: 'White High Heels',
@@ -239,11 +241,11 @@ db.once('open', async () => {
       location: 'Melbourne',
       productStatus: 'friendsOnly',
       image: 'woman-white-background-model-shoe.jpg',
-      gallery: ['young-ballerina-closeup-legs-shoes-standing-pointe-position.jpg','women-s-beige-low-heel-shoes-fashion.jpg'],
+      gallery: ['young-ballerina-closeup-legs-shoes-standing-pointe-position.jpg', 'women-s-beige-low-heel-shoes-fashion.jpg'],
       size: '9',
       colour: 'white',
       tags: [tags[2]._id, tags[4]._id, tags[6]._id, tags[11]._id],
-      owner: users[4]._id
+      owner: 'userFive'
     },
     {
       name: 'Black Ankle Boots',
@@ -252,11 +254,11 @@ db.once('open', async () => {
       location: 'Melbourne',
       productStatus: 'public',
       image: 'woman-white-background-model-shoe.jpg',
-      gallery: ['young-ballerina-closeup-legs-shoes-standing-pointe-position.jpg','women-s-beige-low-heel-shoes-fashion.jpg'],
+      gallery: ['young-ballerina-closeup-legs-shoes-standing-pointe-position.jpg', 'women-s-beige-low-heel-shoes-fashion.jpg'],
       size: '10',
       colour: 'black',
       tags: [tags[1]._id, tags[3]._id, tags[4]._id, tags[11]._id, tags[12]._id],
-      owner: users[0]._id
+      owner: 'userOne'
     },
     {
       name: 'Black Fascinator',
@@ -265,11 +267,11 @@ db.once('open', async () => {
       location: 'Melbourne',
       productStatus: 'public',
       image: 'woman-white-background-model-shoe.jpg',
-      gallery: ['young-ballerina-closeup-legs-shoes-standing-pointe-position.jpg','women-s-beige-low-heel-shoes-fashion.jpg'],
+      gallery: ['young-ballerina-closeup-legs-shoes-standing-pointe-position.jpg', 'women-s-beige-low-heel-shoes-fashion.jpg'],
       size: 'universal',
       colour: 'black',
       tags: [tags[0]._id, tags[6]._id],
-      owner: users[1]._id
+      owner: 'userTwo'
     }
   ]);
 
@@ -277,186 +279,184 @@ db.once('open', async () => {
 
   await User.deleteMany();
 
-  await User.create({
-    username: 'userOne',
-    email: 'userone@email.com',
-    password: 'password12345',
-    products: [products[0]._id, products[2]._id, products[4]._id, products[6]._id, products[15]._id],
-    friends: [users[2]._id, users[4]._id],
-    favourites: [products[1]._id, products[5]._id, products[11]._id, products[14]._id, products[16]._id],
-    bookings: [
+  const users = await User.insertMany([
+    {
+      username: 'userOne',
+      email: 'userone@email.com',
+      password: 'password12345',
+      products: [products[0]._id, products[2]._id, products[4]._id, products[6]._id, products[15]._id],
+      friends: ['userThree', 'userFive'],
+      favourites: [products[1]._id, products[5]._id, products[11]._id, products[14]._id, products[16]._id],
+      bookings: [
         {
-            createdDate: '2022-12-30',
-            bookingDate: '2023-9-2',
-            bookingStatus: 'active',
-            product: products[5]._id,
-            creator: users[0]._id
+          createdDate: '2022-12-30',
+          bookingDate: '2023-9-2',
+          bookingStatus: 'active',
+          product: products[5]._id,
+          creator: 'userOne'
         },
         {
-            createdDate: '2022-12-30',
-            bookingDate: '2023-4-17',
-            bookingStatus: 'cancelled',
-            product: products[12]._id,
-            creator: users[0]._id
+          createdDate: '2022-12-30',
+          bookingDate: '2023-4-17',
+          bookingStatus: 'cancelled',
+          product: products[12]._id,
+          creator: 'userOne'
         },
         {
-            createdDate: '2023-1-30',
-            bookingDate: '2023-5-1',
-            bookingStatus: 'active',
-            product: products[14]._id,
-            creator: users[0]._id
+          createdDate: '2023-1-30',
+          bookingDate: '2023-5-1',
+          bookingStatus: 'active',
+          product: products[14]._id,
+          creator: 'userOne'
         }
-    ]
-  });
-
-  await User.create({
-    username: 'userTwo',
-    email: 'userTwo@email.com',
-    password: 'password12345',
-    products: [products[3]._id, products[16]._id],
-    friends: [users[3]._id],
-    favourites: [products[0]._id, products[5]._id, products[7]._id, products[11]._id, products[15]._id],
-    bookings: [
+      ]
+    },
+    {
+      username: 'userTwo',
+      email: 'userTwo@email.com',
+      password: 'password12345',
+      products: [products[3]._id, products[16]._id],
+      friends: ['userFour'],
+      favourites: [products[0]._id, products[5]._id, products[7]._id, products[11]._id, products[15]._id],
+      bookings: [
         {
-            createdDate: '2022-12-30',
-            bookingDate: '2023-2-1',
-            bookingStatus: 'previous',
-            product: products[0]._id,
-            creator: users[1]._id
+          createdDate: '2022-12-30',
+          bookingDate: '2023-2-1',
+          bookingStatus: 'previous',
+          product: products[0]._id,
+          creator: 'userTwo'
         },
         {
-            createdDate: '2022-12-10',
-            bookingDate: '2023-4-7',
-            bookingStatus: 'active',
-            product: products[7]._id,
-            creator: users[1]._id
+          createdDate: '2022-12-10',
+          bookingDate: '2023-4-7',
+          bookingStatus: 'active',
+          product: products[7]._id,
+          creator: 'userTwo'
         },
         {
-            createdDate: '2023-2-1',
-            bookingDate: '2023-4-11',
-            bookingStatus: 'active',
-            product: products[11]._id,
-            creator: users[1]._id
+          createdDate: '2023-2-1',
+          bookingDate: '2023-4-11',
+          bookingStatus: 'active',
+          product: products[11]._id,
+          creator: 'userTwo'
         }
-    ]
-  });
-
-  await User.create({
-    username: 'userThree',
-    email: 'userThree@email.com',
-    password: 'password12345',
-    products: [products[1]._id, products[5]._id, products[12]._id, products[13]._id],
-    friends: [users[0]._id, users[1]._id, users[3]._id, users[4]._id],
-    favourites: [products[0]._id, products[2]._id, products[6]._id, products[10]._id, products[15]._id],
-    bookings: [
+      ]
+    },
+    {
+      username: 'userThree',
+      email: 'userThree@email.com',
+      password: 'password12345',
+      products: [products[1]._id, products[5]._id, products[12]._id, products[13]._id],
+      friends: ['userOne', 'userTwo', 'userFour', 'userFive'],
+      favourites: [products[0]._id, products[2]._id, products[6]._id, products[10]._id, products[15]._id],
+      bookings: [
         {
-            createdDate: '2022-12-10',
-            bookingDate: '2023-2-25',
-            bookingStatus: 'active',
-            product: products[2]._id,
-            creator: users[2]._id
+          createdDate: '2022-12-10',
+          bookingDate: '2023-2-25',
+          bookingStatus: 'active',
+          product: products[2]._id,
+          creator: 'userThree'
         },
         {
-            createdDate: '2022-12-10',
-            bookingDate: '2023-4-8',
-            bookingStatus: 'active',
-            product: products[4]._id,
-            creator: users[2]._id
+          createdDate: '2022-12-10',
+          bookingDate: '2023-4-8',
+          bookingStatus: 'active',
+          product: products[4]._id,
+          creator: 'userThree'
         },
         {
-            createdDate: '2022-12-30',
-            bookingDate: '2023-1-15',
-            bookingStatus: 'completed',
-            product: products[10]._id,
-            creator: users[2]._id
+          createdDate: '2022-12-30',
+          bookingDate: '2023-1-15',
+          bookingStatus: 'completed',
+          product: products[10]._id,
+          creator: 'userThree'
         },
         {
-            createdDate: '2022-12-30',
-            bookingDate: '2023-2-16',
-            bookingStatus: 'active',
-            product: products[10]._id,
-            creator: users[2]._id
+          createdDate: '2022-12-30',
+          bookingDate: '2023-2-16',
+          bookingStatus: 'active',
+          product: products[10]._id,
+          creator: 'userThree'
         },
         {
-            createdDate: '2022-12-30',
-            bookingDate: '2023-2-17',
-            bookingStatus: 'active',
-            product: products[10]._id,
-            creator: users[2]._id
+          createdDate: '2022-12-30',
+          bookingDate: '2023-2-17',
+          bookingStatus: 'active',
+          product: products[10]._id,
+          creator: 'userThree'
         }
-    ]
-  });
-
-  await User.create({
-    username: 'userFour',
-    email: 'userFour@email.com',
-    password: 'password12345',
-    products: [products[7]._id, products[9]._id, products[10]._id],
-    friends: [users[1]._id, users[2]._id, users[4]._id],
-    favourites: [products[1]._id, products[2]._id, products[4]._id, products[6]._id, products[11]._id, products[13]._id, products[14]._id],
-    bookings: [
+      ]
+    },
+    {
+      username: 'userFour',
+      email: 'userFour@email.com',
+      password: 'password12345',
+      products: [products[7]._id, products[9]._id, products[10]._id],
+      friends: ['userTwo', 'userThree', 'userFive'],
+      favourites: [products[1]._id, products[2]._id, products[4]._id, products[6]._id, products[11]._id, products[13]._id, products[14]._id],
+      bookings: [
         {
-            createdDate: '2022-12-30',
-            bookingDate: '2023-2-25',
-            bookingStatus: 'active',
-            product: products[0]._id,
-            creator: users[3]._id
+          createdDate: '2022-12-30',
+          bookingDate: '2023-2-25',
+          bookingStatus: 'active',
+          product: products[0]._id,
+          creator: 'userFour'
         },
         {
-            createdDate: '2023-1-10',
-            bookingDate: '2023-3-2',
-            bookingStatus: 'active',
-            product: products[1]._id,
-            creator: users[3]._id
+          createdDate: '2023-1-10',
+          bookingDate: '2023-3-2',
+          bookingStatus: 'active',
+          product: products[1]._id,
+          creator: 'userFour'
         },
         {
-            createdDate: '2023-1-10',
-            bookingDate: '2023-9-1',
-            bookingStatus: 'active',
-            product: products[1]._id,
-            creator: users[3]._id
+          createdDate: '2023-1-10',
+          bookingDate: '2023-9-1',
+          bookingStatus: 'active',
+          product: products[1]._id,
+          creator: 'userFour'
         },
         {
-            createdDate: '2023-1-10',
-            bookingDate: '2023-6-1',
-            bookingStatus: 'active',
-            product: products[6]._id,
-            creator: users[3]._id
+          createdDate: '2023-1-10',
+          bookingDate: '2023-6-1',
+          bookingStatus: 'active',
+          product: products[6]._id,
+          creator: 'userFour'
         },
         {
-            createdDate: '2023-1-12',
-            bookingDate: '2023-5-30',
-            bookingStatus: 'active',
-            product: products[14]._id,
-            creator: users[3]._id
+          createdDate: '2023-1-12',
+          bookingDate: '2023-5-30',
+          bookingStatus: 'active',
+          product: products[14]._id,
+          creator: 'userFour'
         }
-    ]
-  });
-
-  await User.create({
-    username: 'userFive',
-    email: 'userFive@email.com',
-    password: 'password12345',
-    products: [products[8]._id, products[11]._id, products[14]._id],
-    friends: [users[0]._id, users[2]._id, users[3]._id],
-    favourites: [products[0]._id, products[4]._id, products[5]._id, products[9]._id, products[10]._id, products[12]._id, products[16]._id],
-    bookings: [
+      ]
+    },
+    {
+      username: 'userFive',
+      email: 'userFive@email.com',
+      password: 'password12345',
+      products: [products[8]._id, products[11]._id, products[14]._id],
+      friends: ['userOne', 'userThree', 'userFour'],
+      favourites: [products[0]._id, products[4]._id, products[5]._id, products[9]._id, products[10]._id, products[12]._id, products[16]._id],
+      bookings: [
         {
-            createdDate: '2023-1-8',
-            bookingDate: '2023-2-20',
-            bookingStatus: 'active',
-            product: products[9]._id,
-            creator: users[4]._id
+          createdDate: '2023-1-8',
+          bookingDate: '2023-2-20',
+          bookingStatus: 'active',
+          product: products[9]._id,
+          creator: 'userFive'
         },
         {
-            createdDate: '2022-11-10',
-            bookingDate: '2022-12-2',
-            bookingStatus: 'completed',
-            product: products[16]._id,
-            creator: users[4]._id
+          createdDate: '2022-11-10',
+          bookingDate: '2022-12-2',
+          bookingStatus: 'completed',
+          product: products[16]._id,
+          creator: 'userFive'
         }
-    ]
-  });
+      ]
+    }
+  ]);
 
   console.log('users seeded');
 

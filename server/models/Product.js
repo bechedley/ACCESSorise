@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 const Booking = require('./Booking');
+const User = require('./User');
 
 const productSchema = new Schema({
     name: {
@@ -59,8 +60,7 @@ const productSchema = new Schema({
         default: false
     },
     owner: {
-        type: Schema.Types.ObjectId,
-        ref: 'User',
+        type: String,
         required: true
     }
 });

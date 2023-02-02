@@ -33,12 +33,9 @@ const userSchema = new Schema({
       ref: 'Product',
     },
   ],
-  friends: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: 'User',
-    },
-  ]
+  friends: {
+      type: [this],
+    }
 });
 
 // set up pre-save middleware to create password

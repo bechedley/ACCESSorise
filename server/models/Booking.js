@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
+const User = require('./User');
 
 const bookingSchema = new Schema({
   createdDate: {
@@ -22,8 +23,7 @@ const bookingSchema = new Schema({
     required: true
   },
   creator: {
-    type: Schema.Types.ObjectId,
-    ref: 'User',
+    type: String,
     required: true
   }
 });

@@ -20,7 +20,6 @@ const resolvers = {
         products: async () => {
             return await Product.find()
             .populate('categories')
-            .populate('user')
             .populate('tags')
             .populate('bookings');
         },
@@ -28,7 +27,6 @@ const resolvers = {
         product: async (parent, { _id }) => {
             return await Product.findById(_id)
             .populate('categories')
-            .populate('user')
             .populate('tags')
             .populate('bookings');
         },
@@ -36,8 +34,7 @@ const resolvers = {
         users: async () => {
             return User.find()
             .populate('products')
-            .populate('bookings')
-            .populate('users');
+            .populate('bookings');
         },
 
         user: async (parent, { _id }) => {
@@ -66,8 +63,7 @@ const resolvers = {
 
         bookings: async () => {
             return await Booking.find()
-            .populate('product')
-            .populate('user');
+            .populate('product');
         },
 
         booking: async (parent, { _id }, context) => {
@@ -98,7 +94,6 @@ const resolvers = {
       
             return await Product.find(params)
             .populate('categories')
-            .populate('user')
             .populate('tags')
             .populate('bookings');
         },
@@ -170,7 +165,7 @@ const resolvers = {
                 bookingDate,
                 bookingStatus,
                 product,
-                creator: context.user._id,
+                creator: context.user.username,
               });
       
               await User.findOneAndUpdate(
@@ -207,7 +202,7 @@ const resolvers = {
                 colour,
                 tags,
                 categories,
-                owner: context.user._id,
+                owner: context.user.username,
               });
       
               await User.findOneAndUpdate(
@@ -229,10 +224,10 @@ const resolvers = {
             return user;
         },
 
-        addFriend: async (parent, { friendId }, context) => {
+        addFriend: async (parent, { friendUsername }, context) => {
             const user = await User.findOneAndUpdate(
                 { _id: context.user._id },
-                { $addToSet: { friends: friendId } }
+                { $addToSet: { friends: friendUsername } }
               );
       
             return user;
@@ -293,8 +288,8 @@ const resolvers = {
             throw new AuthenticationError('Not logged in');
         },
 
-        addTag: async (parent, { name }) => {
-            const tag = await Tag.create(name);
+        addTag: async (parent, { tagName }) => {
+            const tag = await Tag.create(tagName);
       
             return { tag };
         },
@@ -328,11 +323,11 @@ const resolvers = {
             throw new AuthenticationError('You need to be logged in!');
         },
 
-        removeFriend: async (parent, { friendId }, context) => {
+        removeFriend: async (parent, { friendUsername }, context) => {
             if (context.user) {      
               const currentUser = await User.findOneAndUpdate(
                 { _id: context.user._id },
-                { $pull: { friends: friendId } }
+                { $pull: { friends: friendUsername } }
               );
       
               return currentUser;
