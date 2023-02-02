@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
+const Booking = require('./Booking');
 
 const productSchema = new Schema({
     name: {

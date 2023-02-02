@@ -57,6 +57,16 @@ const typeDefs = gql`
     user: User
   }
 
+  type Favourite {
+    _id: ID
+    user: User
+  }
+
+  type Friend {
+    _id: ID
+    user: User
+  }
+
   type Query {
     categories: [Category]
     category(_id: ID!): Category
@@ -66,7 +76,7 @@ const typeDefs = gql`
     users: [User]
     user(_id: ID!): User
     me: User
-    Bookings: [Booking]
+    bookings: [Booking]
     booking(_id: ID!): Booking
     favourites(user: ID, name: String): [Product]
     friends(user: ID, username: String): [User]
@@ -111,7 +121,7 @@ const typeDefs = gql`
         name: String,
         description: String,
         location: String,
-        productStatus,
+        productStatus: String,
         image: String,
         gallery: [String],
         deposit: Float,
