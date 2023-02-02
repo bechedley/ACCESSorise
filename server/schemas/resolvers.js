@@ -126,7 +126,7 @@ const resolvers = {
             const booking = new Booking({ product: args.product });
             const line_items = [];
       
-            const { product } = await order.populate('product');
+            const { product } = await booking.populate('product');
       
               const productItem = await stripe.products.create({
                 name: product.name,
