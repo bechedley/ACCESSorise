@@ -18,8 +18,8 @@ const typeDefs = gql`
     size: String
     colour: String
     tags: [Tag]
-    categories: [Category!]!
-    bookings: [Booking!]
+    categories: [Category]
+    bookings: [Booking]
     onLoan: Boolean
     owner: User
   }
@@ -29,17 +29,17 @@ const typeDefs = gql`
     createdDate: String!
     bookingDate: String!
     bookingStatus: String!
-    product: Product!
+    product: Product
     creator: User
   }
 
   type User {
     _id: ID
-    username: String
-    email: String
-    bookings: [Booking!]
-    products: [Product!]
-    favourites: [Product!]
+    username: String!
+    email: String!
+    bookings: [Booking]
+    products: [Product]
+    favourites: [Product]
     friends: [User]
   }
 
@@ -84,16 +84,18 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    login(email: String!, password: String!): Auth
     addUser(
         username: String!,
         email: String!,
-        password: String!
+        password: String!,
+        bookings: [ID],
+        products: [ID]
     ): Auth
     addBooking(
         bookingDate: String!,
         bookingStatus: String!,
-        product: ID!
+        product: ID
+        creator: ID
     ): Booking
     addProduct(
         name: String!,
@@ -106,7 +108,10 @@ const typeDefs = gql`
         size: String,
         colour: String,
         tags: [ID],
-        categories: [ID]!
+        categories: [ID],
+        bookings: [ID],
+        onLoan: Boolean,
+        owner: ID
     ): Product
     addFavourite(favouriteId: ID!): User
     addFriend(friendusername: String!): User
@@ -115,6 +120,7 @@ const typeDefs = gql`
         _id: ID!,
         bookingDate: String,
         bookingStatus: String,
+        creator: ID
     ): Booking
     updateProduct(
         _id: ID!,
@@ -130,12 +136,14 @@ const typeDefs = gql`
         tags: [ID],
         categories: [ID],
         bookings: [ID],
-        onLoan: Boolean
+        onLoan: Boolean,
+        owner: ID
     ): Product
     addTag(tagName: String!): Tag
     removeProduct(productId: ID!): Product
     removeFavourite(favouriteId: ID!): Favourite
     removeFriend(friendUsername: String!): Friend
+    login(email: String!, password: String!): Auth
   }
 `;
 

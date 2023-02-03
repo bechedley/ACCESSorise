@@ -23,14 +23,11 @@ const bookingSchema = new Schema({
   product: {
     type: Schema.Types.ObjectId,
     ref: 'Product',
-    required: true
   },
-  creator: [
-    {
+  creator: {
       type: Schema.Types.ObjectId,
       ref: 'User',
     },
-  ]
 });
 
 const Booking = mongoose.model('Booking', bookingSchema);

@@ -1,5 +1,5 @@
 const db = require('./connection');
-const { User, Product, Category, Tag } = require('../models');
+const { User, Product, Category, Tag, Booking } = require('../models');
 
 db.once('open', async () => {
   await Category.deleteMany();
@@ -258,6 +258,121 @@ db.once('open', async () => {
 
   console.log('products seeded');
 
+  await Booking.deleteMany();
+
+  const bookings = await Booking.insertMany([
+    {
+      createdDate: '2022-12-30',
+      bookingDate: '2023-9-2',
+      bookingStatus: 'active',
+      product: products[5]._id
+    },
+    {
+      createdDate: '2022-12-30',
+      bookingDate: '2023-4-17',
+      bookingStatus: 'cancelled',
+      product: products[12]._id
+    },
+    {
+      createdDate: '2023-1-30',
+      bookingDate: '2023-5-1',
+      bookingStatus: 'active',
+      product: products[14]._id
+    },
+    {
+      createdDate: '2022-12-30',
+      bookingDate: '2023-2-1',
+      bookingStatus: 'previous',
+      product: products[0]._id
+    },
+    {
+      createdDate: '2022-12-10',
+      bookingDate: '2023-4-7',
+      bookingStatus: 'active',
+      product: products[7]._id
+    },
+    {
+      createdDate: '2023-2-1',
+      bookingDate: '2023-4-11',
+      bookingStatus: 'active',
+      product: products[11]._id
+    },
+    {
+      createdDate: '2022-12-10',
+      bookingDate: '2023-2-25',
+      bookingStatus: 'active',
+      product: products[2]._id
+    },
+    {
+      createdDate: '2022-12-10',
+      bookingDate: '2023-4-8',
+      bookingStatus: 'active',
+      product: products[4]._id
+    },
+    {
+      createdDate: '2022-12-30',
+      bookingDate: '2023-1-15',
+      bookingStatus: 'completed',
+      product: products[10]._id
+    },
+    {
+      createdDate: '2022-12-30',
+      bookingDate: '2023-2-16',
+      bookingStatus: 'active',
+      product: products[10]._id
+    },
+    {
+      createdDate: '2022-12-30',
+      bookingDate: '2023-2-17',
+      bookingStatus: 'active',
+      product: products[10]._id
+    },
+    {
+      createdDate: '2022-12-30',
+      bookingDate: '2023-2-25',
+      bookingStatus: 'active',
+      product: products[0]._id
+    },
+    {
+      createdDate: '2023-1-10',
+      bookingDate: '2023-3-2',
+      bookingStatus: 'active',
+      product: products[1]._id
+    },
+    {
+      createdDate: '2023-1-10',
+      bookingDate: '2023-9-1',
+      bookingStatus: 'active',
+      product: products[1]._id
+    },
+    {
+      createdDate: '2023-1-10',
+      bookingDate: '2023-6-1',
+      bookingStatus: 'active',
+      product: products[6]._id
+    },
+    {
+      createdDate: '2023-1-12',
+      bookingDate: '2023-5-30',
+      bookingStatus: 'active',
+      product: products[14]._id
+    },
+    {
+      createdDate: '2023-1-8',
+      bookingDate: '2023-2-20',
+      bookingStatus: 'active',
+      product: products[9]._id
+    },
+    {
+      createdDate: '2022-11-10',
+      bookingDate: '2022-12-2',
+      bookingStatus: 'completed',
+      product: products[16]._id
+    }
+  ]);
+
+  console.log('bookings seeded');
+
   await User.deleteMany();
 
   const users = await User.insertMany([
@@ -267,152 +382,39 @@ db.once('open', async () => {
       password: 'password12345',
       products: [products[0]._id, products[2]._id, products[4]._id, products[6]._id, products[15]._id],
       favourites: [products[1]._id, products[5]._id, products[11]._id, products[14]._id, products[16]._id],
-      bookings: [
-        {
-          createdDate: '2022-12-30',
-          bookingDate: '2023-9-2',
-          bookingStatus: 'active',
-          product: products[5]._id
-        },
-        {
-          createdDate: '2022-12-30',
-          bookingDate: '2023-4-17',
-          bookingStatus: 'cancelled',
-          product: products[12]._id
-        },
-        {
-          createdDate: '2023-1-30',
-          bookingDate: '2023-5-1',
-          bookingStatus: 'active',
-          product: products[14]._id
-        }
-      ]
+      bookings: [bookings[0]._id, bookings[1]._id, bookings[2]._id]
     },
     {
       username: 'userTwo',
-      email: 'userTwo@email.com',
+      email: 'usertwo@email.com',
       password: 'password12345',
       products: [products[3]._id, products[16]._id],
       favourites: [products[0]._id, products[5]._id, products[7]._id, products[11]._id, products[15]._id],
-      bookings: [
-        {
-          createdDate: '2022-12-30',
-          bookingDate: '2023-2-1',
-          bookingStatus: 'previous',
-          product: products[0]._id
-        },
-        {
-          createdDate: '2022-12-10',
-          bookingDate: '2023-4-7',
-          bookingStatus: 'active',
-          product: products[7]._id
-        },
-        {
-          createdDate: '2023-2-1',
-          bookingDate: '2023-4-11',
-          bookingStatus: 'active',
-          product: products[11]._id
-        }
-      ]
+      bookings: [bookings[3]._id, bookings[4]._id, bookings[5]._id]
     },
     {
       username: 'userThree',
-      email: 'userThree@email.com',
+      email: 'userthree@email.com',
       password: 'password12345',
       products: [products[1]._id, products[5]._id, products[12]._id, products[13]._id],
       favourites: [products[0]._id, products[2]._id, products[6]._id, products[10]._id, products[15]._id],
-      bookings: [
-        {
-          createdDate: '2022-12-10',
-          bookingDate: '2023-2-25',
-          bookingStatus: 'active',
-          product: products[2]._id
-        },
-        {
-          createdDate: '2022-12-10',
-          bookingDate: '2023-4-8',
-          bookingStatus: 'active',
-          product: products[4]._id
-        },
-        {
-          createdDate: '2022-12-30',
-          bookingDate: '2023-1-15',
-          bookingStatus: 'completed',
-          product: products[10]._id
-        },
-        {
-          createdDate: '2022-12-30',
-          bookingDate: '2023-2-16',
-          bookingStatus: 'active',
-          product: products[10]._id
-        },
-        {
-          createdDate: '2022-12-30',
-          bookingDate: '2023-2-17',
-          bookingStatus: 'active',
-          product: products[10]._id
-        }
-      ]
+      bookings: [bookings[6]._id, bookings[7]._id, bookings[8]._id, bookings[9]._id, bookings[10]._id]
     },
     {
       username: 'userFour',
-      email: 'userFour@email.com',
+      email: 'userfour@email.com',
       password: 'password12345',
       products: [products[7]._id, products[9]._id, products[10]._id],
       favourites: [products[1]._id, products[2]._id, products[4]._id, products[6]._id, products[11]._id, products[13]._id, products[14]._id],
-      bookings: [
-        {
-          createdDate: '2022-12-30',
-          bookingDate: '2023-2-25',
-          bookingStatus: 'active',
-          product: products[0]._id
-        },
-        {
-          createdDate: '2023-1-10',
-          bookingDate: '2023-3-2',
-          bookingStatus: 'active',
-          product: products[1]._id
-        },
-        {
-          createdDate: '2023-1-10',
-          bookingDate: '2023-9-1',
-          bookingStatus: 'active',
-          product: products[1]._id
-        },
-        {
-          createdDate: '2023-1-10',
-          bookingDate: '2023-6-1',
-          bookingStatus: 'active',
-          product: products[6]._id
-        },
-        {
-          createdDate: '2023-1-12',
-          bookingDate: '2023-5-30',
-          bookingStatus: 'active',
-          product: products[14]._id
-        }
-      ]
+      bookings: [bookings[11]._id, bookings[12]._id, bookings[13]._id, bookings[14]._id, bookings[15]._id]
     },
     {
       username: 'userFive',
-      email: 'userFive@email.com',
+      email: 'userfive@email.com',
       password: 'password12345',
       products: [products[8]._id, products[11]._id, products[14]._id],
       favourites: [products[0]._id, products[4]._id, products[5]._id, products[9]._id, products[10]._id, products[12]._id, products[16]._id],
-      bookings: [
-        {
-          createdDate: '2023-1-8',
-          bookingDate: '2023-2-20',
-          bookingStatus: 'active',
-          product: products[9]._id
-        },
-        {
-          createdDate: '2022-11-10',
-          bookingDate: '2022-12-2',
-          bookingStatus: 'completed',
-          product: products[16]._id
-        }
-      ]
+      bookings: [bookings[16]._id, bookings[17]._id]
     }
   ]);
 
@@ -444,6 +446,98 @@ db.once('open', async () => {
   );
 
   console.log('friends seeded');
+
+  const booking1 = await Booking.findOneAndUpdate(
+    { _id: bookings[0]._id },
+    { creator: users[0]._id }
+  );
+
+  const booking2 = await Booking.findOneAndUpdate(
+    { _id: bookings[1]._id },
+    { creator: users[0]._id }
+  );
+
+  const booking3 = await Booking.findOneAndUpdate(
+    { _id: bookings[2]._id },
+    { creator: users[0]._id }
+  );
+
+  const booking4 = await Booking.findOneAndUpdate(
+    { _id: bookings[3]._id },
+    { creator: users[1]._id }
+  );
+
+  const booking5 = await Booking.findOneAndUpdate(
+    { _id: bookings[4]._id },
+    { creator: users[1]._id }
+  );
+
+  const booking6 = await Booking.findOneAndUpdate(
+    { _id: bookings[5]._id },
+    { creator: users[1]._id }
+  );
+
+  const booking7 = await Booking.findOneAndUpdate(
+    { _id: bookings[6]._id },
+    { creator: users[2]._id }
+  );
+
+  const booking8 = await Booking.findOneAndUpdate(
+    { _id: bookings[7]._id },
+    { creator: users[2]._id }
+  );
+
+  const booking9 = await Booking.findOneAndUpdate(
+    { _id: bookings[8]._id },
+    { creator: users[2]._id }
+  );
+
+  const booking10 = await Booking.findOneAndUpdate(
+    { _id: bookings[9]._id },
+    { creator: users[2]._id }
+  );
+
+  const booking11 = await Booking.findOneAndUpdate(
+    { _id: bookings[10]._id },
+    { creator: users[2]._id }
+  );
+
+  const booking12 = await Booking.findOneAndUpdate(
+    { _id: bookings[11]._id },
+    { creator: users[3]._id }
+  );
+
+  const booking13 = await Booking.findOneAndUpdate(
+    { _id: bookings[12]._id },
+    { creator: users[3]._id }
+  );
+
+  const booking14 = await Booking.findOneAndUpdate(
+    { _id: bookings[13]._id },
+    { creator: users[3]._id }
+  );
+
+  const booking15 = await Booking.findOneAndUpdate(
+    { _id: bookings[14]._id },
+    { creator: users[3]._id }
+  );
+
+  const booking16 = await Booking.findOneAndUpdate(
+    { _id: bookings[15]._id },
+    { creator: users[3]._id }
+  );
+
+  const booking17 = await Booking.findOneAndUpdate(
+    { _id: bookings[16]._id },
+    { creator: users[4]._id }
+  );
+
+  const booking18 = await Booking.findOneAndUpdate(
+    { _id: bookings[17]._id },
+    { creator: users[4]._id }
+  );
+
+  console.log('booking creators seeded');
 
   process.exit();
 });

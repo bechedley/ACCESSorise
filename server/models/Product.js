@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
-const Booking = require('./Booking');
 
 const productSchema = new Schema({
     name: {
@@ -50,20 +49,22 @@ const productSchema = new Schema({
         {
             type: Schema.Types.ObjectId,
             ref: 'Category',
-            required: true
         },
     ],
-    bookings: [Booking.schema],
+    bookings: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Booking',
+        },
+    ],
     onLoan: {
         type: Boolean,
         default: false
     },
-    owner: [
-        {
+    owner: {
           type: Schema.Types.ObjectId,
           ref: 'User',
         },
-    ]
 });
 
 const Product = mongoose.model('Product', productSchema);
