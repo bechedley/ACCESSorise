@@ -94,7 +94,7 @@ const typeDefs = gql`
     addBooking(
         bookingDate: String!,
         bookingStatus: String!,
-        product: ID
+        product: ID,
         creator: ID
     ): Booking
     addProduct(
