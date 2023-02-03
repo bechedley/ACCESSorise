@@ -21,7 +21,7 @@ const typeDefs = gql`
     categories: [Category]
     bookings: [Booking]
     onLoan: Boolean
-    owner: User!
+    owner: User
   }
 
   type Booking {
@@ -30,13 +30,13 @@ const typeDefs = gql`
     bookingDate: String!
     bookingStatus: String!
     product: Product
-    creator: User!
+    creator: User
   }
 
   type User {
     _id: ID
-    username: String
-    email: String
+    username: String!
+    email: String!
     bookings: [Booking]
     products: [Product]
     favourites: [Product]
@@ -45,7 +45,7 @@ const typeDefs = gql`
 
   type Tag {
     _id: ID!
-    name: String
+    tagName: String
   }
 
   type Checkout {
@@ -58,13 +58,13 @@ const typeDefs = gql`
   }
 
   type Favourite {
-    _id: ID
-    user: User
+    _id: ID!
+    username: User
   }
 
   type Friend {
     _id: ID
-    user: User
+    username: User
   }
 
   type Query {
@@ -84,16 +84,18 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    login(email: String!, password: String!): Auth
     addUser(
         username: String!,
         email: String!,
-        password: String!
+        password: String!,
+        bookings: [ID],
+        products: [ID]
     ): Auth
     addBooking(
         bookingDate: String!,
         bookingStatus: String!,
-        product: ID!
+        product: ID
+        creator: ID
     ): Booking
     addProduct(
         name: String!,
@@ -106,15 +108,19 @@ const typeDefs = gql`
         size: String,
         colour: String,
         tags: [ID],
-        categories: [ID]!
+        categories: [ID],
+        bookings: [ID],
+        onLoan: Boolean,
+        owner: ID
     ): Product
     addFavourite(favouriteId: ID!): User
-    addFriend(friendId: ID!): User
+    addFriend(friendusername: String!): User
     updateUser(username: String, email: String, password: String): User
     updateBooking(
         _id: ID!,
         bookingDate: String,
         bookingStatus: String,
+        creator: ID
     ): Booking
     updateProduct(
         _id: ID!,
@@ -130,12 +136,14 @@ const typeDefs = gql`
         tags: [ID],
         categories: [ID],
         bookings: [ID],
-        onLoan: Boolean
+        onLoan: Boolean,
+        owner: ID
     ): Product
-    addTag(name: String!): Tag
+    addTag(tagName: String!): Tag
     removeProduct(productId: ID!): Product
     removeFavourite(favouriteId: ID!): Favourite
-    removeFriend(friendId: ID!): Friend
+    removeFriend(friendUsername: String!): Friend
+    login(email: String!, password: String!): Auth
   }
 `;
 

@@ -18,47 +18,89 @@ const resolvers = {
         },
 
         products: async () => {
-            return await Product.find()
-            .populate('categories')
-            .populate('user')
-            .populate('tags')
-            .populate('bookings');
+            return await Product.find();
         },
 
         product: async (parent, { _id }) => {
-            return await Product.findById(_id)
-            .populate('categories')
-            .populate('user')
-            .populate('tags')
-            .populate('bookings');
+            return await Product.findById(_id);
         },
 
         users: async () => {
             return User.find()
-            .populate('products')
-            .populate('bookings')
-            .populate('users');
+            .populate({
+                path: "products", // populate products
+                populate: {
+                   path: "bookings" // in products, populate bookings
+                }
+             })
+            .populate({
+                path: "bookings", // populate bookings
+                populate: {
+                   path: "product" // in bookings, populate product
+                }
+             })
+            .populate('favourites')
+            .populate('friends')
+            .populate({
+                path: 'bookings.product',
+                populate: 'owner'
+              })
+            .populate({
+                path: 'product.bookings',
+                populate: 'creator'
+              });
         },
 
         user: async (parent, { _id }) => {
             return await User.findById(_id)
-            .populate('products')
-            .populate('bookings')
             .populate({
-                path: 'bookings.products',
-                populate: 'categories'
+                path: "products", // populate products
+                populate: {
+                   path: "bookings" // in products, populate bookings
+                }
+             })
+            .populate({
+                path: "bookings", // populate bookings
+                populate: {
+                   path: "product" // in bookings, populate product
+                }
+             })
+            .populate('favourites')
+            .populate('friends')
+            .populate({
+                path: 'bookings.product',
+                populate: 'owner'
+              })
+            .populate({
+                path: 'product.bookings',
+                populate: 'creator'
               });
-            
         },
 
         me: async (parent, args, context) => {
             if (context.user) {
               return User.findOne({ _id: context.user._id })
-              .populate('products')
-              .populate('bookings')
               .populate({
-                path: 'bookings.products',
-                populate: 'categories'
+                path: "products", // populate products
+                populate: {
+                   path: "bookings" // in products, populate bookings
+                }
+             })
+              .populate({
+                path: "bookings", // populate bookings
+                populate: {
+                   path: "product" // in bookings, populate product
+                }
+             })
+              .populate('friends')
+              .populate('favourites')
+              .populate({
+                path: 'bookings.product',
+                populate: 'owner'
+              })
+            .populate({
+                path: 'product.bookings',
+                populate: 'creator'
               });
             }
             throw new AuthenticationError('You need to be logged in!');
@@ -67,14 +109,21 @@ const resolvers = {
         bookings: async () => {
             return await Booking.find()
             .populate('product')
-            .populate('user');
+            .populate('creator')
+            .populate({
+                path: 'bookings.product',
+                populate: 'owner'
+              });
         },
 
-        booking: async (parent, { _id }, context) => {
+        booking: async (user, { _id }, context) => {
             if (context.user) {
-              const user = await User.findById(context.user._id).populate({
-                path: 'bookings.products',
-                populate: 'categories'
+              const user = await User.findById(context.user._id)
+              .populate('product')
+              .populate('creator')
+              .populate({
+                path: 'bookings.product',
+                populate: 'owner'
               });
       
               return user.bookings.id(_id);
@@ -98,9 +147,9 @@ const resolvers = {
       
             return await Product.find(params)
             .populate('categories')
-            .populate('user')
             .populate('tags')
-            .populate('bookings');
+            .populate('bookings')
+            .populate('owner');
         },
 
         friends: async (parent, { user, username }) => {
@@ -118,7 +167,8 @@ const resolvers = {
       
             return await User.find(params)
             .populate('products')
-            .populate('bookings');
+            .populate('bookings')
+            .populate('friends');
         },
 
         checkout: async (parent, args, context) => {
@@ -164,17 +214,22 @@ const resolvers = {
             return { token, user };
         },
 
-        addBooking: async (parent, { bookingDate, bookingStatus, product }, context) => {
+        addBooking: async (parent, { bookingDate, bookingStatus, product, creator }, context) => {
             if (context.user) {
               const booking = await Booking.create({
                 bookingDate,
                 bookingStatus,
                 product,
-                creator: context.user._id,
+                creator: context.user._id
               });
       
               await User.findOneAndUpdate(
                 { _id: context.user._id },
+                { $addToSet: { bookings: booking._id } }
+              );
+
+              await Product.findOneAndUpdate(
+                { _id: booking.product },
                 { $addToSet: { bookings: booking._id } }
               );
       
@@ -193,7 +248,9 @@ const resolvers = {
             size,
             colour,
             tags,
-            categories }, context) => {
+            categories,
+            bookings, 
+            owner }, context) => {
             if (context.user) {
               const product = await Product.create({
                 name, 
@@ -207,7 +264,8 @@ const resolvers = {
                 colour,
                 tags,
                 categories,
-                owner: context.user._id,
+                bookings,
+                owner: context.user._id
               });
       
               await User.findOneAndUpdate(
@@ -229,10 +287,10 @@ const resolvers = {
             return user;
         },
 
-        addFriend: async (parent, { friendId }, context) => {
+        addFriend: async (parent, { friendUsername }, context) => {
             const user = await User.findOneAndUpdate(
                 { _id: context.user._id },
-                { $addToSet: { friends: friendId } }
+                { $addToSet: { friends: friendUsername } }
               );
       
             return user;
@@ -250,10 +308,11 @@ const resolvers = {
             _id,
             bookingDate,
             bookingStatus,
+            creator
          }, context) => {
             if (context.user) {
             return await Booking.findByIdAndUpdate(_id, { 
-            bookingDate: bookingDate, bookingStatus: bookingStatus }, { new: true });
+            bookingDate: bookingDate, bookingStatus: bookingStatus, creator: creator }, { new: true });
             }
 
             throw new AuthenticationError('Not logged in');
@@ -272,7 +331,8 @@ const resolvers = {
             colour,
             tags,
             categories,
-            onLoan
+            onLoan,
+            owner
          }, context) => {
             if (context.user) {
             return await Product.findByIdAndUpdate(_id, { 
@@ -287,14 +347,15 @@ const resolvers = {
             colour: colour,
             tags: tags,
             categories: categories,
-            onLoan: onLoan, }, { new: true });
+            onLoan: onLoan,
+            owner: owner }, { new: true });
             }
 
             throw new AuthenticationError('Not logged in');
         },
 
-        addTag: async (parent, { name }) => {
-            const tag = await Tag.create(name);
+        addTag: async (parent, { tagName }) => {
+            const tag = await Tag.create(tagName);
       
             return { tag };
         },
@@ -328,11 +389,11 @@ const resolvers = {
             throw new AuthenticationError('You need to be logged in!');
         },
 
-        removeFriend: async (parent, { friendId }, context) => {
+        removeFriend: async (parent, { friendUsername }, context) => {
             if (context.user) {      
               const currentUser = await User.findOneAndUpdate(
                 { _id: context.user._id },
-                { $pull: { friends: friendId } }
+                { $pull: { friends: friendUsername } }
               );
       
               return currentUser;
