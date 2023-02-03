@@ -8,9 +8,13 @@ import {
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 
+import Nav from './components/Nav';
+import Footer from './components/Footer';
+
 const httpLink = createHttpLink({
   uri: '/graphql',
 });
+
 
 const authLink = setContext((_, { headers }) => {
   const token = localStorage.getItem('id_token');
@@ -32,6 +36,8 @@ function App() {
     <ApolloProvider client={client}>
       <Router>
         <div>
+          <Nav />
+          <Footer />
         </div>
       </Router>
     </ApolloProvider>
