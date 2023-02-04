@@ -9,6 +9,7 @@ import {
 import { setContext } from '@apollo/client/link/context';
 
 import Home from './pages/Home';
+import ProductList from './pages/ProductList';
 // import Detail from './pages/Detail';
 // import NoMatch from './pages/NoMatch';
 // import Login from './pages/Login';
@@ -48,7 +49,8 @@ function App() {
             <Routes>
               <Route 
                 path="/" 
-                element={<Home />} 
+                // element={<Home />} Temp removed for testing
+                element={<ProductList />} 
               />
               <Route 
                 path="/login" 

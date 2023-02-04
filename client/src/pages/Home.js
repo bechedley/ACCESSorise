@@ -3,9 +3,9 @@ import Categories from "../components/Categories";
 
 const Home = () => {
     return (
-        <div className="container p-5 w-full">
-            <div className="flex justify-between items-center px-3">
-                <div className="container p-5 text-left float-left">
+        <div className="container p-5">
+            <div className="flex flex-wrap sm:flex-nowrap justify-center sm:justify-between items-center px-3">
+                <div className="container p-5 text-center sm:text-left float-left sm:float-left">
                     <h2 className="font-satisfy text-sm sm:text-lg md:text-2xl lg:text-5xl text-slate">
                         Find the perfect finishing touch...
                     </h2>
