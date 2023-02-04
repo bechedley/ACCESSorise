@@ -1,6 +1,6 @@
-import { useState } from 'react'
-import { UserCircleIcon, HeartIcon, CalendarDaysIcon, MagnifyingGlassIcon } from '@heroicons/react/24/solid'
-import logo from '../../assets/images/accessorise-logo-shoe.png'
+import { useState } from 'react';
+import { UserCircleIcon, HeartIcon, CalendarDaysIcon, MagnifyingGlassIcon } from '@heroicons/react/24/solid';
+import logo from '../../assets/images/accessorise-logo-shoe.png';
 import Auth from "../../utils/auth";
 import { Link } from "react-router-dom";
 
@@ -73,8 +73,8 @@ function Nav() {
                             </Link>
                         </li>
                     </ul>
-                    </div>
-                    <div className='foat-left sm:float-center'>
+                </div>
+                <div className='foat-left sm:float-center'>
                     <ul className="flex flex-row list-none lg:ml-auto">
                         <li className="hidden sm:block mx-1 font-mont-alt text-slate text-xs md:text-sm lg:text-lg hover:font-bold">
                             <p>ACCESSORIES FOR EVERY OCCASSION</p>

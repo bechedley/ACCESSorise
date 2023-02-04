@@ -107,3 +107,27 @@ export const products = [
     },
 
 ];
+
+export const galleryData = [
+    {
+        id: 1,
+        img: "https://images.pexels.com/photos/3682293/pexels-photo-3682293.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    },
+    {
+        id: 2,
+        img: "https://images.pexels.com/photos/3682291/pexels-photo-3682291.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    },
+    {
+        id: 3,
+        img: "https://images.pexels.com/photos/3682290/pexels-photo-3682290.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    },
+    {
+        id: 4,
+        img: "https://images.pexels.com/photos/1229181/pexels-photo-1229181.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    },
+    {
+        id: 5,
+        img: "https://images.pexels.com/photos/1229209/pexels-photo-1229209.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    },
+
+];
