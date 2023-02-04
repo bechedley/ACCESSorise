@@ -13,8 +13,8 @@ import ProductList from './pages/ProductList';
 import Product from './pages/Product';
 // import Detail from './pages/Detail';
 // import NoMatch from './pages/NoMatch';
-// import Login from './pages/Login';
-// import Signup from './pages/Signup';
+import Login from './pages/Login';
+import Signup from './pages/Signup';
 import Nav from './components/Nav';
 import Footer from './components/Footer';
 import { StoreProvider } from './utils/GlobalState';
@@ -50,16 +50,15 @@ function App() {
             <Routes>
               <Route
                 path="/"
-                // element={<Home />} Temp removed for testing
-                element={<Product />}
+                element={<Home />}
               />
               <Route
                 path="/login"
-              // element={<Login />} 
+              element={<Login />} 
               />
               <Route
                 path="/signup"
-              // element={<Signup />} 
+              element={<Signup />} 
               />
               <Route
                 path="/success"

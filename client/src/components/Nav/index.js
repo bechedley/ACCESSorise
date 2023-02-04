@@ -31,7 +31,7 @@ function Nav() {
                             <UserCircleIcon className="h-6 lg:h-8 w-6 lg:w-8 fill-slate" />
                         </Link>
                     </li>
-                    <li className="mx-1 font-mont-alt text-slate text-xs md:text-sm lg:text-lg hover:font-bold">
+                    <li className="px-1 mx-1 font-mont-alt text-slate text-xs md:text-sm lg:text-lg hover:font-bold">
                         {/* this is not using the Link component to logout or user and then refresh the application to the start */}
                         <a href="/" onClick={() => Auth.logout()}>
                             Logout
@@ -42,12 +42,12 @@ function Nav() {
         } else {
             return (
                 <ul className="flex flex-row list-none lg:ml-auto">
-                    <li className="mx-1 font-mont-alt text-slate text-xs md:text-sm lg:text-lg hover:font-bold">
+                    <li className="px-1 mx-1 font-mont-alt text-slate text-xs md:text-sm lg:text-lg hover:font-bold">
                         <Link to="/signup">
                             Signup
                         </Link>
                     </li>
-                    <li className="mx-1 font-mont-alt text-slate text-xs md:text-sm lg:text-lg hover:font-bold">
+                    <li className="px-1 mx-1 font-mont-alt text-slate text-xs md:text-sm lg:text-lg hover:font-bold">
                         <Link to="/login">
                             Login
                         </Link>

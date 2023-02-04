@@ -33,7 +33,7 @@ const Product = () => {
                         minimal wear. Comfortable for long events. 6cm
                         heel, open toe, strappy.</p>
                 </div>
-                <div className="float-center">
+                <div className="float-center pb-5">
                         <ul className="flex flex-row justify-between text-center list-none text-xl text-slate font-mont-alt uppercase border-r border-l border-grey divide-x divide-grey">
                             <li className="px-3">Location</li> 
                             <li className="px-3">Size: size</li>
