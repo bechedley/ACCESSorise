@@ -8,7 +8,8 @@ module.exports = {
       'grey': '#9cadbc',
       'pink': '#e4bbd0',
       'mauve': '#ac869a',
-      'red': '#ba1a1a'
+      'red': '#ba1a1a',
+      'white': '#fff'
     },
     extend: {
       fontFamily: {
@@ -17,5 +18,8 @@ module.exports = {
       }
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/forms'),
+    // ...
+  ],
 }

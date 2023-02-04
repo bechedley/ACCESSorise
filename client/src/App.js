@@ -8,12 +8,15 @@ import {
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 
-// import Home from './pages/Home';
+import Home from './pages/Home';
+import ProductList from './pages/ProductList';
+import Product from './pages/Product';
 // import Detail from './pages/Detail';
 // import NoMatch from './pages/NoMatch';
-// import Login from './pages/Login';
-// import Signup from './pages/Signup';
+import Login from './pages/Login';
+import Signup from './pages/Signup';
 import Nav from './components/Nav';
+import Footer from './components/Footer';
 import { StoreProvider } from './utils/GlobalState';
 // import Success from './pages/Success';
 // import OrderHistory from './pages/OrderHistory';
@@ -45,36 +48,40 @@ function App() {
           <StoreProvider>
             <Nav />
             <Routes>
-              <Route 
-                path="/" 
-                // element={<Home />} 
+              <Route
+                path="/"
+                element={<Home />}
               />
-              <Route 
-                path="/login" 
-                // element={<Login />} 
+              <Route
+                path="/login"
+              element={<Login />} 
               />
-              <Route 
-                path="/signup" 
-                // element={<Signup />} 
+              <Route
+                path="/signup"
+              element={<Signup />} 
               />
-              <Route 
-                path="/success" 
-                // element={<Success />} 
+              <Route
+                path="/success"
+              // element={<Success />} 
               />
-              <Route 
-                path="/orderHistory" 
-                // element={<OrderHistory />} 
+              <Route
+                path="/orderHistory"
+              // element={<OrderHistory />} 
               />
-              <Route 
-                path="/products/:id" 
-                // element={<Detail />} 
+              <Route
+                path="/categories/:id"
+                element={<ProductList />}
               />
-              <Route 
-                path="*" 
-                // element={<NoMatch />} 
+              <Route
+                path="/products/:id"
+                element={<Product />}
+              />
+              <Route
+                path="*"
+              // element={<NoMatch />} 
               />
             </Routes>
-            {/* </Footer > */}
+            <Footer />
           </StoreProvider>
         </div>
       </Router>
