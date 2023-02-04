@@ -357,13 +357,13 @@ img {
 .float-right {
   float: right;
 }
-.mx-1 {
-  margin-left: 0.25rem;
-  margin-right: 0.25rem;
-}
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
+}
+.mx-1 {
+  margin-left: 0.25rem;
+  margin-right: 0.25rem;
 }
 .mb-3 {
   margin-bottom: 0.75rem;
@@ -380,14 +380,11 @@ img {
 .hidden {
   display: none;
 }
-.h-6 {
-  height: 1.5rem;
-}
 .h-8 {
   height: 2rem;
 }
-.w-6 {
-  width: 1.5rem;
+.h-6 {
+  height: 1.5rem;
 }
 .w-full {
   width: 100%;
@@ -395,11 +392,17 @@ img {
 .w-auto {
   width: auto;
 }
+.w-6 {
+  width: 1.5rem;
+}
 .list-none {
   list-style-type: none;
 }
 .flex-row {
   flex-direction: row;
+}
+.flex-col {
+  flex-direction: column;
 }
 .flex-wrap {
   flex-wrap: wrap;
@@ -409,6 +412,10 @@ img {
 }
 .justify-between {
   justify-content: space-between;
+}
+.bg-grey {
+  --tw-bg-opacity: 1;
+  background-color: rgb(156 173 188 / var(--tw-bg-opacity));
 }
 .bg-blue {
   --tw-bg-opacity: 1;
@@ -420,6 +427,18 @@ img {
 .p-2 {
   padding: 0.5rem;
 }
+.px-3 {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+.py-4 {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+.px-4 {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
 .px-2 {
   padding-left: 0.5rem;
   padding-right: 0.5rem;
@@ -428,9 +447,8 @@ img {
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
 }
-.px-4 {
-  padding-left: 1rem;
-  padding-right: 1rem;
+.text-left {
+  text-align: left;
 }
 .font-mont-alt {
   font-family: Montserrat Alternates, sans-serif;

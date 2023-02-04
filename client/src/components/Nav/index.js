@@ -1,5 +1,4 @@
-import { Fragment } from 'react'
-import { Disclosure, Menu, Transition } from '@headlessui/react'
+import { useState } from 'react'
 import { UserCircleIcon, HeartIcon, CalendarDaysIcon, MagnifyingGlassIcon } from '@heroicons/react/24/solid'
 import logo from '../../assets/images/accessorise-logo-shoe.png'
 import Auth from "../../utils/auth";
