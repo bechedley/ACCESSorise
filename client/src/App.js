@@ -8,7 +8,7 @@ import {
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 
-// import Home from './pages/Home';
+import Home from './pages/Home';
 // import Detail from './pages/Detail';
 // import NoMatch from './pages/NoMatch';
 // import Login from './pages/Login';
@@ -48,7 +48,7 @@ function App() {
             <Routes>
               <Route 
                 path="/" 
-                // element={<Home />} 
+                element={<Home />} 
               />
               <Route 
                 path="/login" 

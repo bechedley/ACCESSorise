@@ -10,7 +10,7 @@ function Nav() {
     function showNavigation() {
         if (Auth.loggedIn()) {
             return (
-                <ul className="flex flex-row list-none lg:ml-auto">
+                <ul className="flex flex-row list-none lg:ml-auto w-screen">
                     <li className="mx-1">
                         <Link to="/search">
                             <MagnifyingGlassIcon className="h-6 lg:h-8 w-6 lg:w-8 fill-slate" />
@@ -64,13 +64,20 @@ function Nav() {
                     <ul className="flex flex-row list-none lg:ml-auto items-center">
                         <li className="mx-1">
                             <Link to="/">
-                                <img src={logo} className="block h-8 w-auto" title="Accessorise logo" alt="accessorise" />
+                                <h1 className='hidden sm:block text-slate font-satisfy lg:text-4xl sm:text-sm md:text-lg'>ACCESSorise</h1>
                             </Link>
                         </li>
                         <li className="mx-1">
                             <Link to="/">
-                                <h1 className='hidden sm:block text-slate font-satisfy p-2 lg:text-4xl sm:text-sm md:text-lg'>ACCESSorise</h1>
+                                <img src={logo} className="block h-8 w-auto items-center" title="Accessorise logo" alt="accessorise" />
                             </Link>
+                        </li>
+                    </ul>
+                    </div>
+                    <div className='foat-left sm:float-center'>
+                    <ul className="flex flex-row list-none lg:ml-auto">
+                        <li className="hidden sm:block mx-1 font-mont-alt text-slate text-xs md:text-sm lg:text-lg hover:font-bold">
+                            <p>ACCESSORIES FOR EVERY OCCASSION</p>
                         </li>
                     </ul>
                 </div>

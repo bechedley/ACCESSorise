@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 function Footer() {
 
     return (
-        <footer className="bg-grey relative flex flex-wrap items-center justify-between px-3 py-4 mb-3">
+        <footer className="bg-grey relative flex flex-wrap items-center justify-between px-3 py-4 pb-5 w-screen">
             <div className="container px-4 mx-auto flex flex-wrap items-center justify-between">
                 <div className="w-full relative flex justify-between w-auto block lg:justify-start">
                     <ul className="flex flex-col list-none lg:ml-auto text-left">
@@ -26,15 +26,6 @@ function Footer() {
                             How it works
                         </Link>
                     </li>
-                    </ul>
-                </div>
-                <div className='float-center'>
-                    <ul className="flex flex-row list-none lg:ml-auto">
-                    <li className="mx-1">
-                            <Link to="/">
-                                <img src={logo} className="block h-8 w-auto" title="Accessorise logo" alt="accessorise" />
-                            </Link>
-                        </li>
                     </ul>
                 </div>
 
