@@ -44,21 +44,21 @@ db.once('open', async () => {
       category: [categories[2]._id, categories[4]._id],
       location: 'Melbourne',
       productStatus: 'public',
-      image: 'women-s-beige-low-heel-shoes-fashion.jpg',
-      gallery: ['woman-white-background-model-shoe.jpg', 'young-ballerina-closeup-legs-shoes-standing-pointe-position.jpg'],
+      image: 'https://images.pexels.com/photos/3155234/pexels-photo-3155234.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+      gallery: ['https://images.pexels.com/photos/7046767/pexels-photo-7046767.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2', 'https://images.pexels.com/photos/1438680/pexels-photo-1438680.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'],
       size: '9',
       colour: 'brown',
       tags: [tags[1]._id, tags[2]._id, tags[4]._id],
       onLoan: false
     },
     {
-      name: 'Black woven handbag',
-      description: 'Small to medium black woven handbag with zip. Versatile and stylish for a variety of occassions.',
+      name: 'Black handbag',
+      description: 'Small to medium black handbag with zip and front buckles. Versatile and stylish for a variety of occassions.',
       category: [categories[2]._id, categories[3].id, categories[4]._id, categories[5]._id],
       location: 'Sydney',
       productStatus: 'friendsOnly',
-      image: 'young-ballerina-closeup-legs-shoes-standing-pointe-position.jpg',
-      gallery: ['woman-white-background-model-shoe.jpg', 'women-s-beige-low-heel-shoes-fashion.jpg'],
+      image: 'https://images.pexels.com/photos/1204464/pexels-photo-1204464.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+      gallery: ['https://images.pexels.com/photos/1204459/pexels-photo-1204459.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2', 'https://images.pexels.com/photos/1204463/pexels-photo-1204463.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'],
       deposit: 50.00,
       size: 'universal',
       colour: 'black',
@@ -71,8 +71,8 @@ db.once('open', async () => {
       category: [categories[0]._id, categories[1]._id, categories[2]._id, categories[3]._id, categories[4]._id, categories[5]._id],
       location: 'Melbourne',
       productStatus: 'public',
-      image: 'women-s-beige-low-heel-shoes-fashion.jpg',
-      gallery: ['woman-white-background-model-shoe.jpg', 'young-ballerina-closeup-legs-shoes-standing-pointe-position.jpg'],
+      image: 'https://images.pexels.com/photos/1539781/pexels-photo-1539781.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+      gallery: ['https://images.pexels.com/photos/7701076/pexels-photo-7701076.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2', 'https://images.pexels.com/photos/13722335/pexels-photo-13722335.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'],
       size: '7',
       colour: 'black',
       tags: [tags[1]._id, tags[3]._id, tags[4]._id, tags[6]._id, tags[11]._id, tags[12]._id],
@@ -84,8 +84,8 @@ db.once('open', async () => {
       category: [categories[0]._id, categories[3].id, categories[5]._id],
       location: 'Brisbane',
       productStatus: 'hidden',
-      image: 'young-ballerina-closeup-legs-shoes-standing-pointe-position.jpg',
-      gallery: ['woman-white-background-model-shoe.jpg', 'women-s-beige-low-heel-shoes-fashion.jpg'],
+      image: 'https://images.pexels.com/photos/5864581/pexels-photo-5864581.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+      gallery: ['https://images.pexels.com/photos/904350/pexels-photo-904350.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2', 'https://images.pexels.com/photos/7659916/pexels-photo-7659916.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'],
       deposit: 80.00,
       size: 'universal',
       colour: 'silver',
@@ -98,8 +98,8 @@ db.once('open', async () => {
       category: [categories[0]._id, categories[1].id, categories[2].id, categories[3].id, categories[4].id, categories[5]._id],
       location: 'Melbourne',
       productStatus: 'public',
-      image: 'young-ballerina-closeup-legs-shoes-standing-pointe-position.jpg',
-      gallery: ['woman-white-background-model-shoe.jpg', 'women-s-beige-low-heel-shoes-fashion.jpg'],
+      image: 'https://images.pexels.com/photos/59662/pexels-photo-59662.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+      gallery: ['https://images.pexels.com/photos/185489/pexels-photo-185489.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'],
       size: 'universal',
       colour: 'gold',
       tags: [tags[6]._id, tags[8]._id],
@@ -111,30 +111,30 @@ db.once('open', async () => {
       category: [categories[1]._id, categories[2].id, categories[4].id],
       location: 'Melbourne',
       productStatus: 'public',
-      image: 'young-ballerina-closeup-legs-shoes-standing-pointe-position.jpg',
+      image: 'https://images.pexels.com/photos/2120584/pexels-photo-2120584.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
       size: 'universal',
       colour: 'multi',
       tags: [tags[1]._id, tags[5]._id]
     },
     {
-      name: 'Laptop Bag',
-      description: 'Black and white check workbag. Suits 15inch Mac book with zip.',
+      name: 'Laptop Travel Bag',
+      description: 'Black bag for business or travel. Suits 15inch Mac book with zip.',
       category: [categories[1]._id],
       location: 'Sydney',
       productStatus: 'public',
-      image: 'young-ballerina-closeup-legs-shoes-standing-pointe-position.jpg',
+      image: 'https://images.pexels.com/photos/842959/pexels-photo-842959.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
       size: 'universal',
       colour: 'multi',
       tags: [tags[7]._id]
     },
     {
-      name: 'Cream Feather Fascinator',
-      description: 'Ivory cream fascinator headband with feather details.',
+      name: 'Cream Flower Fascinator',
+      description: 'Ivory cream fascinator headband with flower details.',
       category: [categories[0]._id, categories[3].id],
       location: 'Melbourne',
       productStatus: 'friendsOnly',
-      image: 'mohammad-metri-E-0ON3VGrBc-unsplash.jpg',
-      gallery: ['woman-white-background-model-shoe.jpg', 'women-s-beige-low-heel-shoes-fashion.jpg'],
+      image: 'https://images.pexels.com/photos/8100397/pexels-photo-8100397.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+      gallery: ['https://images.pexels.com/photos/10051761/pexels-photo-10051761.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'],
       deposit: 60.00,
       size: 'universal',
       colour: 'cream',
@@ -142,15 +142,15 @@ db.once('open', async () => {
       onLoan: false
     },
     {
-      name: 'Red Flower Fascinator',
-      description: 'Fascinator with big red flower.',
+      name: 'Pink Flower Fascinator',
+      description: 'Fascinator with big pink flowers.',
       category: [categories[0]._id, categories[3].id],
       location: 'Melbourne',
       productStatus: 'hidden',
-      image: 'mohammad-metri-E-0ON3VGrBc-unsplash.jpg',
-      gallery: ['woman-white-background-model-shoe.jpg', 'women-s-beige-low-heel-shoes-fashion.jpg'],
+      image: 'https://images.pexels.com/photos/11326349/pexels-photo-11326349.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+      gallery: ['https://images.pexels.com/photos/11326351/pexels-photo-11326351.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2', 'https://images.pexels.com/photos/122734/pexels-photo-122734.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'],
       size: 'universal',
-      colour: 'red',
+      colour: 'pink',
       tags: [tags[0]._id, tags[6]._id, tags[8]._id],
       onLoan: false
     },
@@ -160,8 +160,7 @@ db.once('open', async () => {
       category: [categories[1]._id, categories[2].id, categories[4].id],
       location: 'Melbourne',
       productStatus: 'friendsOnly',
-      image: 'woman-white-background-model-shoe.jpg',
-      gallery: ['mohammad-metri-E-0ON3VGrBc-unsplash.jpg', 'women-s-beige-low-heel-shoes-fashion.jpg'],
+      image: 'https://images.pexels.com/photos/1537492/pexels-photo-1537492.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
       size: '7',
       colour: 'brown',
       tags: [tags[1]._id, tags[3]._id, tags[4]._id, tags[11]._id, tags[12]._id],
@@ -173,23 +172,23 @@ db.once('open', async () => {
       category: [categories[0]._id, categories[1].id, categories[3].id],
       location: 'Melbourne',
       productStatus: 'friendsOnly',
-      image: 'woman-white-background-model-shoe.jpg',
-      gallery: ['mohammad-metri-E-0ON3VGrBc-unsplash.jpg', 'women-s-beige-low-heel-shoes-fashion.jpg'],
+      image: 'https://images.pexels.com/photos/1251085/pexels-photo-1251085.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+      gallery: ['https://images.pexels.com/photos/1172851/pexels-photo-1172851.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2', 'https://images.pexels.com/photos/1172848/pexels-photo-1172848.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'],
       size: 'universal',
       colour: 'pink',
       tags: [tags[6]._id, tags[8]._id, tags[10]._id],
       onLoan: false
     },
     {
-      name: 'Silver Mimco Purse',
-      description: 'Medium sized silver sparkly Mimco purse with zip. Can comfortably fit Samsung phone and has zip pocket for cards.',
+      name: 'Leather Mimco Purse',
+      description: 'Medium sized leather Mimco purse with zip. Can comfortably fit Samsung phone and has zip pocket for cards.',
       category: [categories[0]._id, categories[3].id, categories[5].id],
       location: 'Melbourne',
       productStatus: 'public',
-      image: 'woman-white-background-model-shoe.jpg',
-      gallery: ['mohammad-metri-E-0ON3VGrBc-unsplash.jpg', 'women-s-beige-low-heel-shoes-fashion.jpg'],
+      image: 'https://images.pexels.com/photos/978663/pexels-photo-978663.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+      gallery: ['https://images.pexels.com/photos/978664/pexels-photo-978664.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2', 'https://images.pexels.com/photos/12747236/pexels-photo-12747236.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'],
       size: 'universal',
-      colour: 'silver',
+      colour: 'black',
       tags: [tags[6]._id, tags[7]._id, tags[9]._id],
       onLoan: false
     },
@@ -199,8 +198,7 @@ db.once('open', async () => {
       category: [categories[0]._id, categories[1].id, categories[2].id, categories[3].id, categories[4].id, categories[5].id],
       location: 'Sydney',
       productStatus: 'public',
-      image: 'woman-white-background-model-shoe.jpg',
-      gallery: ['mohammad-metri-E-0ON3VGrBc-unsplash.jpg', 'women-s-beige-low-heel-shoes-fashion.jpg'],
+      image: 'https://images.pexels.com/photos/9980380/pexels-photo-9980380.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
       size: 'universal',
       colour: 'gold',
       tags: [tags[8]._id, tags[10]._id],
@@ -212,7 +210,8 @@ db.once('open', async () => {
       category: [categories[0]._id, categories[1].id, categories[2].id, categories[3].id, categories[4].id, categories[5].id],
       location: 'Melbourne',
       productStatus: 'public',
-      image: 'women-s-beige-low-heel-shoes-fashion.jpg',
+      image: 'https://images.pexels.com/photos/3682292/pexels-photo-3682292.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+      gallery: ['https://images.pexels.com/photos/3682293/pexels-photo-3682293.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2', 'https://images.pexels.com/photos/3682291/pexels-photo-3682291.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2', 'https://images.pexels.com/photos/3682290/pexels-photo-3682290.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'],
       size: '8',
       colour: 'red',
       tags: [tags[2]._id, tags[3]._id, tags[4]._id, tags[6]._id, tags[11]._id],
@@ -224,8 +223,8 @@ db.once('open', async () => {
       category: [categories[0]._id, categories[1].id, categories[2].id, categories[3].id, categories[4].id, categories[5].id],
       location: 'Melbourne',
       productStatus: 'friendsOnly',
-      image: 'woman-white-background-model-shoe.jpg',
-      gallery: ['young-ballerina-closeup-legs-shoes-standing-pointe-position.jpg', 'women-s-beige-low-heel-shoes-fashion.jpg'],
+      image: 'https://images.pexels.com/photos/2085527/pexels-photo-2085527.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+      gallery: ['https://images.pexels.com/photos/2085523/pexels-photo-2085523.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'],
       size: '9',
       colour: 'white',
       tags: [tags[2]._id, tags[4]._id, tags[6]._id, tags[11]._id]
@@ -236,8 +235,7 @@ db.once('open', async () => {
       category: [categories[1]._id, categories[2].id, categories[4].id],
       location: 'Melbourne',
       productStatus: 'public',
-      image: 'woman-white-background-model-shoe.jpg',
-      gallery: ['young-ballerina-closeup-legs-shoes-standing-pointe-position.jpg', 'women-s-beige-low-heel-shoes-fashion.jpg'],
+      image: 'https://images.pexels.com/photos/1123985/pexels-photo-1123985.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
       size: '10',
       colour: 'black',
       tags: [tags[1]._id, tags[3]._id, tags[4]._id, tags[11]._id, tags[12]._id]
@@ -248,8 +246,8 @@ db.once('open', async () => {
       category: [categories[0]._id, categories[3].id],
       location: 'Melbourne',
       productStatus: 'public',
-      image: 'woman-white-background-model-shoe.jpg',
-      gallery: ['young-ballerina-closeup-legs-shoes-standing-pointe-position.jpg', 'women-s-beige-low-heel-shoes-fashion.jpg'],
+      image: 'https://images.pexels.com/photos/12168803/pexels-photo-12168803.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+      gallery: ['https://images.pexels.com/photos/7759330/pexels-photo-7759330.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'],
       size: 'universal',
       colour: 'black',
       tags: [tags[0]._id, tags[6]._id]
@@ -538,6 +536,93 @@ db.once('open', async () => {
   );
 
   console.log('booking creators seeded');
+
+  const product1 = await Product.findOneAndUpdate(
+    { _id: products[0]._id },
+    { creator: users[0]._id }
+  );
+
+  const product2 = await Product.findOneAndUpdate(
+    { _id: products[1]._id },
+    { creator: users[2]._id }
+  );
+
+  const product3 = await Product.findOneAndUpdate(
+    { _id: products[2]._id },
+    { creator: users[0]._id }
+  );
+
+  const product4 = await Product.findOneAndUpdate(
+    { _id: products[3]._id },
+    { creator: users[1]._id }
+  );
+
+  const product5 = await Product.findOneAndUpdate(
+    { _id: products[4]._id },
+    { creator: users[0]._id }
+  );
+
+  const product6 = await Product.findOneAndUpdate(
+    { _id: products[5]._id },
+    { creator: users[2]._id }
+  );
+
+  const product7 = await Product.findOneAndUpdate(
+    { _id: products[6]._id },
+    { creator: users[0]._id }
+  );
+
+  const product8 = await Product.findOneAndUpdate(
+    { _id: products[7]._id },
+    { creator: users[3]._id }
+  );
+
+  const product9 = await Product.findOneAndUpdate(
+    { _id: products[8]._id },
+    { creator: users[4]._id }
+  );
+
+  const product10 = await Product.findOneAndUpdate(
+    { _id: products[9]._id },
+    { creator: users[3]._id }
+  );
+
+  const product11 = await Product.findOneAndUpdate(
+    { _id: products[10]._id },
+    { creator: users[3]._id }
+  );
+
+  const product12 = await Product.findOneAndUpdate(
+    { _id: products[11]._id },
+    { creator: users[4]._id }
+  );
+
+  const product13 = await Product.findOneAndUpdate(
+    { _id: products[12]._id },
+    { creator: users[2]._id }
+  );
+
+  const product14 = await Product.findOneAndUpdate(
+    { _id: products[13]._id },
+    { creator: users[2]._id }
+  );
+
+  const product15 = await Product.findOneAndUpdate(
+    { _id: products[14]._id },
+    { creator: users[4]._id }
+  );
+
+  const product16 = await Product.findOneAndUpdate(
+    { _id: products[15]._id },
+    { creator: users[0]._id }
+  );
+
+  const product17 = await Product.findOneAndUpdate(
+    { _id: products[16]._id },
+    { creator: users[1]._id }
+  );
+
+  console.log('product owners seeded');
 
   process.exit();
 });

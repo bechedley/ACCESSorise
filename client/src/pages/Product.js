@@ -7,7 +7,7 @@ import Auth from "../utils/auth";
 const Product = () => {
     return (
         <div className="container p-5 grid grid-cols-1 md:grid-cols-2">
-            <div className="IMAGE float-left p-5">
+            <div className="float-left p-5">
                 <div className="mb-2">
                     <img src="https://images.pexels.com/photos/3682292/pexels-photo-3682292.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" className="w-full max-h-700px object-cover object-center" alt="product-image"></img>
                 </div>
@@ -15,7 +15,7 @@ const Product = () => {
                     <Gallery />
                 </div>
             </div>
-            <div className="DETAILS float-right p-5">
+            <div className="float-right p-5">
                 <div className="flex justify-center items-center">
                     <div>
                         <h1 className="font-satisfy text-7xl text-slate text-center">Product Name</h1>
