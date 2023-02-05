@@ -27,7 +27,7 @@ const productSchema = new Schema({
     },
     gallery: [
         {
-          type: String,
+            type: String,
         }
     ],
     deposit: {
@@ -61,9 +61,9 @@ const productSchema = new Schema({
         default: false
     },
     owner: {
-          type: Schema.Types.ObjectId,
-          ref: 'User',
-        },
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+    },
 });
 
 const Product = mongoose.model('Product', productSchema);
