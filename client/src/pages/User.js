@@ -23,7 +23,7 @@ const User = () => {
         }
     }
     return (
-        <div className="w-screen p-5 pb-10">
+        <div className="w-screen p-5 pb-10 min-h-screen">
             <div className="flex flex-col float-left">
                 <div className="flex flex-wrap sm:flex-nowrap justify-center sm:justify-between items-center px-3">
                     <div className="flex flex-col  sm:flex-row justify-center md:justify-between items-center">

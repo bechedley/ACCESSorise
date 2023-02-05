@@ -13,6 +13,8 @@ const ProductList = () => {
   const [state, dispatch] = useStoreContext();
   const { id } = useParams();
 
+  const { categories } = state;
+
   const [thisCategory, setThisCategory] = useState(id);
 
   const [productFilters, setProductFilters] = useState(id);
@@ -24,17 +26,17 @@ const ProductList = () => {
 };
   
   const filterProductModalDismissHandler = () => {
-    setCreatingProductState(false);
+    setProductFilterState(false);
   };
 
   const filterProductModalConfirmHandler = () => {
-    setCreatingProductState(false);
+    setProductFilterState(false);
   };
 
   const handleProductFilters = (e) => {
     const value = e.target.value;
-    setFilters({
-      ...filters,
+    setProductFilters({
+      ...productFilters,
       [e.target.name]: value
     })
   }
@@ -83,7 +85,7 @@ const ProductList = () => {
         });
       });
     }
-  }, [dataProducts, loadingProducts, dispatch]);
+  }, [products, dataProducts, loadingProducts, dispatch, id]);
 
   function filterCategories() {
     if (!currentCategory) {
@@ -96,7 +98,7 @@ const ProductList = () => {
   }
 
   return (
-    <div className="w-screen p-5">
+    <div className="w-screen min-h-screen p-5">
          <React.Fragment>
     {/* Modal Input */}
     {productFilterState && <Backdrop />}
@@ -162,7 +164,7 @@ const ProductList = () => {
         </div>
       </div>
       <div>
-        <allProducts cat={thisCategory} filters={productFilters}/>
+        <AllProducts cat={thisCategory} filters={productFilters}/>
       </div>
       </React.Fragment>
     </div>

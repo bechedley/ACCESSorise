@@ -20,7 +20,7 @@ const Home = () => {
     }
 
     return (
-        <div className="p-5 w-screen">
+        <div className="p-5 w-screen min-h-screen">
             <React.Fragment>
                 {searchState && <Backdrop />}
                 {searchState && <Modal title="Search" btnText="Search" canCancel canConfirm onCancel={searchModalDismissHandler} onConfirm={searchModalConfirmHandler}>

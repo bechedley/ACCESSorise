@@ -1,11 +1,12 @@
 import React from "react";
-import History from "../components/Products";
-import { Link } from "react-router-dom";
+import History from "../components/History";
+import { Link, useParams } from "react-router-dom";
 import { UserIcon } from '@heroicons/react/24/solid';
 
 const BookingHistory = () => {
+    const { id } = useParams();
     return (
-        <div className="w-screenp-5 pb-10">
+        <div className="w-screen min-h-screen p-5 pb-10">
             <div className="flex flex-col float-left">
                 <div className="flex flex-wrap sm:flex-nowrap justify-center sm:justify-between items-center px-3">
                     <div className="flex flex-col  sm:flex-row justify-center md:justify-between items-center">
@@ -24,13 +25,13 @@ const BookingHistory = () => {
                     </div>
                 </div>
                 <div className="float-left">
-                        <h5 className='pl-1 font-satisfy text-lg md:text-xl lg:text-2xl text-mauve'>Upcoming</h5>
+                        <h5 className='mx-10 font-satisfy text-xl md:text-2xl lg:text-4xl text-mauve'>Upcoming</h5>
                     </div>
                 <div className="flex pb-5 p-5">
                     <History />
                 </div>
                 <div className="float-left">
-                        <h5 className='pl-1 font-satisfy text-lg md:text-xl lg:text-2xl text-mauve'>Previous</h5>
+                        <h5 className='mx-10 font-satisfy text-xl md:text-2xl lg:text-4xl text-mauve'>Previous</h5>
                     </div>
                 <div className="flex pb-5 p-5">
                     <History />

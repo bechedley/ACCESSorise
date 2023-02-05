@@ -16,7 +16,7 @@ const Product = (props) => {
     //     };
 
     return (
-        <div className='container flex-1 mb-2'>
+        <div className='container flex-1 mb-5'>
             <Link to={`/products/${props._id}`}>
                 <div className='container relative mb-1'>
                     <div>
@@ -45,7 +45,7 @@ const Product = (props) => {
                 <Link to={`/products/${props._id}`}>
                     <h6 className='text-3xl font-semibold'>{props.name}</h6>
                 </Link>
-                <Link to={`/user/${props.owner}`}>
+                <Link to={`/users/${props.owner}`}>
                     <div className='flex items-center'>
                         <UserIcon className='block fill-pink h-6 w-6'></UserIcon>
                         <p className='px-2 text-2xl'>{props.owner}</p>

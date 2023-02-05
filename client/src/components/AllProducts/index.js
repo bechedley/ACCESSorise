@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import Product from '../Product';
 import { useQuery } from '@apollo/client';
-import { useStoreContext } from '../utils/GlobalState';
-import { UPDATE_PRODUCTS } from '../utils/actions';
-import { QUERY_PRODUCTS } from '../utils/queries';
-import { idbPromise } from '../utils/helpers';
+import { useStoreContext } from '../../utils/GlobalState';
+import { UPDATE_PRODUCTS } from '../../utils/actions';
+import { QUERY_PRODUCTS } from '../../utils/queries';
+import { idbPromise } from '../../utils/helpers';
 
 
 function AllProducts({ cat, filters }) {
@@ -53,7 +53,7 @@ function AllProducts({ cat, filters }) {
   }
 
   return (
-    <div className='container p-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 pb-3'>
+    <div className='container p-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 pb-3'>
       {filterProducts().map((productEach) => (
         <Product {...productEach} key={productEach._id} />
       ))}

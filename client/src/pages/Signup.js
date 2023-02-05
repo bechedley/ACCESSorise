@@ -30,7 +30,7 @@ const Signup = (props) => {
     };
 
     return (
-        <div className="w-screen p-5 h-full w-full">
+        <div className="w-screen p-5 min-h-screen">
             <div className='flex-col justify-center border-grey border-1 mb-10'>
                 <h2 className='font-satisfy text-5xl text-mauve text-center p-5'>Create an Account</h2>
                 <div className='flex-col block justify-center'>

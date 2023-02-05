@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const Contact = () => {
     return (
-        <div className="p-5 h-full w-screen">
+        <div className="p-5 min-h-screen w-screen">
             <div className='flex-col justify-center border-grey border-1 mb-10'>
                 <h2 className='font-satisfy text-5xl text-mauve text-center p-5'>Get in Touch</h2>
                 <div className='flex-col block justify-center'>

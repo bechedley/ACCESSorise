@@ -2,7 +2,7 @@ import React from 'react';
 
 const Policies = () => {
     return (
-        <div className="w-screen p-20 h-full">
+        <div className="w-screen min-h-screen p-20 h-full">
             <div className="m-10">
                 <div className='p-2 py-5 text-left'>
                     <h2 className='font-satisfy text-slate text-6xl'>Our Policies</h2>

@@ -97,7 +97,7 @@ const Profile = () => {
     };
 
     return (
-        <div className="w-screen p-5 pb-10">
+        <div className="w-screen min-h-screen p-5 pb-10">
             <React.Fragment>
                 {/* Modal Input */}
                 {creatingProductState && <Backdrop />}
