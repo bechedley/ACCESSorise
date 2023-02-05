@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { UserCircleIcon, HeartIcon, CalendarDaysIcon, MagnifyingGlassIcon } from '@heroicons/react/24/solid';
 import logo from '../../assets/images/accessorise-logo-shoe.png';
 import Auth from "../../utils/auth";
@@ -58,7 +58,7 @@ function Nav() {
     }
 
     return (
-        <nav className="bg-blue relative flex flex-wrap items-center justify-between px-2 py-3 mb-3">
+        <nav className="bg-blue relative flex flex-wrap items-center justify-between px-2 py-3 mb-3 w-screen">
             <div className="container px-4 mx-auto flex flex-wrap items-center justify-between">
                 <div className="w-full relative flex justify-between w-auto block lg:justify-start">
                     <ul className="flex flex-row list-none lg:ml-auto items-center">
@@ -76,7 +76,7 @@ function Nav() {
                 </div>
                 <div className='foat-left sm:float-center'>
                     <ul className="flex flex-row list-none lg:ml-auto">
-                        <li className="hidden sm:block mx-1 font-mont-alt text-slate text-xs md:text-sm lg:text-lg hover:font-bold">
+                        <li className="hidden sm:block mx-1 font-mont-alt text-slate text-xs md:text-sm lg:text-lg">
                             <p>ACCESSORIES FOR EVERY OCCASSION</p>
                         </li>
                     </ul>

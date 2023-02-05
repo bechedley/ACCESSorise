@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Product, Category, Booking, Tag } = require('../models');
+const { User, Product, Category, Booking } = require('../models');
 const { signToken } = require('../utils/auth');
 const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
 
@@ -11,10 +11,6 @@ const resolvers = {
 
         category: async (parent, { _id }) => {
             return await Category.findById(_id);
-        },
-
-        tags: async () => {
-            return await Tag.find();
         },
 
         products: async () => {
@@ -352,12 +348,6 @@ const resolvers = {
             }
 
             throw new AuthenticationError('Not logged in');
-        },
-
-        addTag: async (parent, { tagName }) => {
-            const tag = await Tag.create(tagName);
-      
-            return { tag };
         },
 
         removeProduct: async (parent, { productId }, context) => {

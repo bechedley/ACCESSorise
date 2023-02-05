@@ -11,15 +11,18 @@ import { setContext } from '@apollo/client/link/context';
 import Home from './pages/Home';
 import ProductList from './pages/ProductList';
 import Product from './pages/Product';
-// import Detail from './pages/Detail';
-// import NoMatch from './pages/NoMatch';
+import Profile from './pages/Profile';
+import Favourites from './pages/Favourites';
+import Contact from './pages/Contact';
+import Policies from './pages/Policies';
+import NoMatch from './pages/NoMatch';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Nav from './components/Nav';
 import Footer from './components/Footer';
 import { StoreProvider } from './utils/GlobalState';
 // import Success from './pages/Success';
-// import OrderHistory from './pages/OrderHistory';
+import BookingHistory from './pages/BookingHistory';
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -57,6 +60,22 @@ function App() {
               element={<Login />} 
               />
               <Route
+                path="/profile"
+              element={<Profile />} 
+              />
+              <Route
+                path="/favourites"
+              element={<Favourites />} 
+              />
+              <Route
+                path="/contact"
+              element={<Contact />} 
+              />
+              <Route
+                path="/policies"
+              element={<Policies />} 
+              />
+              <Route
                 path="/signup"
               element={<Signup />} 
               />
@@ -65,8 +84,8 @@ function App() {
               // element={<Success />} 
               />
               <Route
-                path="/orderHistory"
-              // element={<OrderHistory />} 
+                path="/booking-history"
+              element={<BookingHistory />} 
               />
               <Route
                 path="/categories/:id"
@@ -78,7 +97,7 @@ function App() {
               />
               <Route
                 path="*"
-              // element={<NoMatch />} 
+              element={<NoMatch />} 
               />
             </Routes>
             <Footer />

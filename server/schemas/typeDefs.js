@@ -17,7 +17,7 @@ const typeDefs = gql`
     deposit: Float
     size: String
     colour: String
-    tags: [Tag]
+    tags: [String]
     categories: [Category]
     bookings: [Booking]
     onLoan: Boolean
@@ -43,11 +43,6 @@ const typeDefs = gql`
     friends: [User]
   }
 
-  type Tag {
-    _id: ID!
-    tagName: String
-  }
-
   type Checkout {
     session: ID
   }
@@ -69,8 +64,7 @@ const typeDefs = gql`
 
   type Query {
     categories: [Category]
-    category(_id: ID!): Category
-    tags: [Tag]
+    category(name: String!): Category
     products: [Product]
     product(_id: ID!): Product
     users: [User]
@@ -103,11 +97,11 @@ const typeDefs = gql`
         location: String!,
         productStatus: String!,
         image: String!,
-        gallery: String,
+        gallery: [String],
         deposit: Float,
         size: String,
         colour: String,
-        tags: [ID],
+        tags: [String],
         categories: [ID],
         bookings: [ID],
         onLoan: Boolean,
@@ -133,13 +127,12 @@ const typeDefs = gql`
         deposit: Float,
         size: String,
         colour: String,
-        tags: [ID],
+        tags: [String],
         categories: [ID],
         bookings: [ID],
         onLoan: Boolean,
         owner: ID
     ): Product
-    addTag(tagName: String!): Tag
     removeProduct(productId: ID!): Product
     removeFavourite(favouriteId: ID!): Favourite
     removeFriend(friendUsername: String!): Friend
