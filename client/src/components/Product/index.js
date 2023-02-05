@@ -17,7 +17,7 @@ const Product = (props) => {
 
     return (
         <div className='container flex-1 mb-2'>
-            <Link to={`/products/${props.id}`}>
+            <Link to={`/products/${props._id}`}>
                 <div className='container relative mb-1'>
                     <div>
                         <img src={props.img} className="w-full h-64 object-cover object-center border-mauve border-4" title={props.name} alt="product image"></img>
@@ -42,7 +42,7 @@ const Product = (props) => {
                 </div>
             </Link>
             <div className='font-mont-alt text-left text-slate'>
-                <Link to={`/products/${props.id}`}>
+                <Link to={`/products/${props._id}`}>
                     <h6 className='text-3xl font-semibold'>{props.name}</h6>
                 </Link>
                 <Link to={`/user/${props.owner}`}>
