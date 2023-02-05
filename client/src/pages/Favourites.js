@@ -1,5 +1,5 @@
 import React from "react";
-import Products from "../components/Products";
+import AllProducts from "../components/AllProducts";
 
 const Favourites = () => {
     return (
@@ -15,7 +15,7 @@ const Favourites = () => {
                 </div>
             </div>
             <div>
-                <Products />
+                <AllProducts />
             </div>
         </div>
 

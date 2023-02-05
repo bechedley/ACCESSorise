@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Products from "../components/Products";
+import AllProducts from "../components/AllProducts";
 import { Link } from "react-router-dom";
 import { UserIcon } from '@heroicons/react/24/solid';
 import Backdrop from "../components/Backdrop";
@@ -21,22 +21,22 @@ const Profile = () => {
 
     useEffect(() => {
         if (categoryData) {
-          dispatch({
-            type: UPDATE_CATEGORIES,
-            categories: categoryData.categories,
-          });
-          categoryData.categories.forEach((category) => {
-            idbPromise('categories', 'put', category);
-          });
-        } else if (!loading) {
-          idbPromise('categories', 'get').then((categories) => {
             dispatch({
-              type: UPDATE_CATEGORIES,
-              categories: categories,
+                type: UPDATE_CATEGORIES,
+                categories: categoryData.categories,
             });
-          });
+            categoryData.categories.forEach((category) => {
+                idbPromise('categories', 'put', category);
+            });
+        } else if (!loading) {
+            idbPromise('categories', 'get').then((categories) => {
+                dispatch({
+                    type: UPDATE_CATEGORIES,
+                    categories: categories,
+                });
+            });
         }
-      }, [categoryData, loading, dispatch]);
+    }, [categoryData, loading, dispatch]);
 
     const [creatingProductState, setCreatingProductState] = useState(false);
 
@@ -194,12 +194,12 @@ const Profile = () => {
                             </div>
                             <div>
                                 <select multiple="true" className="form-multiselect flex-1 m-1 shadow font-mont-alt text-slate text-sm w-80" name="categories" id="newCategories" onChange={handleChange}>
-                                {categories.map((item) => (
-        <option
-          key={item._id} value={item._id}>
-          {item.name}
-        </option>
-      ))}
+                                    {categories.map((item) => (
+                                        <option
+                                            key={item._id} value={item._id}>
+                                            {item.name}
+                                        </option>
+                                    ))}
                                 </select>
                             </div>
                         </div>
@@ -228,7 +228,7 @@ const Profile = () => {
                         </div>
                     </div>
                     <div className="flex pb-5 p-5">
-                        <Products />
+                        <AllProducts />
                     </div>
                 </div>
                 <div className="float-center flex flex-col border-grey border-t p-5 justify-center">

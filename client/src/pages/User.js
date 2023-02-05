@@ -1,5 +1,5 @@
 import React from "react";
-import Products from "../components/Products";
+import AllProducts from "../components/AllProducts";
 import { Link } from "react-router-dom";
 import { UserIcon } from '@heroicons/react/24/solid';
 
@@ -44,7 +44,7 @@ const User = () => {
                     {friendAction()}
                 </div>
                 <div className="flex pb-5 p-5">
-                    <Products />
+                    <AllProducts />
                 </div>
             </div>
         </div>
