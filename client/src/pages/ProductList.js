@@ -3,12 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import Products from "../components/Products";
 import { useStoreContext } from '../utils/GlobalState';
-import {
-  REMOVE_FROM_CART,
-  UPDATE_CART_QUANTITY,
-  ADD_TO_CART,
-  UPDATE_CATEGORIES,
-} from '../utils/actions';
+import { UPDATE_CATEGORIES } from '../utils/actions';
 import { QUERY_CATEGORIES } from '../utils/queries';
 import { idbPromise } from '../utils/helpers';
 
