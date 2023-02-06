@@ -10,8 +10,7 @@ function Nav() {
     function showNavigation() {
         if (Auth.loggedIn()) {
             return (
-                <ul className="flex w-screen max-w-screen max-h-30 list-none lg:ml-auto w-screen items-center max-h-30">
-
+                <ul className="flex flex-row list-none lg:ml-auto w-screen">
                     <li className="mx-1">
                         <Link to="/search">
                             <MagnifyingGlassIcon className="h-6 lg:h-8 w-6 lg:w-8 fill-slate" />
@@ -28,7 +27,7 @@ function Nav() {
                         </Link>
                     </li>
                     <li className="mx-1">
-                        <Link to={`/users/${Auth.getUser().data._id}`}>
+                        <Link to="/profile">
                             <UserCircleIcon className="h-6 lg:h-8 w-6 lg:w-8 fill-slate" />
                         </Link>
                     </li>
@@ -42,7 +41,7 @@ function Nav() {
             );
         } else {
             return (
-                <ul className="flex flex-row list-none lg:ml-auto">
+                <ul className="flex w-screen flex-row list-none lg:ml-auto">
                     <li className="px-1 mx-1 font-mont-alt text-slate text-xs md:text-sm lg:text-lg hover:font-bold">
                         <Link to="/signup">
                             Signup
