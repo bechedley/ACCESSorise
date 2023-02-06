@@ -58,9 +58,9 @@ function Nav() {
     }
 
     return (
-        <nav className="bg-blue relative flex flex-wrap items-center justify-between px-2 py-3 mb-3 w-screen">
-            <div className="container px-4 mx-auto flex flex-wrap items-center justify-between">
-                <div className="w-full relative flex justify-between w-auto block lg:justify-start">
+        <nav className="bg-blue w-screen items-center px-2 py-3 mb-3">
+            <div className="px-4 mx-auto flex flex-row g-4 items-center justify-between">
+                <div className="flex justify-between w-auto block">
                     <ul className="flex flex-row list-none lg:ml-auto items-center">
                         <li className="mx-1">
                             <Link to="/">
