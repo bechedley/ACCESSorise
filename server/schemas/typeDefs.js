@@ -3,7 +3,8 @@ const { gql } = require('apollo-server-express');
 const typeDefs = gql`
   type Category {
     _id: ID!
-    name: String
+    name: String!
+    image: String!
   }
 
   type Product {
@@ -89,7 +90,6 @@ const typeDefs = gql`
         bookingDate: String!,
         bookingStatus: String!,
         product: ID,
-        creator: ID
     ): Booking
     addProduct(
         name: String!,
@@ -107,22 +107,23 @@ const typeDefs = gql`
         onLoan: Boolean,
         owner: ID
     ): Product
-    addFavourite(favouriteId: ID!): User
-    addFriend(friendusername: String!): User
+    addFavourite(userId: ID!, favouriteId: ID!): User
+    addFriend(friendId: ID!): User
     updateUser(username: String, email: String, password: String): User
     updateBooking(
         _id: ID!,
         bookingDate: String,
         bookingStatus: String,
+        product: ID!
         creator: ID
     ): Booking
     updateProduct(
         _id: ID!,
-        name: String,
-        description: String,
-        location: String,
-        productStatus: String,
-        image: String,
+        name: String!,
+        description: String!,
+        location: String!,
+        productStatus: String!,
+        image: String!,
         gallery: [String],
         deposit: Float,
         size: String,
@@ -135,7 +136,7 @@ const typeDefs = gql`
     ): Product
     removeProduct(productId: ID!): Product
     removeFavourite(favouriteId: ID!): Favourite
-    removeFriend(friendUsername: String!): Friend
+    removeFriend(friendId: ID!!): Friend
     login(email: String!, password: String!): Auth
   }
 `;

@@ -63,7 +63,7 @@ const productSchema = new Schema({
     owner: {
         type: Schema.Types.ObjectId,
         ref: 'User',
-    },
+    }
 });
 
 const Product = mongoose.model('Product', productSchema);

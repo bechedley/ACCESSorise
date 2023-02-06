@@ -40,7 +40,7 @@ const Profile = () => {
 
     const [creatingProductState, setCreatingProductState] = useState(false);
 
-    const [productId, setProductId] = useState(null);
+    const [productId, setProductId] = useState('');
 
     const [formState, setFormState] = useState({
         name: '',
@@ -75,6 +75,7 @@ const Profile = () => {
         });
 
         setProductId(mutationResponse.data.addProduct._id);
+        console.log(productId);
     };
 
     useEffect(() => {
