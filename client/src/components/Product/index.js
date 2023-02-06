@@ -32,7 +32,7 @@ const Product = ({ cat, filters }) => {
                 });
             });
         }
-    }, [productData, loading, dispatch]);
+    }, [productData, dispatch]);
 
     const handleOwnerClick = (id) => {
         dispatch({

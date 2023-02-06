@@ -68,7 +68,7 @@ const ProductList = () => {
         });
       });
     }
-  }, [data, loading, dispatch], 0);
+  }, [data, dispatch]);
 
   useEffect(() => {
     if (dataProducts) {
@@ -87,7 +87,7 @@ const ProductList = () => {
         });
       });
     }
-  }, [products, dataProducts, loadingProducts, dispatch, id],0);
+  }, [id]);
 
   function filterCategories() {
     if (!currentCategory) {
@@ -98,6 +98,7 @@ const ProductList = () => {
       (category) => category._id === currentCategory
     );
   }
+  
 
   return (
     <div className="w-screen min-h-screen p-5">

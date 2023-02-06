@@ -4,30 +4,34 @@ import { useMutation } from '@apollo/client';
 import Auth from '../utils/auth';
 import { ADD_USER } from '../utils/mutations';
 
-const Signup = (props) => {
+const Signup = () => {
     const [formState, setFormState] = useState({ email: '', password: '' });
-    const [addUser] = useMutation(ADD_USER);
 
-    const handleFormSubmit = async (event) => {
-        event.preventDefault();
-        const mutationResponse = await addUser({
-            variables: {
-                email: formState.email,
-                password: formState.password,
-                username: formState.username,
-            },
-        });
-        const token = mutationResponse.data.addUser.token;
-        Auth.login(token);
-    };
+  const [addUser, { error, data }] = useMutation(ADD_USER);
 
-    const handleChange = (event) => {
-        const { name, value } = event.target;
-        setFormState({
-            ...formState,
-            [name]: value,
-        });
-    };
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormState({
+        ...formState,
+        [name]: value,
+    });
+};
+
+  // submit form
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+    console.log(formState);
+
+    try {
+      const { data } = await addUser({
+        variables: { ...formState },
+      });
+
+      Auth.login(data.addUser.token);
+    } catch (e) {
+      console.error(e);
+    }
+  };
 
     return (
         <div className="w-screen p-5 min-h-screen">
