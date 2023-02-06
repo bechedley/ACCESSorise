@@ -4,11 +4,12 @@
   "description": "",
   "main": "server/server.js",
   "scripts": {
-    "start": "node server --ignore client",
+    "start": "cd server && node server --ignore client",
     "develop": "concurrently \"cd server && npm run start\" \"cd client && npm start\"",
     "install": "cd server && npm i && cd ../client && npm i",
     "seed": "cd server && npm run seed",
-    "build": "cd client && npm run build"
+    "build": "cd client && npm run build",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install npm && run build"
   },
   "keywords": [],
   "author": "",
