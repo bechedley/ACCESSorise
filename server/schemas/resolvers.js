@@ -75,29 +75,28 @@ const resolvers = {
 
     me: async (parent, args, context) => {
       if (context.user) {
-        return User.findOne({ _id: context.user._id })
-          .populate({
-            path: "products", // populate products
-            populate: {
-              path: "bookings" // in products, populate bookings
-            }
-          })
-          .populate({
-            path: "bookings", // populate bookings
-            populate: {
-              path: "product" // in bookings, populate product
-            }
-          })
-          .populate('friends')
-          .populate('favourites')
-          .populate({
-            path: 'bookings.product',
-            populate: 'owner'
-          })
-          .populate({
-            path: 'product.bookings',
-            populate: 'creator'
-          });
+        return User.findOne({ _id: context.user._id }).populate({
+          path: "products", // populate products
+          populate: {
+            path: "bookings" // in products, populate bookings
+          }
+        })
+        .populate({
+          path: "bookings", // populate bookings
+          populate: {
+            path: "product" // in bookings, populate product
+          }
+        })
+        .populate('favourites')
+        .populate('friends')
+        .populate({
+          path: 'bookings.product',
+          populate: 'owner'
+        })
+        .populate({
+          path: 'product.bookings',
+          populate: 'creator'
+        });
       }
       throw new AuthenticationError('You need to be logged in!');
     },
@@ -271,22 +270,40 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in!');
     },
 
-    addFavourite: async (parent, { favouriteId }, context) => {
-      const user = await User.findOneAndUpdate(
-        { _id: context.user._id },
-        { $addToSet: { favourites: favouriteId } }
-      );
-
-      return user;
+    addFavourite: async (parent, { userId, favouriteId }, context) => {
+      if (context.user._id === userId) {
+        return User.findOneAndUpdate(
+          { _id: userId },
+          {
+            $addToSet: {
+              favourites: { favouriteId },
+            },
+          },
+          {
+            new: true,
+            runValidators: true,
+          }
+        );
+      }
+      throw new AuthenticationError('You need to be logged in!');
     },
 
-    addFriend: async (parent, { friendId }, context) => {
-      const user = await User.findOneAndUpdate(
-        { _id: context.user._id },
-        { $addToSet: { friends: friendId } }
-      );
-
-      return user;
+    addFriend: async (parent, { userId, friendId }, context) => {
+      if (context.user._id === userId) {
+        return User.findOneAndUpdate(
+          { _id: userId },
+          {
+            $addToSet: {
+              friends: { friendId },
+            },
+          },
+          {
+            new: true,
+            runValidators: true,
+          }
+        );
+      }
+      throw new AuthenticationError('You need to be logged in!');
     },
 
     updateUser: async (parent, args, context) => {
@@ -367,6 +384,28 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in!');
     },
 
+    removeProduct: async (parent, { productId }, context) => {
+      if (context.user) {
+        const product = await Product.findOneAndDelete({
+          _id: productId,
+          owner: context.user._id,
+        });
+
+        await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $pull: { products: product._id } }
+        );
+
+        await Booking.findOneAndUpdate(
+          { product: productId },
+          { bookingStatus: "cancelled" }
+        );
+
+        return product;
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    },
+
     removeFavourite: async (parent, { favouriteId }, context) => {
       if (context.user) {
         const currentUser = await User.findOneAndUpdate(
@@ -379,11 +418,11 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in!');
     },
 
-    removeFriend: async (parent, { friendUsername }, context) => {
+    removeFriend: async (parent, { friendId }, context) => {
       if (context.user) {
         const currentUser = await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $pull: { friends: friendUsername } }
+          { $pull: { friends: friendId } }
         );
 
         return currentUser;

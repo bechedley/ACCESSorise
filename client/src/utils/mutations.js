@@ -14,13 +14,13 @@ export const LOGIN = gql`
 
 export const ADD_BOOKING = gql`
   mutation addBooking(
-    $bookingDate: String!
-    $bookingStatus: String!
+    $bookingDate: String!,
+    $bookingStatus: String!,
     $product: ID!
   ) {
     addBooking(
-      bookingDate: $bookingDate
-      bookingStatus: $bookingStatus
+      bookingDate: $bookingDate,
+      bookingStatus: $bookingStatus,
       product: $product
     ) {
       booking {
@@ -44,13 +44,13 @@ export const ADD_BOOKING = gql`
 
 export const ADD_USER = gql`
   mutation addUser(
-    $username: String!
-    $email: String!
+    $username: String!,
+    $email: String!,
     $password: String!
   ) {
     addUser(
-      username: $username
-      email: $email
+      username: $username,
+      email: $email,
       password: $password
     ) {
       token
@@ -64,29 +64,29 @@ export const ADD_USER = gql`
 
 export const ADD_PRODUCT = gql`
   mutation addProduct(
-    $name: String!
-    $description: String!
-    $location: String!
-    $productStatus: String!
-    $image: String!
-    $gallery: [String]
-    $deposit: Float
-    $size: String
-    $colour: String
-    $tags: [String]
+    $name: String!,
+    $description: String!,
+    $location: String!,
+    $productStatus: String!,
+    $image: String!,
+    $gallery: [String],
+    $deposit: Float,
+    $size: String,
+    $colour: String,
+    $tags: [String],
     $categories: [ID]
   ) {
     addProduct(
-      name: $name
-      description: $description
-      location: $location
-      productStatus: $productStatus
-      image: $image
-      gallery: $gallery
-      deposit: $deposit
-      size: $size
-      colour: $colour
-      tags: $tags
+      name: $name,
+      description: $description,
+      location: $location,
+      productStatus: $productStatus,
+      image: $image,
+      gallery: $gallery,
+      deposit: $deposit,
+      size: $size,
+      colour: $colour,
+      tags: $tags,
       categories: $categories
     ) {
       product {
@@ -107,56 +107,20 @@ export const ADD_PRODUCT = gql`
   }
 `;
 
-export const ADD_FAVOURITE = gql`
-  mutation addFavourite(
-    $favouriteId: ID!
-  ) {
-    addFavourite(
-      favouriteId: $favouriteId
-    ) {
-      user {
-        _id
-        favourites {
-          _id
-          name
-          owner
-        }
-      }
-    }
-  }
-`;
-
-export const ADD_FRIEND = gql`
-  mutation addFriend(
-    $friendId: ID!
-  ) {
-    addFriend(
-      friendId: $friendId
-    ) {
-      user {
-        _id
-        friends {
-          _id
-          username
-        }
-      }
-    }
-  }
-`;
 
 export const UPDATE_BOOKING = gql`
   mutation updateBooking(
-    $id: ID!
-    $bookingDate: String!
-    $bookingStatus: String!
-    $product: ID!
+    $id: ID!,
+    $bookingDate: String!,
+    $bookingStatus: String!,
+    $product: ID!,
     $creator: ID
   ) {
     updateBooking(
-      _id: $id
-      bookingDate: $bookingDate
-      bookingStatus: $bookingStatus
-      product: $product
+      _id: $id,
+      bookingDate: $bookingDate,
+      bookingStatus: $bookingStatus,
+      product: $product,
       creator: $creator
     ) {
       booking {
@@ -180,37 +144,37 @@ export const UPDATE_BOOKING = gql`
 
 export const UPDATE_PRODUCT = gql`
   mutation updateProduct(
-    $_id: ID!
-    $name: String!
-    $description: String!
-    $location: String!
-    $productStatus: String!
-    $image: String!
-    $gallery: [String]
-    $deposit: Float
-    $size: String
-    $colour: String
-    $tags: [String]
-    $categories: [ID]
-    $bookings: [ID]
-    $onLoan: Boolean
+    $_id: ID!,
+    $name: String!,
+    $description: String!,
+    $location: String!,
+    $productStatus: String!,
+    $image: String!,
+    $gallery: [String],
+    $deposit: Float,
+    $size: String,
+    $colour: String,
+    $tags: [String],
+    $categories: [ID],
+    $bookings: [ID],
+    $onLoan: Boolean,
     $owner: ID
   ) {
     updateProduct(
-      _id: $_id
-      name: $name
-      description: $description
-      location: $location
-      productStatus: $productStatus
-      image: $image
-      gallery: $gallery
-      deposit: $deposit
-      size: $size
-      colour: $colour
-      tags: $tags
-      categories: $categories
-      bookings: $bookings
-      onLoan: $onLoan
+      _id: $_id,
+      name: $name,
+      description: $description,
+      location: $location,
+      productStatus: $productStatus,
+      image: $image,
+      gallery: $gallery,
+      deposit: $deposit,
+      size: $size,
+      colour: $colour,
+      tags: $tags,
+      categories: $categories,
+      bookings: $bookings,
+      onLoan: $onLoan,
       owner: $owner
     ) {
       product {
@@ -230,10 +194,7 @@ export const UPDATE_PRODUCT = gql`
           _id
           bookingDate
           bookingStatus
-          creator {
-            _id
-            username
-          }
+          creator
         }
         onLoan
         owner {
@@ -258,28 +219,30 @@ export const REMOVE_PRODUCT = gql`
   }
 `;
 
-export const REMOVE_FAVOURITE = gql`
-  mutation removeFavourite($favouriteId: ID!) 
-  {
-    removeFavourite(
-      favourites._id: $favouriteId
-    ) {
-      favourite {
+export const ADD_FAVOURITE = gql`
+  mutation addFavourite($userId: ID!, $favouriteId: ID!) {
+    addFavourite(userId: $userId, favouriteId: $favouriteId) {
+      _id
+      username
+      favourites {
         _id
+        name
+        owner
       }
     }
   }
 `;
 
-export const REMOVE_FRIEND = gql`
-  mutation removeFriend($friendId: ID!) 
-  {
-    removeFriend(
-      friends._id: $friendId
-    ) {
-      friend {
+export const ADD_FRIEND = gql`
+  mutation addFriend($userId: ID!, $friendId: ID!) {
+    addFriend(userId: $userId, friendId: $friendId) {
+      _id
+      username
+      friends {
         _id
+        username
       }
     }
   }
 `;
+

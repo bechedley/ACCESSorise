@@ -1,18 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { ShareIcon, HeartIcon, UserIcon } from '@heroicons/react/24/solid';
 import Gallery from "../components/Gallery";
-import { useQuery } from '@apollo/client';
+import { useQuery, useMutation } from '@apollo/client';
 import { Link, useParams } from "react-router-dom";
 import Auth from "../utils/auth";
 import { useStoreContext } from '../utils/GlobalState';
 import { UPDATE_PRODUCTS } from '../utils/actions';
 import { QUERY_PRODUCTS } from '../utils/queries';
-import { ADD_BOOKING } from '../utils/mutations';
+import { ADD_BOOKING, ADD_FAVOURITE } from '../utils/mutations';
 import { idbPromise } from '../utils/helpers';
+import Backdrop from "../components/Backdrop";
+import Modal from "../components/Modal";
+
 
 const Product = () => {
     const [state, dispatch] = useStoreContext();
     const { id } = useParams();
+
+    const availability = [];
+
+    
 
     const [createBookingState, setCreateBookingState] = useState(false);
 
@@ -20,11 +27,15 @@ const Product = () => {
 
     const [askState, setAskState] = useState(false);
 
+    const [favouriteIcon, setFavouriteIcon] = useState(false);
+
     const [bookingFormState, setBookingFormState] = useState({ bookingDate: '' });
 
     const [askFormState, setAskFormState] = useState({ message: '' });
 
     const [addBooking] = useMutation(ADD_BOOKING);
+
+    const [addFavourite] = useMutation(ADD_FAVOURITE);
 
     const handleBookBtn = () => {
         setCreateBookingState(true);
@@ -32,6 +43,19 @@ const Product = () => {
 
     const handleAskBtn = () => {
         setAskState(true);
+    };
+
+    const handleFavouriteBtn = async (event) => {
+        event.preventDefault();
+
+        const mutationResponse = await addFavourite({
+            variables: {
+                favouriteId: id,
+            },
+        });
+
+        setFavouriteIcon(true);
+        console.log(mutationResponse.dataingId);
     };
 
     const bookProductModalDismissHandler = () => {
@@ -115,6 +139,9 @@ const Product = () => {
     const tags = currentProduct.tags;
     const tagsArray = tags.pop(',');
 
+    const reservations = currentProduct.bookings;
+    console.log(reservations);
+
     return (
         <div className="w-screen min-h-screen p-5 grid grid-cols-1 md:grid-cols-2">
             <React.Fragment>
@@ -162,7 +189,7 @@ const Product = () => {
                 </Modal>}
                 <div className="float-left p-5">
                     <div className="mb-2">
-                        <img src={`${currentProduct.image}`} alt={currentProduct.name}></img>
+                        <img src={currentProduct.image} alt={currentProduct.name}></img>
                     </div>
                     <div className="">
                         <Gallery {...currentProduct} />
@@ -199,7 +226,7 @@ const Product = () => {
                             </div>
                             <div className="float-left block">
                                 <button className="p-2 my-4 px-6 bg-blue rounded-md font-satisfy text-center text-slate text-4xl" onClick={handleFavouriteBtn} pid={currentProduct._id}>
-                                    <span><HeartIcon className={Auth.loggedIn() === true ? 'fill-mauve h-6 w-6 mr-1' : 'fill-slate h-6 w-6 mr-1'}></HeartIcon>Favourite</span>
+                                    <span><HeartIcon className={favouriteIcon === true ? 'fill-mauve h-6 w-6 mr-1' : 'fill-slate h-6 w-6 mr-1'}></HeartIcon>Favourite</span>
                                 </button>
                             </div>
                             <div className="float-left block">

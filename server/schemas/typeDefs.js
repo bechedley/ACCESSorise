@@ -73,8 +73,8 @@ const typeDefs = gql`
     me: User
     bookings: [Booking]
     booking(_id: ID!): Booking
-    favourites(user: ID, name: String): [Product]
-    friends(user: ID, username: String): [User]
+    favourites(user: ID, name: ID): [Product]
+    friends(user: ID, friend: ID): [User]
     checkout(product: ID!): Checkout
   }
 
@@ -108,7 +108,7 @@ const typeDefs = gql`
         owner: ID
     ): Product
     addFavourite(userId: ID!, favouriteId: ID!): User
-    addFriend(friendId: ID!): User
+    addFriend(userId: ID!, friendId: ID!): User
     updateUser(username: String, email: String, password: String): User
     updateBooking(
         _id: ID!,
@@ -136,7 +136,7 @@ const typeDefs = gql`
     ): Product
     removeProduct(productId: ID!): Product
     removeFavourite(favouriteId: ID!): Favourite
-    removeFriend(friendId: ID!!): Friend
+    removeFriend(friendId: ID!): Friend
     login(email: String!, password: String!): Auth
   }
 `;

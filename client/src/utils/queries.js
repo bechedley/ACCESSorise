@@ -21,10 +21,7 @@ export const QUERY_PRODUCTS = gql`
         _id
         bookingDate
         bookingStatus
-        creator {
-          _id
-          username
-        }
+        creator
       }
       onLoan
       owner
@@ -99,29 +96,26 @@ export const QUERY_CATEGORIES = gql`
 `;
 
 export const QUERY_USER = gql`
-{
-  user {
+query user($_id: ID!) {
+  user(_id: $_id) {
     _id
     username
+    email
     bookings {
       _id
-      createdAt
       bookingDate
-      bookingStatus
       product
+      bookingStatus
+      createdAt
     }
     products {
       _id
       name
-      bookings
     }
     favourites {
       _id
       name
-      owner {
-        _id
-        username
-      }
+      owner
     }
     friends {
       _id
@@ -132,55 +126,27 @@ export const QUERY_USER = gql`
 `;
 
 export const QUERY_ME = gql`
-{
-  user {
+query me {
+  me {
     _id
     username
+    email
     bookings {
       _id
-      createdAt
       bookingDate
+      product 
       bookingStatus
-      product
+      createdAt
     }
     products {
       _id
       name
-      bookings
     }
-    favourites {
-      _id
-      name
-      owner {
-        _id
-        username
-      }
-    }
-    friends {
-      _id
-      username
-    }
-  }
-}
-`;
-
-export const QUERY_FAVOURITES = gql`
-query getFavourites($user: ID!, favouriteId: ID!) {
-  favourites(_id: $user, favourite._id: favouriteId) {
-    _id
     favourites {
       _id
       name
       owner
     }
-  }
-}
-`;
-
-export const QUERY_FRIENDS = gql`
-query getFriends($user: ID!, friendId: ID!) {
-  friends(_id: $user, friend._id: friendId) {
-    _id
     friends {
       _id
       username
@@ -188,6 +154,7 @@ query getFriends($user: ID!, friendId: ID!) {
   }
 }
 `;
+
 
 export const QUERY_USERS = gql`
 {
@@ -201,19 +168,18 @@ export const QUERY_USERS = gql`
       bookingDate
       bookingStatus
       product
+      creator
     }
     products {
       _id
       name
       bookings
+      owner
     }
     favourites {
       _id
       name
-      owner {
-        _id
-        username
-      }
+      owner 
     }
     friends {
       _id
