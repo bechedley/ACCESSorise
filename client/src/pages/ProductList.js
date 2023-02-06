@@ -17,6 +17,8 @@ const ProductList = () => {
 
   const [thisCategory, setThisCategory] = useState(id);
 
+  setThisCategory(id);
+
   const [productFilters, setProductFilters] = useState(id);
 
   const [productFilterState, setProductFilterState] = useState(false);
@@ -66,7 +68,7 @@ const ProductList = () => {
         });
       });
     }
-  }, [data, loading, dispatch]);
+  }, [data, loading, dispatch], 0);
 
   useEffect(() => {
     if (dataProducts) {
@@ -85,7 +87,7 @@ const ProductList = () => {
         });
       });
     }
-  }, [products, dataProducts, loadingProducts, dispatch, id]);
+  }, [products, dataProducts, loadingProducts, dispatch, id],0);
 
   function filterCategories() {
     if (!currentCategory) {

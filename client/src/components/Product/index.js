@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useQuery } from '@apollo/client';
 import { Link } from "react-router-dom";
 import { useStoreContext } from '../../utils/GlobalState';
-import { UPDATE_PRODUCTS } from '../../utils/actions';
+import { UPDATE_CURRENT_USER, UPDATE_CURRENT_PRODUCT, UPDATE_PRODUCTS } from '../../utils/actions';
 import { QUERY_PRODUCTS } from '../../utils/queries';
 import { idbPromise } from '../../utils/helpers';
 import { HeartIcon, UserIcon } from '@heroicons/react/24/solid';
@@ -11,17 +11,17 @@ import Auth from "../../utils/auth";
 const Product = ({ cat, filters }) => {
     const [state, dispatch] = useStoreContext();
 
-    const { loading, data } = useQuery(QUERY_PRODUCTS);
-
     const { products } = state;
 
+    const { loading, data: productData } = useQuery(QUERY_PRODUCTS);
+
     useEffect(() => {
-        if (data) {
+        if (productData) {
             dispatch({
                 type: UPDATE_PRODUCTS,
-                products: data.products,
+                products: productData.products,
             });
-            data.products.forEach((product) => {
+            productData.products.forEach((product) => {
                 idbPromise('products', 'put', product);
             });
         } else if (!loading) {
@@ -32,9 +32,25 @@ const Product = ({ cat, filters }) => {
                 });
             });
         }
-    }, [data, loading, dispatch, cat, filters]);
+    }, [productData, loading, dispatch]);
+
+    const handleOwnerClick = (id) => {
+        dispatch({
+            type: UPDATE_CURRENT_USER,
+            currentUser: id,
+        });
+    };
+
+    const handleProductClick = (id) => {
+        dispatch({
+            type: UPDATE_CURRENT_PRODUCT,
+            currentProduct: id,
+        });
+    };
 
     console.log(products);
+    console.log(filterProducts);
+
 
     function filterProducts() {
         if (!cat && !filters) {
@@ -71,7 +87,9 @@ const Product = ({ cat, filters }) => {
         <div className='p-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 pb-3'>
             {filterProducts().map((productEach) => (
                 <div className='container flex-1 mb-5' key={productEach._id}>
-                    <Link to={`/products/${productEach._id}`}>
+                    <Link to={`/products/${productEach._id}`} onClick={() => {
+                        handleProductClick(`${productEach._id}`);
+                    }}>
                         <div className='container relative mb-1'>
                             <div>
                                 <img src={productEach.image} className="w-full h-64 object-cover object-center border-mauve border-4" title={productEach.name} alt="product image"></img>
@@ -96,10 +114,14 @@ const Product = ({ cat, filters }) => {
                         </div>
                     </Link>
                     <div className='font-mont-alt text-left text-slate'>
-                        <Link to={`/products/${productEach._id}`}>
+                        <Link to={`/products/${productEach._id}`} onClick={() => {
+                            handleProductClick(`${productEach._id}`);
+                        }}>
                             <h6 className='text-3xl font-semibold'>{productEach.name}</h6>
                         </Link>
-                        <Link to={`/users/${productEach.owner}`}>
+                        <Link to={`/users/${productEach.owner}`} onClick={() => {
+                            handleOwnerClick(`${productEach.owner}`);
+                        }}>
                             <div className='flex items-center'>
                                 <UserIcon className='block fill-pink h-6 w-6'></UserIcon>
                                 <p className='px-2 text-2xl'>{productEach.owner}</p>

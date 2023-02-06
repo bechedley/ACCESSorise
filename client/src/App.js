@@ -60,7 +60,11 @@ function App() {
               element={<Login />} 
               />
               <Route
-                path="/profile"
+                path="/me"
+              element={<Profile />} 
+              />
+              <Route
+                path="/users/:id"
               element={<Profile />} 
               />
               <Route
@@ -93,6 +97,10 @@ function App() {
               />
               <Route
                 path="/products/:id"
+                element={<Product />}
+              />
+              <Route
+                path="/bookings/:id"
                 element={<Product />}
               />
               <Route

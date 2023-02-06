@@ -27,7 +27,7 @@ function Nav() {
                         </Link>
                     </li>
                     <li className="mx-1">
-                        <Link to="/profile">
+                        <Link to={`/users/${Auth.getProfile().data._id}`}>
                             <UserCircleIcon className="h-6 lg:h-8 w-6 lg:w-8 fill-slate" />
                         </Link>
                     </li>

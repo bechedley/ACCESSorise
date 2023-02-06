@@ -11,7 +11,7 @@ function AllProducts({ cat, filters }) {
 
   return (
     <div className='container p-5 pb-3'>
-        <Product />
+        <Product cat={cat} filters={filters} />
     </div>
 
   );

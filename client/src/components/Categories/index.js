@@ -36,9 +36,7 @@ function Categories() {
 
   return (
     <div className='container p-5 pb-3'>
-      {/* {categories.map((categoryEach) => ( */}
       <CategoryItem />
-      {/* ))} */}
     </div>
 
   );
