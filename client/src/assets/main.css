@@ -278,7 +278,7 @@ img {
   display: none;
 }
 
-[type='text'],[type='email'],[type='url'],[type='password'],[type='number'],[type='datetime-local'],[type='search'],[type='time'],[multiple],textarea,select {
+[type='text'],[type='email'],[type='url'],[type='password'],[type='number'],[type='search'],[type='time'],[multiple],textarea,select {
   appearance: none;
   background-color: #fff;
   border-color: #6b7280;
@@ -293,7 +293,7 @@ img {
   --tw-shadow: 0 0 #0000;
 }
 
-[type='text']:focus, [type='email']:focus, [type='url']:focus, [type='password']:focus, [type='number']:focus, [type='datetime-local']:focus, [type='search']:focus, [type='time']:focus, [multiple]:focus, textarea:focus, select:focus {
+[type='text']:focus, [type='email']:focus, [type='url']:focus, [type='password']:focus, [type='number']:focus, [type='search']:focus, [type='time']:focus, [multiple]:focus, textarea:focus, select:focus {
   outline: 2px solid transparent;
   outline-offset: 2px;
   --tw-ring-inset: var(--tw-empty,/*!*/ /*!*/);
@@ -562,9 +562,6 @@ select {
 .top-32 {
   top: 8rem;
 }
-.bottom-10 {
-  bottom: 2.5rem;
-}
 .z-10 {
   z-index: 10;
 }
@@ -700,11 +697,11 @@ select {
 .w-6 {
   width: 1.5rem;
 }
-.w-80 {
-  width: 20rem;
-}
 .w-10 {
   width: 2.5rem;
+}
+.w-80 {
+  width: 20rem;
 }
 .w-auto {
   width: auto;
