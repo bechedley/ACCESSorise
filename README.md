@@ -12,7 +12,7 @@ N/A
 
 Once you've created an account, you'll have an option to add products. Fill in key product details and add an image (or many!). You can also browse accessories uploaded by other users, if they're set to public or you have them in your friends list. When you find an accessory that matches what you're looking for, click into the product page and press the 'Book' button to choose your booking date. You can also send a message to the owner if you have any questions.
 
-Deployed URL: (https://bechedley.github.io/profile-page/)
+Deployed URL: (https://accessorise.herokuapp.com/)
 
 ![Screenshot of home page](./client/src/assets/images/homepage-screenshot.png)
 
