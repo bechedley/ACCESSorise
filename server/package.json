@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server.js",
     "watch": "nodemon",
-    "web": "node index.js",
+    "web": "node server.js",
     "seed": "node config/seeds.js"
   },
   "keywords": [],
@@ -23,5 +23,8 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.2"
-  }
+  },
+  "engines": {
+    "node": "16.17.1"
+}
 }
