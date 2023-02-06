@@ -1,6 +1,11 @@
 import { useReducer } from 'react';
 import {
   UPDATE_PRODUCTS,
+  UPDATE_CURRENT_PRODUCT,
+  UPDATE_BOOKINGS,
+  UPDATE_CURRENT_BOOKING,
+  UPDATE_USERS,
+  UPDATE_CURRENT_USER,
   ADD_TO_CART,
   UPDATE_CART_QUANTITY,
   REMOVE_FROM_CART,
@@ -19,6 +24,12 @@ export const reducer = (state, action) => {
       return {
         ...state,
         products: [...action.products],
+      };
+
+    case UPDATE_BOOKINGS:
+      return {
+        ...state,
+        bookings: [...action.bookings],
       };
 
     case ADD_TO_CART:
@@ -80,10 +91,34 @@ export const reducer = (state, action) => {
         categories: [...action.categories],
       };
 
+    case UPDATE_USERS:
+      return {
+        ...state,
+        users: [...action.users],
+      };
+
     case UPDATE_CURRENT_CATEGORY:
       return {
         ...state,
         currentCategory: action.currentCategory,
+      };
+
+    case UPDATE_CURRENT_PRODUCT:
+      return {
+        ...state,
+        currentProduct: action.currentProduct,
+      };
+
+    case UPDATE_CURRENT_BOOKING:
+      return {
+        ...state,
+        currentBooking: action.currentBooking,
+      };
+
+    case UPDATE_CURRENT_USER:
+      return {
+        ...state,
+        currentUser: action.currentUser,
       };
 
     // Return the state as is in the event that the `action.type` passed to our reducer was not accounted for by the developers

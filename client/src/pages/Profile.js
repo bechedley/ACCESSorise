@@ -1,23 +1,43 @@
 import React, { useState, useEffect } from "react";
-import AllProducts from "../components/AllProducts";
-import { Link } from "react-router-dom";
+import { Link, useParams, Navigate } from "react-router-dom";
+import { useStoreContext } from '../utils/GlobalState';
+import { useQuery, useMutation } from '@apollo/client';
+import { UPDATE_CATEGORIES, UPDATE_CURRENT_USER } from '../utils/actions';
+import { QUERY_CATEGORIES, QUERY_USER, QUERY_ME } from '../utils/queries';
+import { ADD_PRODUCT } from '../utils/mutations';
+import { idbPromise } from '../utils/helpers';
 import { UserIcon } from '@heroicons/react/24/solid';
 import Backdrop from "../components/Backdrop";
 import Modal from "../components/Modal";
-import { useMutation } from '@apollo/client';
-import { ADD_PRODUCT } from '../utils/mutations';
-import { useStoreContext } from '../utils/GlobalState';
-import { useQuery } from '@apollo/client';
-import { QUERY_CATEGORIES } from '../utils/queries';
-import { UPDATE_CATEGORIES } from '../utils/actions';
-import { idbPromise } from '../utils/helpers';
+import AllProducts from "../components/AllProducts";
+import Auth from '../utils/auth';
 
 const Profile = () => {
+    const { id: userParams } = useParams();
     const [state, dispatch] = useStoreContext();
+
+    const [thisId, setThisId] = useState(userParams)
+
+    const [creatingProductState, setCreatingProductState] = useState(false);
+
+    const [me, setMe] = useState(false);
+
+    const [productId, setProductId] = useState('');
+
+    const [formState, setFormState] = useState({
+        name: '',
+        description: ''
+    });
 
     const { categories } = state;
 
+    const [addProduct] = useMutation(ADD_PRODUCT);
+
     const { loading, data: categoryData } = useQuery(QUERY_CATEGORIES);
+
+    const { loadingUser, dataUser } = useQuery(userParams ? QUERY_USER : QUERY_ME, {
+        variables: { _id: userParams },
+    });
 
     useEffect(() => {
         if (categoryData) {
@@ -36,18 +56,27 @@ const Profile = () => {
                 });
             });
         }
-    }, [categoryData, loading, dispatch]);
+    },[categoryData, dispatch]);
 
-    const [creatingProductState, setCreatingProductState] = useState(false);
+    const user = dataUser?.me || dataUser?.user || {};
+    // navigate to personal profile page if username is yours
+    if (Auth.loggedIn() && Auth.getUser().data._id === userParams) {
+        setMe(true);
+    }
 
-    const [productId, setProductId] = useState(null);
+    if (loadingUser) {
+        return <div>Loading...</div>;
+    }
 
-    const [formState, setFormState] = useState({
-        name: '',
-        description: ''
-    });
+    if (user?._id) {
+        return (
+            <h4 className="font-mont-alt text-large text-slate">
+                You need to be logged in to see this. Use the navigation links above to
+                sign up or log in!
+            </h4>
+        );
+    }
 
-    const [addProduct] = useMutation(ADD_PRODUCT);
 
     const handleCreateProductStart = () => {
         setCreatingProductState(true);
@@ -75,26 +104,28 @@ const Profile = () => {
         });
 
         setProductId(mutationResponse.data.addProduct._id);
+        console.log(productId);
     };
 
-    useEffect(() => {
-        if (productId) {
-
-            window.location.assign(`/products/${productId}`);
-        }
-    }, [productId]);
-
-    const handleChange = (event) => {
-        const { name, value } = event.target;
-        setFormState({
-            ...formState,
-            [name]: value,
+    const handleFriendClick = (id) => {
+        dispatch({
+            type: UPDATE_CURRENT_USER,
+            currentUser: id,
         });
     };
+
+    const handleChange = (e) => {
+        const value = e.target.value;
+        setFormState({
+          ...formState,
+          [e.target.name]: value
+        })
+      };
 
     const createProductModalDismissHandler = () => {
         setCreatingProductState(false);
     };
+
 
     return (
         <div className="w-screen min-h-screen p-5 pb-10">
@@ -142,10 +173,10 @@ const Profile = () => {
                         </div>
                         <div className='flex-row space-between p-2'>
                             <div>
-                                <label className="font-satisfy text-mauve text-xl" htmlFor="image">Product Image:</label>
+                                <label className="font-satisfy text-mauve text-xl" htmlFor="image">Select an image:</label>
                             </div>
                             <div>
-                                <input type='text' className="form-input flex-1 m-1 shadow font-mont-alt text-slate text-sm w-80" name="image" id="newImage" placeholder='image url' onChange={handleChange}></input>
+                                <input type='file' className="form-input flex-1 m-1 shadow font-mont-alt text-slate text-sm w-80" name="image" id="newImage" placeholder='image url' onChange={handleChange}></input>
                             </div>
                         </div>
                         <div className='flex-row space-between p-2'>
@@ -212,68 +243,50 @@ const Profile = () => {
                             <div className="p-5 text-center sm:text-left float-left">
                                 <div className='flex items-center'>
                                     <UserIcon className='block fill-pink h-6 w-6'></UserIcon>
-                                    <h4 className='pl-1 font-satisfy text-xl md:text-2xl lg:text-3xl text-slate'>Username</h4>
+                                    <h4 className='pl-1 font-satisfy text-xl md:text-2xl lg:text-3xl text-slate'>{me === false ? `${user.username}` : `${Auth.getUser().data.username}`}</h4>
                                 </div>
                             </div>
-                            <div className="block float-right">
-                                <h6 className="px-1 mx-1 font-mont-alt text-slate text-xs md:text-sm lg:text-lg hover:font-bold">
-                                    <Link to="/booking-history">
-                                        View Booking History
-                                    </Link>
-                                </h6>
-                            </div>
+                            {me && (
+                                <div className="block float-right">
+                                    <h6 className="px-1 mx-1 font-mont-alt text-slate text-xs md:text-sm lg:text-lg hover:font-bold">
+                                        <Link to={`/booking-history/${Auth.getUser().data._id}`}>
+                                            View Booking History
+                                        </Link>
+                                    </h6>
+                                </div>
+                                                    )}
                         </div>
+                        {me && (
                         <div className="float-left">
                             <button className="p-2 px-4 bg-pink rounded-md font-satisfy text-center text-slate text-4xl" onClick={handleCreateProductStart}>Add Product</button>
                         </div>
+                        )}
                     </div>
                     <div className="flex pb-5 p-5">
                         <AllProducts />
                     </div>
                 </div>
-                <div className="float-center flex flex-col border-grey border-t p-5 justify-center">
-                    <div className="p-5 text-center sm:text-left float-left">
-                        <h2 className="font-satisfy text-lg sm:text-3xl lg:text-5xl text-slate">
-                            Friends
-                        </h2>
+                {me && (
+                    <div className="float-center flex flex-col border-grey border-t p-5 justify-center">
+                        <div className="p-5 text-center sm:text-left float-left">
+
+                            <h2 className="font-satisfy text-lg sm:text-3xl lg:text-5xl text-slate">
+                                Friends
+                            </h2>
+                        </div>
+                        <div>
+                            <ul className="flex flex-row flex-wrap mb-5 font-mont-alt items-center justify-start text-sm text-center text-slate p-5">
+                                {/* {(me).map((friend) => (
+                                    <li key={friend._id} className="border-mauve flex items-center justify-center border p-2 px-3 m-1 rounded-xl hover:bg-grey hover:bg-opacity-10 hover:font-bold hover:border-2">
+                                        <Link to={`/users/${friend._id}`}><UserIcon className='block float-left fill-mauve h-6 w-6' onClick={() => {
+                                            handleFriendClick(`${friend._id}`);
+                                        }}></UserIcon>{friend.username}
+                                        </Link>
+                                    </li>))} */}
+                            </ul>
+                        </div>
                     </div>
-                    <div>
-                        <ul className="flex flex-row flex-wrap mb-5 font-mont-alt items-center justify-start text-sm text-center text-slate p-5">
-                            <li className="border-mauve flex items-center justify-center border p-2 px-3 m-1 rounded-xl hover:bg-grey hover:bg-opacity-10 hover:font-bold hover:border-2">
-                                <Link to="/user"><UserIcon className='block float-left fill-mauve h-6 w-6'></UserIcon>Friend
-                                </Link>
-                            </li>
-                            <li className="border-mauve flex items-center justify-center border p-2 px-3 m-1 rounded-xl hover:bg-grey hover:bg-opacity-10 hover:font-bold hover:border-2">
-                                <Link to="/user"><UserIcon className='block float-left fill-mauve h-6 w-6'></UserIcon>Friend
-                                </Link>
-                            </li>
-                            <li className="border-mauve flex items-center justify-center border p-2 px-3 m-1 rounded-xl hover:bg-grey hover:bg-opacity-10 hover:font-bold hover:border-2">
-                                <Link to="/user"><UserIcon className='block float-left fill-mauve h-6 w-6'></UserIcon>Friend
-                                </Link>
-                            </li>
-                            <li className="border-mauve flex items-center justify-center border p-2 px-3 m-1 rounded-xl hover:bg-grey hover:bg-opacity-10 hover:font-bold hover:border-2">
-                                <Link to="/user"><UserIcon className='block float-left fill-mauve h-6 w-6'></UserIcon>Friend
-                                </Link>
-                            </li>
-                            <li className="border-mauve flex items-center justify-center border p-2 px-3 m-1 rounded-xl hover:bg-grey hover:bg-opacity-10 hover:font-bold hover:border-2">
-                                <Link to="/user"><UserIcon className='block float-left fill-mauve h-6 w-6'></UserIcon>Friend
-                                </Link>
-                            </li>
-                            <li className="border-mauve flex items-center justify-center border p-2 px-3 m-1 rounded-xl hover:bg-grey hover:bg-opacity-10 hover:font-bold hover:border-2">
-                                <Link to="/user"><UserIcon className='block float-left fill-mauve h-6 w-6'></UserIcon>Friend
-                                </Link>
-                            </li>
-                            <li className="border-mauve flex items-center justify-center border p-2 px-3 m-1 rounded-xl hover:bg-grey hover:bg-opacity-10 hover:font-bold hover:border-2">
-                                <Link to="/user"><UserIcon className='block float-left fill-mauve h-6 w-6'></UserIcon>Friend
-                                </Link>
-                            </li>
-                            <li className="border-mauve flex items-center justify-center border p-2 px-3 m-1 rounded-xl hover:bg-grey hover:bg-opacity-10 hover:font-bold hover:border-2">
-                                <Link to="/user"><UserIcon className='block float-left fill-mauve h-6 w-6'></UserIcon>Friend
-                                </Link>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+                )}
             </React.Fragment>
         </div>
 

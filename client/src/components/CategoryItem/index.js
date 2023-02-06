@@ -10,7 +10,7 @@ import { QUERY_CATEGORIES } from '../../utils/queries';
 import { idbPromise } from '../../utils/helpers';
 
 const CategoryItem = (props) => {
-    const [state, dispatch] = useStoreContext();
+  const [state, dispatch] = useStoreContext();
 
   const { categories } = state;
 
@@ -41,22 +41,28 @@ const CategoryItem = (props) => {
       currentCategory: id,
     });
   };
-    
-    return (
-        <div className='container flex-1 relative mb-2'>
-            <Link to={`/categories/${props._id}`}onClick={() => {
-            handleClick(`${props._id}`);
+
+  console.log(categoryData);
+
+
+  return (
+    <div className='p-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pb-3'>
+      {categories.map((category) => (
+        <div key={category._id} className='container flex-1 relative mb-2'>
+          <Link to={`/categories/${category._id}`} onClick={() => {
+            handleClick(`${category._id}`);
           }}>
             <div>
-                    <img src={props.img} className="w-full h-72 object-cover object-center" title={props.name} alt="category image"></img>
+              <img src={category.image} className="w-full h-72 object-cover object-center" title={category.name} alt="category image"></img>
             </div>
             <div className='absolute flex justify-center items-center w-full h-full top-0 left-0 bg-white bg-opacity-60 border-mauve border-4'>
-                <h1 className='font-satisfy text-center text-slate text-6xl'>{props.name}</h1>
+              <h1 className='font-satisfy text-center text-slate text-6xl'>{category.name}</h1>
             </div>
-            </Link>
+          </Link>
         </div>
-
-    );
+      ))}
+    </div>
+  );
 }
 
 export default CategoryItem;

@@ -5,35 +5,21 @@ db.once('open', async () => {
   await Category.deleteMany();
 
   const categories = await Category.insertMany([
-    { name: 'Formal' },
-    { name: 'Business' },
-    { name: 'Smart Casual' },
-    { name: 'Cocktail Party' },
-    { name: 'Daywear' },
-    { name: 'Night Out' }
+    { name: 'Formal',
+      image: "https://images.pexels.com/photos/1445696/pexels-photo-1445696.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" },
+    { name: 'Business',
+      image: "https://images.pexels.com/photos/2285500/pexels-photo-2285500.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" },
+    { name: 'Smart Casual',
+      image: "https://images.pexels.com/photos/1335463/pexels-photo-1335463.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" },
+    { name: 'Cocktail Party',
+      image: "https://images.pexels.com/photos/1453008/pexels-photo-1453008.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" },
+    { name: 'Daywear',
+      image: "https://images.pexels.com/photos/1460838/pexels-photo-1460838.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" },
+    { name: 'Night Out',
+      image: "https://images.pexels.com/photos/336372/pexels-photo-336372.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" }
   ]);
 
   console.log('categories seeded');
-
-  await Tag.deleteMany();
-
-  const tags = await Tag.insertMany([
-    { tagName: 'fascinator' },
-    { tagName: 'casual' },
-    { tagName: 'sandals' },
-    { tagName: 'comfortable' },
-    { tagName: 'shoes' },
-    { tagName: 'scarf' },
-    { tagName: 'spring racing' },
-    { tagName: 'handbag' },
-    { tagName: 'jewellery' },
-    { tagName: 'purse' },
-    { tagName: 'watch' },
-    { tagName: 'heels' },
-    { tagName: 'boots' },
-  ]);
-
-  console.log('tags seeded');
 
   await Product.deleteMany();
 
@@ -41,20 +27,20 @@ db.once('open', async () => {
     {
       name: 'Tan Sandals',
       description: 'Comrtable tan t-bar sandals with buckle.',
-      category: [categories[2]._id, categories[4]._id],
+      categories: [categories[2]._id, categories[4]._id],
       location: 'Melbourne',
       productStatus: 'public',
       image: 'https://images.pexels.com/photos/3155234/pexels-photo-3155234.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
       gallery: ['https://images.pexels.com/photos/7046767/pexels-photo-7046767.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2', 'https://images.pexels.com/photos/1438680/pexels-photo-1438680.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'],
       size: '9',
       colour: 'brown',
-      tags: [tags[1]._id, tags[2]._id, tags[4]._id],
+      tags: ["casual", "sandals", "shoes"],
       onLoan: false
     },
     {
       name: 'Black handbag',
       description: 'Small to medium black handbag with zip and front buckles. Versatile and stylish for a variety of occassions.',
-      category: [categories[2]._id, categories[3].id, categories[4]._id, categories[5]._id],
+      categories: [categories[2]._id, categories[3].id, categories[4]._id, categories[5]._id],
       location: 'Sydney',
       productStatus: 'friendsOnly',
       image: 'https://images.pexels.com/photos/1204464/pexels-photo-1204464.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
@@ -62,26 +48,26 @@ db.once('open', async () => {
       deposit: 50.00,
       size: 'universal',
       colour: 'black',
-      tags: [tags[1]._id, tags[6]._id, tags[7]._id],
+      tags: ['casual', 'spring racing', 'handbag'],
       onLoan: true
     },
     {
       name: 'Black Heels',
       description: 'Black pointed toe heels in size 7.',
-      category: [categories[0]._id, categories[1]._id, categories[2]._id, categories[3]._id, categories[4]._id, categories[5]._id],
+      categories: [categories[0]._id, categories[1]._id, categories[2]._id, categories[3]._id, categories[4]._id, categories[5]._id],
       location: 'Melbourne',
       productStatus: 'public',
       image: 'https://images.pexels.com/photos/1539781/pexels-photo-1539781.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
       gallery: ['https://images.pexels.com/photos/7701076/pexels-photo-7701076.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2', 'https://images.pexels.com/photos/13722335/pexels-photo-13722335.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'],
       size: '7',
       colour: 'black',
-      tags: [tags[1]._id, tags[3]._id, tags[4]._id, tags[6]._id, tags[11]._id, tags[12]._id],
+      tags: ['casual', 'comfortable', 'shoes', 'spring racing', 'heels'],
       onLoan: false
     },
     {
       name: 'Silver Clutch',
       description: 'Formal silver clutch purse.',
-      category: [categories[0]._id, categories[3].id, categories[5]._id],
+      categories: [categories[0]._id, categories[3].id, categories[5]._id],
       location: 'Brisbane',
       productStatus: 'hidden',
       image: 'https://images.pexels.com/photos/5864581/pexels-photo-5864581.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
@@ -89,48 +75,48 @@ db.once('open', async () => {
       deposit: 80.00,
       size: 'universal',
       colour: 'silver',
-      tags: [tags[6]._id, tags[7]._id, tags[9]._id],
+      tags: ['spring racing', 'handbag', 'purse'],
       onLoan: false
     },
     {
       name: 'Gold Necklace',
       description: 'Long gold chain.',
-      category: [categories[0]._id, categories[1].id, categories[2].id, categories[3].id, categories[4].id, categories[5]._id],
+      categories: [categories[0]._id, categories[1].id, categories[2].id, categories[3].id, categories[4].id, categories[5]._id],
       location: 'Melbourne',
       productStatus: 'public',
       image: 'https://images.pexels.com/photos/59662/pexels-photo-59662.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
       gallery: ['https://images.pexels.com/photos/185489/pexels-photo-185489.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'],
       size: 'universal',
       colour: 'gold',
-      tags: [tags[6]._id, tags[8]._id],
+      tags: ['spring racing', 'jewellery'],
       onLoan: false
     },
     {
       name: 'Silk Scarf',
       description: 'Multicoloured silk scarf in greens and blues.',
-      category: [categories[1]._id, categories[2].id, categories[4].id],
+      categories: [categories[1]._id, categories[2].id, categories[4].id],
       location: 'Melbourne',
       productStatus: 'public',
       image: 'https://images.pexels.com/photos/2120584/pexels-photo-2120584.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
       size: 'universal',
       colour: 'multi',
-      tags: [tags[1]._id, tags[5]._id]
+      tags: ['casual', 'scarf']
     },
     {
       name: 'Laptop Travel Bag',
       description: 'Black bag for business or travel. Suits 15inch Mac book with zip.',
-      category: [categories[1]._id],
+      categories: [categories[1]._id],
       location: 'Sydney',
       productStatus: 'public',
       image: 'https://images.pexels.com/photos/842959/pexels-photo-842959.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
       size: 'universal',
       colour: 'multi',
-      tags: [tags[7]._id]
+      tags: ['handbag', 'travel']
     },
     {
       name: 'Cream Flower Fascinator',
       description: 'Ivory cream fascinator headband with flower details.',
-      category: [categories[0]._id, categories[3].id],
+      categories: [categories[0]._id, categories[3].id],
       location: 'Melbourne',
       productStatus: 'friendsOnly',
       image: 'https://images.pexels.com/photos/8100397/pexels-photo-8100397.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
@@ -138,119 +124,119 @@ db.once('open', async () => {
       deposit: 60.00,
       size: 'universal',
       colour: 'cream',
-      tags: [tags[0]._id, tags[6]._id, tags[8]._id],
+      tags: ['fascinator', 'spring racing', 'jewellery'],
       onLoan: false
     },
     {
       name: 'Pink Flower Fascinator',
       description: 'Fascinator with big pink flowers.',
-      category: [categories[0]._id, categories[3].id],
+      categories: [categories[0]._id, categories[3].id],
       location: 'Melbourne',
       productStatus: 'hidden',
       image: 'https://images.pexels.com/photos/11326349/pexels-photo-11326349.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
       gallery: ['https://images.pexels.com/photos/11326351/pexels-photo-11326351.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2', 'https://images.pexels.com/photos/122734/pexels-photo-122734.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'],
       size: 'universal',
       colour: 'pink',
-      tags: [tags[0]._id, tags[6]._id, tags[8]._id],
+      tags: ['fascinator', 'spring racing', 'jewellery'],
       onLoan: false
     },
     {
       name: 'Brown knee-high boots',
       description: 'Long brown tan boots with 3 inch heel. Comfortable for full-day wear.',
-      category: [categories[1]._id, categories[2].id, categories[4].id],
+      categories: [categories[1]._id, categories[2].id, categories[4].id],
       location: 'Melbourne',
       productStatus: 'friendsOnly',
       image: 'https://images.pexels.com/photos/1537492/pexels-photo-1537492.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
       size: '7',
       colour: 'brown',
-      tags: [tags[1]._id, tags[3]._id, tags[4]._id, tags[11]._id, tags[12]._id],
+      tags: ['casual', 'comfortable', 'shoes', 'heels', 'boots'],
       onLoan: false
     },
     {
       name: 'Pale pink watch',
       description: 'Light pink analogue watch with gold rim.',
-      category: [categories[0]._id, categories[1].id, categories[3].id],
+      categories: [categories[0]._id, categories[1].id, categories[3].id],
       location: 'Melbourne',
       productStatus: 'friendsOnly',
       image: 'https://images.pexels.com/photos/1251085/pexels-photo-1251085.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
       gallery: ['https://images.pexels.com/photos/1172851/pexels-photo-1172851.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2', 'https://images.pexels.com/photos/1172848/pexels-photo-1172848.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'],
       size: 'universal',
       colour: 'pink',
-      tags: [tags[6]._id, tags[8]._id, tags[10]._id],
+      tags: ['spring racing', 'jewellery', 'watch'],
       onLoan: false
     },
     {
       name: 'Leather Mimco Purse',
       description: 'Medium sized leather Mimco purse with zip. Can comfortably fit Samsung phone and has zip pocket for cards.',
-      category: [categories[0]._id, categories[3].id, categories[5].id],
+      categories: [categories[0]._id, categories[3].id, categories[5].id],
       location: 'Melbourne',
       productStatus: 'public',
       image: 'https://images.pexels.com/photos/978663/pexels-photo-978663.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
       gallery: ['https://images.pexels.com/photos/978664/pexels-photo-978664.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2', 'https://images.pexels.com/photos/12747236/pexels-photo-12747236.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'],
       size: 'universal',
       colour: 'black',
-      tags: [tags[6]._id, tags[7]._id, tags[9]._id],
+      tags: ['spring racing', 'handbag', 'jewellery'],
       onLoan: false
     },
     {
       name: 'Gold Bracelet Watch',
       description: 'Delicate gold bracelet watch with filigree links. Analogue.',
-      category: [categories[0]._id, categories[1].id, categories[2].id, categories[3].id, categories[4].id, categories[5].id],
+      categories: [categories[0]._id, categories[1].id, categories[2].id, categories[3].id, categories[4].id, categories[5].id],
       location: 'Sydney',
       productStatus: 'public',
       image: 'https://images.pexels.com/photos/9980380/pexels-photo-9980380.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
       size: 'universal',
       colour: 'gold',
-      tags: [tags[8]._id, tags[10]._id],
+      tags: ['jewellery', 'watch'],
       onLoan: true
     },
     {
       name: 'Red Peep-toe Heels',
       description: 'Red satin peep-toe heels in size 8. Can be dressed up or down.',
-      category: [categories[0]._id, categories[1].id, categories[2].id, categories[3].id, categories[4].id, categories[5].id],
+      categories: [categories[0]._id, categories[1].id, categories[2].id, categories[3].id, categories[4].id, categories[5].id],
       location: 'Melbourne',
       productStatus: 'public',
       image: 'https://images.pexels.com/photos/3682292/pexels-photo-3682292.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
       gallery: ['https://images.pexels.com/photos/3682293/pexels-photo-3682293.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2', 'https://images.pexels.com/photos/3682291/pexels-photo-3682291.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2', 'https://images.pexels.com/photos/3682290/pexels-photo-3682290.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'],
       size: '8',
       colour: 'red',
-      tags: [tags[2]._id, tags[3]._id, tags[4]._id, tags[6]._id, tags[11]._id],
+      tags: ['sandals', 'comfortable', 'shoes', 'spring racing', 'heels'],
       onLoan: false
     },
     {
       name: 'White High Heels',
       description: '4 inch white high heels in size 9.',
-      category: [categories[0]._id, categories[1].id, categories[2].id, categories[3].id, categories[4].id, categories[5].id],
+      categories: [categories[0]._id, categories[1].id, categories[2].id, categories[3].id, categories[4].id, categories[5].id],
       location: 'Melbourne',
       productStatus: 'friendsOnly',
       image: 'https://images.pexels.com/photos/2085527/pexels-photo-2085527.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
       gallery: ['https://images.pexels.com/photos/2085523/pexels-photo-2085523.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'],
       size: '9',
       colour: 'white',
-      tags: [tags[2]._id, tags[4]._id, tags[6]._id, tags[11]._id]
+      tags: ['sandals', 'shoes', 'spring racing', 'heels']
     },
     {
       name: 'Black Ankle Boots',
       description: 'Black ankle boots with mid heel, size 10.',
-      category: [categories[1]._id, categories[2].id, categories[4].id],
+      categories: [categories[1]._id, categories[2].id, categories[4].id],
       location: 'Melbourne',
       productStatus: 'public',
       image: 'https://images.pexels.com/photos/1123985/pexels-photo-1123985.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
       size: '10',
       colour: 'black',
-      tags: [tags[1]._id, tags[3]._id, tags[4]._id, tags[11]._id, tags[12]._id]
+      tags: ['casual', 'comfortable', 'shoes', 'heels', 'boots']
     },
     {
       name: 'Black Fascinator',
       description: 'Black lace fascinator with flower detailing.',
-      category: [categories[0]._id, categories[3].id],
+      categories: [categories[0]._id, categories[3].id],
       location: 'Melbourne',
       productStatus: 'public',
       image: 'https://images.pexels.com/photos/12168803/pexels-photo-12168803.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
       gallery: ['https://images.pexels.com/photos/7759330/pexels-photo-7759330.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'],
       size: 'universal',
       colour: 'black',
-      tags: [tags[0]._id, tags[6]._id]
+      tags: ['fascinator', 'spring racing']
     }
   ]);
 
@@ -539,90 +525,116 @@ db.once('open', async () => {
 
   const product1 = await Product.findOneAndUpdate(
     { _id: products[0]._id },
-    { creator: users[0]._id }
+    { owner: users[0]._id,
+      bookings: [bookings[3]._id, bookings[11]._id]
+    }
   );
 
   const product2 = await Product.findOneAndUpdate(
     { _id: products[1]._id },
-    { creator: users[2]._id }
+    { owner: users[2]._id,
+      bookings: [bookings[12]._id, bookings[13]._id]
+    }
   );
 
   const product3 = await Product.findOneAndUpdate(
     { _id: products[2]._id },
-    { creator: users[0]._id }
+    { owner: users[0]._id,
+      bookings: [bookings[6]._id]
+    }
   );
 
   const product4 = await Product.findOneAndUpdate(
     { _id: products[3]._id },
-    { creator: users[1]._id }
+    { owner: users[1]._id }
   );
 
   const product5 = await Product.findOneAndUpdate(
     { _id: products[4]._id },
-    { creator: users[0]._id }
+    { owner: users[0]._id,
+      bookings: [bookings[7]._id]
+    }
   );
 
   const product6 = await Product.findOneAndUpdate(
     { _id: products[5]._id },
-    { creator: users[2]._id }
+    { owner: users[2]._id,
+      bookings: [bookings[0]._id]
+    }
   );
 
   const product7 = await Product.findOneAndUpdate(
     { _id: products[6]._id },
-    { creator: users[0]._id }
+    { owner: users[0]._id,
+      bookings: [bookings[14]._id]
+    }
   );
 
   const product8 = await Product.findOneAndUpdate(
     { _id: products[7]._id },
-    { creator: users[3]._id }
+    { owner: users[3]._id,
+      bookings: [bookings[4]._id]
+    }
   );
 
   const product9 = await Product.findOneAndUpdate(
     { _id: products[8]._id },
-    { creator: users[4]._id }
+    { owner: users[4]._id }
   );
 
   const product10 = await Product.findOneAndUpdate(
     { _id: products[9]._id },
-    { creator: users[3]._id }
+    { owner: users[3]._id,
+      bookings: [bookings[16]._id]
+    }
   );
 
   const product11 = await Product.findOneAndUpdate(
     { _id: products[10]._id },
-    { creator: users[3]._id }
+    { owner: users[3]._id,
+      bookings: [bookings[8]._id, bookings[9]._id, bookings[10]._id]
+    }
   );
 
   const product12 = await Product.findOneAndUpdate(
     { _id: products[11]._id },
-    { creator: users[4]._id }
+    { owner: users[4]._id,
+      bookings: [bookings[5]._id]
+    }
   );
 
   const product13 = await Product.findOneAndUpdate(
     { _id: products[12]._id },
-    { creator: users[2]._id }
+    { owner: users[2]._id,
+      bookings: [bookings[1]._id]
+    }
   );
 
   const product14 = await Product.findOneAndUpdate(
     { _id: products[13]._id },
-    { creator: users[2]._id }
+    { owner: users[2]._id }
   );
 
   const product15 = await Product.findOneAndUpdate(
     { _id: products[14]._id },
-    { creator: users[4]._id }
+    { owner: users[4]._id,
+      bookings: [bookings[2]._id, bookings[15]._id]
+    }
   );
 
   const product16 = await Product.findOneAndUpdate(
     { _id: products[15]._id },
-    { creator: users[0]._id }
+    { owner: users[0]._id }
   );
 
   const product17 = await Product.findOneAndUpdate(
     { _id: products[16]._id },
-    { creator: users[1]._id }
+    { owner: users[1]._id,
+      bookings: [17]._id
+    }
   );
 
-  console.log('product owners seeded');
+  console.log('product owners and bookings seeded');
 
   process.exit();
 });

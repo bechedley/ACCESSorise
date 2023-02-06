@@ -1,5 +1,4 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import {
   ApolloClient,
   InMemoryCache,
@@ -7,6 +6,7 @@ import {
   createHttpLink,
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import Home from './pages/Home';
 import ProductList from './pages/ProductList';
@@ -29,7 +29,9 @@ const httpLink = createHttpLink({
 });
 
 const authLink = setContext((_, { headers }) => {
+  // get the authentication token from local storage if it exists
   const token = localStorage.getItem('id_token');
+  // return the headers to the context so httpLink can read them
   return {
     headers: {
       ...headers,
@@ -60,7 +62,11 @@ function App() {
               element={<Login />} 
               />
               <Route
-                path="/profile"
+                path="/me"
+              element={<Profile />} 
+              />
+              <Route
+                path="/users/:id"
               element={<Profile />} 
               />
               <Route
@@ -93,6 +99,10 @@ function App() {
               />
               <Route
                 path="/products/:id"
+                element={<Product />}
+              />
+              <Route
+                path="/bookings/:id"
                 element={<Product />}
               />
               <Route
