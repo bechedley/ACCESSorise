@@ -10,18 +10,16 @@
     "seed": "node config/seeds.js",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
-
   "engines": {
-    "node": "16.17.1",
-    "npm": "8.15.0"
+    "node": "16.17.1"
   },
-
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "apollo-server-express": "^3.6.2",
     "bcrypt": "^5.0.0",
+    "dotenv": "^16.0.3",
     "express": "^4.17.2",
     "graphql": "^16.3.0",
     "jsonwebtoken": "^8.5.1",
@@ -30,8 +28,5 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.2"
-  },
-  "engines": {
-    "node": "16.17.1"
-}
+  }
 }
