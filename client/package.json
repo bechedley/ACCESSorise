@@ -2,7 +2,7 @@
   "name": "accessorise-client",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:3001/",
+  "proxy": "http://localhost:5000/",
   "dependencies": {
     "@apollo/client": "^3.5.8",
     "@fullhuman/postcss-purgecss": "^5.0.0",

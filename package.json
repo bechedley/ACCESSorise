@@ -4,12 +4,12 @@
   "description": "",
   "main": "server/server.js",
   "scripts": {
-    "start": "npm run build && cd server && node server.js",
+    "start": "cd server && node server --ignore client",
     "develop": "concurrently \"cd server && npm run start\" \"cd client && npm start\"",
     "install": "cd server && npm i && cd ../client && npm i",
     "seed": "cd server && npm run seed",
     "build": "cd client && npm run build",
-    "heroku-postbuild": "npm run build"
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install npm && run build"
   },
   "keywords": [],
   "author": "",
@@ -22,6 +22,6 @@
     "npm": "8.15.0"
   },
   "dependencies": {
-    "dotenv": "^16.0.3"
+
   }
 }
