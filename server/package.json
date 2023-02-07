@@ -8,7 +8,7 @@
     "watch": "nodemon",
     "web": "node server.js",
     "seed": "node config/seeds.js",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+    "heroku-postbuild": "npm run build"
   },
   "engines": {
     "node": "16.17.1"
