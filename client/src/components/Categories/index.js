@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { Link } from "react-router-dom";
 import CategoryItem from '../CategoryItem';
 import { useQuery } from '@apollo/client';
 import { useStoreContext } from '../../utils/GlobalState';

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { UserCircleIcon, HeartIcon, CalendarDaysIcon, MagnifyingGlassIcon } from '@heroicons/react/24/solid';
 import logo from '../../assets/images/accessorise-logo-shoe.png';
 import Auth from "../../utils/auth";

@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import Product from "../components/Product";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useStoreContext } from '../utils/GlobalState';
 import { UPDATE_CATEGORIES } from '../utils/actions';
 import { useQuery } from '@apollo/client';

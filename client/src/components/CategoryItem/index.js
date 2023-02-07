@@ -53,7 +53,7 @@ const CategoryItem = (props) => {
             handleClick(`${category._id}`);
           }}>
             <div>
-              <img src={category.image} className="w-full h-72 object-cover object-center" title={category.name} alt="category image"></img>
+              <img src={category.image} className="w-full h-72 object-cover object-center" title={category.name} alt={category.name}></img>
             </div>
             <div className='absolute flex justify-center items-center w-full h-full top-0 left-0 bg-white bg-opacity-60 border-mauve border-4'>
               <h1 className='font-satisfy text-center text-slate text-6xl'>{category.name}</h1>
