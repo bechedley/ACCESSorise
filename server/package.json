@@ -9,6 +9,12 @@
     "web": "node server.js",
     "seed": "node config/seeds.js"
   },
+
+  "engines": {
+    "node": "16.17.1",
+    "npm": "8.15.0"
+  },
+  
   "keywords": [],
   "author": "",
   "license": "ISC",
