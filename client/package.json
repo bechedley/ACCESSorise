@@ -25,7 +25,6 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "watch:css": "postcss src/assets/tailwind.css -o src/assets/main.css"
-    
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -49,8 +48,10 @@
   "license": "ISC",
   "devDependencies": {
     "@tailwindcss/forms": "^0.5.3",
-    "autoprefixer": "^9.8.6",
+    "autoprefixer": "^9.8.8",
+    "postcss": "^8.4.21",
     "postcss-cli": "^10.1.0",
+    "postcss-loader": "^7.0.2",
     "tailwindcss": "^3.2.4"
   }
 }
